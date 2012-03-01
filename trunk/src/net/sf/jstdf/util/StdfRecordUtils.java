@@ -519,14 +519,23 @@ public class StdfRecordUtils
 	}
 	
 	/**
-	 * Eight byte floating point number
-	 * @param bb
-	 * @return
+	 * Read eight byte floating point number.
+	 * 
+	 * @param bb the buffer which data is read from.
+	 * @return a double.
 	 */
 	public static final double readR8Double(ByteBuffer bb)
 	{
 		return readR8Double(bb, 0.0);
 	}
+	
+	/**
+	 * Read eight byte floating point number.
+	 * 
+	 * @param bb the buffer which data is read from.
+	 * @param default_value the default return value if fail to read.
+	 * @return a double.
+	 */
 	public static final double readR8Double(ByteBuffer bb, double default_value)
 	{
 		if(bb.remaining()<8) return default_value;
@@ -535,10 +544,11 @@ public class StdfRecordUtils
 	}
 	
 	/**
-	 * Fixed length character string
-	 * @param bb
-	 * @param len
-	 * @return
+	 * Read fixed length character string.
+	 * 
+	 * @param bb the buffer which data is read from.
+	 * @param len the number of bytes to read.
+	 * @return a string.
 	 */
 	public static final String readCString(ByteBuffer bb, int len)
 	{
@@ -553,14 +563,23 @@ public class StdfRecordUtils
 	}
 	
 	/**
-	 * Variable length character string
-	 * @param bb
-	 * @return
+	 * Read variable length character string, the length of string is stored in 1st byte.
+	 * 
+	 * @param bb the buffer which data is read from.
+	 * @return a string.
 	 */
 	public static final String readCnString(ByteBuffer bb)
 	{
 		return readCnString(bb, "");
 	}
+	
+	/**
+	 * Read variable length character string, the length of string is stored in 1st byte.
+	 * 
+	 * @param bb the buffer which data is read from.
+	 * @param default_value the default return value if fail to read.
+	 * @return a string.
+	 */
 	public static final String readCnString(ByteBuffer bb, String default_value)
 	{
 		if(!bb.hasRemaining()) return default_value;
@@ -569,15 +588,25 @@ public class StdfRecordUtils
 	}
 	
 	/**
-	 * Array of Variable length character string
-	 * @param bb
-	 * @param k
-	 * @return
+	 * Read array of variable length character string.
+	 * 
+	 * @param bb the buffer which data is read from.
+	 * @param k the number of elements to read.
+	 * @return an array of k string
 	 */
 	public static final String[] readKCnString(ByteBuffer bb, int k)
 	{
 		return readKCNString(bb, k, "");
 	}
+	
+	/**
+	 * Read array of variable length character string.
+	 * 
+	 * @param bb the buffer which data is read from.
+	 * @param k the number of elements to read.
+	 * @param default_value the default value of array element if fail to read.
+	 * @return an array of k string
+	 */
 	public static final String[] readKCNString(ByteBuffer bb, int k, String default_value)
 	{
 		String[] d = new String[k];
@@ -589,6 +618,16 @@ public class StdfRecordUtils
 		return d;
 	}
 	
+	/**
+	 * Create STDF record object by record header.
+	 * 
+	 * @param seq the sequence number when reading file.
+	 * @param REC_LEN the record length in bytes.
+	 * @param REC_TYP the record type.
+	 * @param REC_SUB the record sub-type.
+	 * @param bb the buffer which data is read from.
+	 * @return the STDF record.
+	 */
 	public static final STDFRecord createSTDFRecord(int seq, int REC_LEN, int REC_TYP, int REC_SUB, ByteBuffer bb)
 	{
 		STDFRecord rec = null;
