@@ -5,7 +5,12 @@ import java.util.BitSet;
 
 import net.sf.jstdf.util.StdfRecordUtils;
 
-
+/**
+ * Test Synopsis Record (TSR)
+ * 
+ * @author malong
+ *
+ */
 public class TestSynopsisRecord extends AbstractSTDFRecord
 {
 	public static final byte Type = 10;

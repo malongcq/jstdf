@@ -4,7 +4,12 @@ import java.nio.ByteBuffer;
 
 import net.sf.jstdf.util.StdfRecordUtils;
 
-
+/**
+ * Pin Group Record (PGR)
+ * 
+ * @author malong
+ *
+ */
 public class PinGroupRecord extends AbstractSTDFRecord
 {
 	public static final byte Type = 1;

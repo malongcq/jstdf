@@ -5,7 +5,12 @@ import java.util.Date;
 
 import net.sf.jstdf.util.StdfRecordUtils;
 
-
+/**
+ * Wafer Results Record (WRR)
+ * 
+ * @author malong
+ *
+ */
 public class WaferResultsRecord extends AbstractSTDFRecord
 {
 	public static final byte Type = 2;

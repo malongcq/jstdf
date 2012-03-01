@@ -4,7 +4,12 @@ import java.nio.ByteBuffer;
 
 import net.sf.jstdf.util.StdfRecordUtils;
 
-
+/**
+ * Part Information Record (PIR)
+ * 
+ * @author malong
+ *
+ */
 public class PartInformationRecord extends AbstractSTDFRecord
 {
 	public static final byte Type = 5;

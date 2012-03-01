@@ -5,7 +5,12 @@ import java.util.List;
 
 import net.sf.jstdf.util.StdfRecordUtils;
 
-
+/**
+ * Generic Data Record (GDR)
+ * 
+ * @author malong
+ *
+ */
 public class GenericDataRecord extends AbstractSTDFRecord
 {
 	public static final byte Type = 50;

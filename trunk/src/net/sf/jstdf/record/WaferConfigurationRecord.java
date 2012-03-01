@@ -4,7 +4,12 @@ import java.nio.ByteBuffer;
 
 import net.sf.jstdf.util.StdfRecordUtils;
 
-
+/**
+ * Wafer Configuration Record (WCR)
+ * 
+ * @author malong
+ *
+ */
 public class WaferConfigurationRecord extends AbstractSTDFRecord
 {
 	public static final byte Type = 2;

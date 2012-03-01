@@ -5,7 +5,12 @@ import java.util.BitSet;
 
 import net.sf.jstdf.util.StdfRecordUtils;
 
-
+/**
+ * Parametric Test Record (PTR)
+ * 
+ * @author malong
+ *
+ */
 public class ParametricTestRecord extends AbstractSTDFRecord
 {
 	public static final byte Type = 15;

@@ -5,7 +5,12 @@ import java.util.BitSet;
 
 import net.sf.jstdf.util.StdfRecordUtils;
 
-
+/**
+ * Multiple-Result Parametric Record (MPR)
+ * 
+ * @author malong
+ *
+ */
 public class MultipleResultParametricRecord extends AbstractSTDFRecord
 {
 	public static final byte Type = 15;

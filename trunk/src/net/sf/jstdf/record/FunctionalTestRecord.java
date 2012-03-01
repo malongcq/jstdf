@@ -5,7 +5,12 @@ import java.util.BitSet;
 
 import net.sf.jstdf.util.StdfRecordUtils;
 
-
+/**
+ * Functional Test Record (FTR)
+ * 
+ * @author malong
+ *
+ */
 public class FunctionalTestRecord extends AbstractSTDFRecord
 {
 	public static final byte Type = 15;

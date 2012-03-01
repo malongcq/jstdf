@@ -5,7 +5,12 @@ import java.util.Date;
 
 import net.sf.jstdf.util.StdfRecordUtils;
 
-
+/**
+ * Master Information Record (MIR)
+ * 
+ * @author malong
+ *
+ */
 public class MasterInformationRecord extends AbstractSTDFRecord
 {
 	public static final byte Type = 1;

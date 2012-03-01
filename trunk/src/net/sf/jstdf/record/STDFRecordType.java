@@ -1,5 +1,11 @@
 package net.sf.jstdf.record;
 
+/**
+ * Represents an STDF record type.
+ * 
+ * @author malong
+ *
+ */
 public enum STDFRecordType 
 {
 	/**

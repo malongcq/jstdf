@@ -5,7 +5,12 @@ import java.util.Arrays;
 
 import net.sf.jstdf.util.StdfRecordUtils;
 
-
+/**
+ * Site Description Record (SDR)
+ * 
+ * @author malong
+ *
+ */
 public class SiteDescriptionRecord extends AbstractSTDFRecord
 {
 	public static final byte Type = 1;

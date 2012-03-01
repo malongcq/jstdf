@@ -2,6 +2,12 @@ package net.sf.jstdf.record;
 
 import java.nio.ByteBuffer;
 
+/**
+ * Represents unknown STDF record type 
+ * 
+ * @author malong
+ *
+ */
 public class UnknownSTDFRecord extends AbstractSTDFRecord
 {
 	public byte[] Raw_Bytes;

@@ -4,7 +4,12 @@ import java.nio.ByteBuffer;
 
 import net.sf.jstdf.util.StdfRecordUtils;
 
-
+/**
+ * Pin Map Record (PMR)
+ * 
+ * @author malong
+ *
+ */
 public class PinMapRecord extends AbstractSTDFRecord
 {
 	public static final byte Type = 1;

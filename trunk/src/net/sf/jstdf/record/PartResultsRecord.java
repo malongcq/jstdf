@@ -6,7 +6,12 @@ import java.util.BitSet;
 
 import net.sf.jstdf.util.StdfRecordUtils;
 
-
+/**
+ * Part Results Record (PRR)
+ * 
+ * @author malong
+ *
+ */
 public class PartResultsRecord extends AbstractSTDFRecord
 {
 	public static final byte Type = 5;

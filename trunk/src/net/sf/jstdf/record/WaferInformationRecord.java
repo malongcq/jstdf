@@ -5,7 +5,12 @@ import java.util.Date;
 
 import net.sf.jstdf.util.StdfRecordUtils;
 
-
+/**
+ * Wafer Information Record (WIR)
+ * 
+ * @author malong
+ *
+ */
 public class WaferInformationRecord extends AbstractSTDFRecord
 {
 	public static final byte Type = 2;

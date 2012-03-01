@@ -4,7 +4,12 @@ import java.nio.ByteBuffer;
 
 import net.sf.jstdf.util.StdfRecordUtils;
 
-
+/**
+ * Part Count Record (PCR)
+ * 
+ * @author malong
+ *
+ */
 public class PartCountRecord extends AbstractSTDFRecord
 {
 	public static final byte Type = 1;

@@ -4,7 +4,12 @@ import java.nio.ByteBuffer;
 
 import net.sf.jstdf.util.StdfRecordUtils;
 
-
+/**
+ * Retest Data Record (RDR)
+ * 
+ * @author malong
+ *
+ */
 public class RetestDataRecord extends AbstractSTDFRecord
 {
 	public static final byte Type = 1;

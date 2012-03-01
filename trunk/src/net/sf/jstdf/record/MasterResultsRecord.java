@@ -5,7 +5,12 @@ import java.util.Date;
 
 import net.sf.jstdf.util.StdfRecordUtils;
 
-
+/**
+ * Master Results Record (MRR)
+ * 
+ * @author malong
+ *
+ */
 public class MasterResultsRecord extends AbstractSTDFRecord
 {
 	public static final byte Type = 1;
