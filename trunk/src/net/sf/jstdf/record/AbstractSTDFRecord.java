@@ -1,6 +1,10 @@
 package net.sf.jstdf.record;
 
-
+/**
+ * An abstract class implements STDFRecord
+ * @author malongcq@gmail.com
+ *
+ */
 public abstract class AbstractSTDFRecord implements STDFRecord
 {
 	protected int REC_NO;
@@ -9,6 +13,7 @@ public abstract class AbstractSTDFRecord implements STDFRecord
 	protected int REC_TYP;
 	protected int REC_SUB;
 	
+	@Override
 	public void setHeadInfo(int seq, int len, int typ, int sub) 
 	{
 		REC_NO = seq;
