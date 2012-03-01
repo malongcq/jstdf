@@ -35,60 +35,22 @@ import net.sf.jstdf.record.WaferConfigurationRecord;
 import net.sf.jstdf.record.WaferInformationRecord;
 import net.sf.jstdf.record.WaferResultsRecord;
 
-
+/**
+ * General utilities for STDF record generation.
+ * 
+ * @author malong
+ *
+ */
 public class StdfRecordUtils
 {
 	private StdfRecordUtils() {}
 	
-//	public final static STDFPartTestResult searchPartTestResult(Collection<STDFPartTestResult> lst, int headNum, int siteNum)
-//	{
-//		for(Iterator<STDFPartTestResult> it = lst.iterator(); it.hasNext(); )
-//		{
-//			STDFPartTestResult part = it.next();
-//			if(part.getHeadNum()==headNum && part.getSiteNum()==siteNum)
-//			{
-//				return part;
-//			}
-//		}
-//		
-//		return null;
-//	}
-//	
-//	public final static STDFWaferTestResult searchWaferTestResult(Collection<STDFWaferTestResult> lst, int headNum, int siteGrp)
-//	{
-//		for(Iterator<STDFWaferTestResult> it = lst.iterator(); it.hasNext(); )
-//		{
-//			STDFWaferTestResult wf = it.next();
-//			
-//			if(wf.getSiteGrp()==255 || siteGrp==255)
-//			{
-//				if(wf.getHeadNum()==headNum)
-//				{
-//					return wf;
-//				}
-//			}
-//			else
-//			{
-//				if(wf.getHeadNum()==headNum && wf.getSiteGrp()==siteGrp)
-//				{
-//					return wf;
-//				}
-//			}
-//		}
-//		
-//		return null;
-//	}
-//	
-//	public final static STDFWaferTestResult searchWaferTestResult(Collection<STDFWaferTestResult> lst, int headNum)
-//	{
-//		return searchWaferTestResult(lst, headNum, 255);
-//	}
-	
 	/**
-	 * Variable data type field
-	 * @param bb
-	 * @param cnt
-	 * @return
+	 * Read variable data type field.
+	 * 
+	 * @param bb the buffer which data is read from.
+	 * @param cnt the number of data items.
+	 * @return the list of generic data items.
 	 */
 	public static final List<GenericDataItem> readVnList(ByteBuffer bb, int cnt)
 	{
@@ -149,11 +111,13 @@ public class StdfRecordUtils
 	}
 	
 	/**
+	 * Read date from binary data.
 	 * The date and time field used in this specification is defined as 
 	 * a four byte (32 bit) unsigned integer field measuring the number of seconds 
-	 * since midnight on January 1st, 1970
-	 * @param bb
-	 * @return
+	 * since midnight on January 1st, 1970.
+	 * 
+	 * @param bb the buffer which data is read from.
+	 * @return the date.
 	 */
 	public static final Date readDate(ByteBuffer bb)
 	{
@@ -164,10 +128,11 @@ public class StdfRecordUtils
 	}
 	
 	/**
-	 * Fixed length bit-encoded data
-	 * @param bb
-	 * @param len
-	 * @return
+	 * Read fixed length byte data.
+	 * 
+	 * @param bb the buffer which data is read from.
+	 * @param len the number of bytes to read.
+	 * @return the byte array of data.
 	 */
 	public static final byte[] readBytes(ByteBuffer bb, int len)
 	{
@@ -179,16 +144,12 @@ public class StdfRecordUtils
 		return bytes;
 	}
 	
-	public static final BitSet readBits(ByteBuffer bb, int byte_len)
-	{
-		return Bytes2Bits(readBytes(bb, byte_len));
-	}
-	
 	/**
-	 * Variable length bit-encoded field: 
-	 * First byte = unsigned count of bytes to follow (maximum of 255 bytes).
-	 * @param bb
-	 * @return
+	 * Read fixed length byte data, 
+	 * the number of bytes to read is stored in 1st byte.
+	 * 
+	 * @param bb the buffer which data is read from.
+	 * @return the byte array of data.
 	 */
 	public static final byte[] readBytes(ByteBuffer bb)
 	{
@@ -198,10 +159,23 @@ public class StdfRecordUtils
 	}
 	
 	/**
-	 * Variable length bit-encoded field: 
-	 * First two bytes = unsigned count of bits to follow (maximum of 65,535 bits).
-	 * @param bb
-	 * @return
+	 * Read fixed length bit-encoded data.
+	 * 
+	 * @param bb the buffer which data is read from.
+	 * @param byte_len the number of bytes to read.
+	 * @return the bit-encoded data
+	 */
+	public static final BitSet readBits(ByteBuffer bb, int byte_len)
+	{
+		return Bytes2Bits(readBytes(bb, byte_len));
+	}
+	
+	/**
+	 * Read fixed length bit-encoded data, 
+	 * the number of bits to read is stored in first 2 bytes.
+	 * 
+	 * @param bb the buffer which data is read from.
+	 * @return the bit-encoded data
 	 */
 	public static final BitSet readDnBits(ByteBuffer bb)
 	{
@@ -211,6 +185,12 @@ public class StdfRecordUtils
 		return Bytes2Bits(readBytes(bb, len_bytes));
 	}
 	
+	/**
+	 * Convert byte array to bit-encoded data.
+	 * 
+	 * @param bytes the byte array to convert
+	 * @return the bit-encoded data 
+	 */
 	public static final BitSet Bytes2Bits(byte[] bytes)
 	{
 		BitSet bits = new BitSet(bytes.length*8);
@@ -230,11 +210,12 @@ public class StdfRecordUtils
 	}
 	
 	/**
-	 * Array of Unsigned integer data stored in a nibble. 
+	 * Read array of Unsigned integer data stored in a nibble. 
 	 * (Nibble = 4 bits of a byte).
-	 * @param bb
-	 * @param k
-	 * @return
+	 * 
+	 * @param bb the buffer which data is read from.
+	 * @param k the number of nibble to read. 
+	 * @return the array of bit-encoded data.
 	 */
 	public static final BitSet[] readKNBits(ByteBuffer bb, int k)
 	{
@@ -269,14 +250,23 @@ public class StdfRecordUtils
 	}
 	
 	/**
-	 * One byte signed integer
-	 * @param bb
-	 * @return
+	 * Read one byte signed integer.
+	 * 
+	 * @param bb the buffer which data is read from.
+	 * @return an integer.
 	 */
 	public static final int readI1Int(ByteBuffer bb)
 	{
 		return readI1Int(bb, 0);
 	}
+	
+	/**
+	 * Read one byte signed integer.
+	 * 
+	 * @param bb the buffer which data is read from.
+	 * @param default_value the default return value if fail to read.
+	 * @return an integer.
+	 */
 	public static final int readI1Int(ByteBuffer bb, int default_value)
 	{
 		int d = bb.hasRemaining() ? bb.get() : default_value;
@@ -284,9 +274,10 @@ public class StdfRecordUtils
 	}
 	
 	/**
-	 * One byte fixed length character string
-	 * @param bb
-	 * @return
+	 * Read one byte fixed length character string.
+	 * 
+	 * @param bb the buffer which data is read from.
+	 * @return a character.
 	 */
 	public static final char readC1Char(ByteBuffer bb)
 	{
@@ -294,14 +285,23 @@ public class StdfRecordUtils
 	}
 			
 	/**
-	 * One byte unsigned integer
-	 * @param bb
-	 * @return
+	 * Read one byte unsigned integer.
+	 * 
+	 * @param bb the buffer which data is read from.
+	 * @return an integer.
 	 */
 	public static final int readU1Int(ByteBuffer bb)
 	{
 		return readU1Int(bb, 0);
 	}
+	
+	/**
+	 * Read one byte unsigned integer.
+	 * 
+	 * @param bb the buffer which data is read from.
+	 * @param default_value the default return value if fail to read.
+	 * @return an integer.
+	 */
 	public static final int readU1Int(ByteBuffer bb, int default_value)
 	{
 		int d = bb.hasRemaining() ? bb.get() & 0xFF : default_value;
@@ -309,15 +309,25 @@ public class StdfRecordUtils
 	}
 	
 	/**
-	 * Array of One byte unsigned integer
-	 * @param bb
-	 * @param k
-	 * @return
+	 * Read array of one byte unsigned integer.
+	 * 
+	 * @param bb the buffer which data is read from.
+	 * @param k the number of elements to read.
+	 * @return an array of k integers. 
 	 */
 	public static final int[] readKU1Int(ByteBuffer bb, int k)
 	{
 		return readKU1Int(bb, k, 0);
 	}
+	
+	/**
+	 * Read array of one byte unsigned integer.
+	 * 
+	 * @param bb the buffer which data is read from.
+	 * @param k the number of elements to read.
+	 * @param default_value the default value of array element if fail to read.
+	 * @return an array of k integers. 
+	 */
 	public static final int[] readKU1Int(ByteBuffer bb, int k, int default_value)
 	{
 		int[] d = new int[k];
@@ -330,43 +340,71 @@ public class StdfRecordUtils
 	}
 	
 	/**
-	 * Two byte signed integer
-	 * @param bb
-	 * @return
+	 * Read two byte signed integer
+	 * 
+	 * @param bb the buffer which data is read from.
+	 * @return an integer.
 	 */
 	public static final int readI2Int(ByteBuffer bb)
 	{
 		return readI2Int(bb, 0);
 	}
+	
+	/**
+	 * Read two byte signed integer
+	 * 
+	 * @param bb the buffer which data is read from.
+	 * @param default_value the default return value if fail to read.
+	 * @return an integer.
+	 */
 	public static final int readI2Int(ByteBuffer bb, int default_value)
 	{
 		return (bb.remaining()<2) ? default_value : bb.getShort();
 	}
 	
 	/**
-	 * Two byte unsigned integer
-	 * @param bb
-	 * @return
+	 * Read two byte unsigned integer.
+	 * 
+	 * @param bb the buffer which data is read from.
+	 * @return an integer.
 	 */
 	public static final int readU2Int(ByteBuffer bb)
 	{
 		return readU2Int(bb, 0);
 	}
+	
+	/**
+	 * Read two byte unsigned integer.
+	 * 
+	 * @param bb the buffer which data is read from.
+	 * @param default_value the default return value if fail to read.
+	 * @return an integer.
+	 */
 	public static final int readU2Int(ByteBuffer bb, int default_value)
 	{
 		return (bb.remaining()<2) ? default_value : bb.getShort() & 0xFFFF;
 	}
 	
 	/**
-	 * Array of Two byte unsigned integer
-	 * @param bb
-	 * @param k
-	 * @return
+	 * Read array of two byte unsigned integer.
+	 * 
+	 * @param bb the buffer which data is read from.
+	 * @param k the number of elements to read.
+	 * @return an array of k integers. 
 	 */
 	public static final int[] readKU2Int(ByteBuffer bb, int k)
 	{
 		return readKU2Int(bb, k, 0);
 	}
+	
+	/**
+	 * Read array of two byte unsigned integer.
+	 * 
+	 * @param bb the buffer which data is read from.
+	 * @param k the number of elements to read.
+	 * @param default_value the default value of array element if fail to read.
+	 * @return an array of k integers. 
+	 */
 	public static final int[] readKU2Int(ByteBuffer bb, int k, int default_value)
 	{
 		int[] d = new int[k];

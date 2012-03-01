@@ -8,6 +8,12 @@ import net.sf.jstdf.data.PartResultSet;
 import net.sf.jstdf.record.PartResultsRecord;
 import net.sf.jstdf.record.WaferConfigurationRecord;
 
+/**
+ * General utilities for wafer data generation.
+ * 
+ * @author malong
+ *
+ */
 public class StdfWaferUtils 
 {
 	private StdfWaferUtils() {}
