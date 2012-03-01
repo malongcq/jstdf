@@ -4,7 +4,12 @@ import java.nio.ByteBuffer;
 
 import net.sf.jstdf.util.StdfRecordUtils;
 
-
+/**
+ * Datalog Text Record (DTR)
+ * 
+ * @author malong
+ *
+ */
 public class DatalogTextRecord extends AbstractSTDFRecord
 {
 	public static final byte Type = 50;

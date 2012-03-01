@@ -2,7 +2,8 @@ package net.sf.jstdf.record;
 
 /**
  * An abstract class implements STDFRecord
- * @author malongcq@gmail.com
+ * 
+ * @author malong
  *
  */
 public abstract class AbstractSTDFRecord implements STDFRecord

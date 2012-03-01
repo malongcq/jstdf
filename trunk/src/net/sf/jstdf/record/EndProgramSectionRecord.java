@@ -2,6 +2,12 @@ package net.sf.jstdf.record;
 
 import java.nio.ByteBuffer;
 
+/**
+ * End Program Section Record (EPS)
+ * 
+ * @author malong
+ *
+ */
 public class EndProgramSectionRecord extends AbstractSTDFRecord
 {
 	public static final byte Type = 20;

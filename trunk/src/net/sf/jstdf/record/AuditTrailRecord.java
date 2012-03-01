@@ -5,7 +5,12 @@ import java.util.Date;
 
 import net.sf.jstdf.util.StdfRecordUtils;
 
-
+/**
+ * Audit Trail Record (ATR)
+ * 
+ * @author malong
+ *
+ */
 public class AuditTrailRecord extends AbstractSTDFRecord
 {
 	public static final byte Type = 0;

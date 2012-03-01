@@ -4,7 +4,12 @@ import java.nio.ByteBuffer;
 
 import net.sf.jstdf.util.StdfRecordUtils;
 
-
+/**
+ * File Attributes Record (FAR)
+ * 
+ * @author malong
+ *
+ */
 public class FileAttributesRecord extends AbstractSTDFRecord
 {
 	public static final byte Type = 0;

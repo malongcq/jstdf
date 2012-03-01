@@ -3,9 +3,9 @@ package net.sf.jstdf.record;
 import java.nio.ByteBuffer;
 
 /**
+ * The interface defines the common property and methods of STDF record
  * 
- * 
- * @author malongcq@gmail.com
+ * @author malong
  *
  */
 public interface STDFRecord

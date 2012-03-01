@@ -4,7 +4,12 @@ import java.nio.ByteBuffer;
 
 import net.sf.jstdf.util.StdfRecordUtils;
 
-
+/**
+ * Begin Program Section Record (BPS)
+ * 
+ * @author malong
+ *
+ */
 public class BeginProgramSectionRecord extends AbstractSTDFRecord
 {
 	public static final byte Type = 20;
