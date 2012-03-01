@@ -18,6 +18,14 @@ public class StdfWaferUtils
 {
 	private StdfWaferUtils() {}
 	
+	/**
+	 * Create Hard/Soft bin wafermap.
+	 * 
+	 * @param wafermap the wafer part test results. 
+	 * @param softBin true to use soft bin, false to use hard bin.
+	 * @param wcr WaferConfigurationRecord used to create wafermap, can be null.
+	 * @return the bin wafermap in 2D array.
+	 */
 	public static final int[][] createWafermapBin2DArray(
 			Map<Point, PartResultSet> wafermap,
 			boolean softBin,
@@ -53,6 +61,13 @@ public class StdfWaferUtils
 		return wmap;
 	}
 	
+	/**
+	 * Create Hard/Soft bin count summary.
+	 * 
+	 * @param wafermap the wafer part test results. 
+	 * @param softBin true to use soft bin, false to use hard bin.
+	 * @return a map stored bin-count pair of data.
+	 */
 	public Map<Integer, Integer> createWafermapBinCountSummary(
 			Map<Point, PartResultSet> wafermap,
 			boolean softBin)
