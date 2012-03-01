@@ -417,42 +417,69 @@ public class StdfRecordUtils
 	}
 	
 	/**
-	 * Four byte signed integer
-	 * @param bb
-	 * @return
+	 * Read four byte signed integer.
+	 * 
+	 * @param bb the buffer which data is read from.
+	 * @return an integer.
 	 */
 	public static final int readI4Int(ByteBuffer bb)
 	{
 		return readI4Int(bb, 0);
 	}
+	
+	/**
+	 * Read four byte signed integer.
+	 * 
+	 * @param bb the buffer which data is read from.
+	 * @param default_value the default return value if fail to read.
+	 * @return an integer.
+	 */
 	public static final int readI4Int(ByteBuffer bb, int default_value)
 	{	
 		return (bb.remaining()<4) ? default_value : bb.getInt();
 	}
 	
 	/**
-	 * Four byte unsigned integer
-	 * @param bb
-	 * @return
+	 * Read four byte unsigned integer.
+	 * 
+	 * @param bb the buffer which data is read from.
+	 * @return an integer.
 	 */
 	public static final long readU4Int(ByteBuffer bb)
 	{
 		return readU4Int(bb, 0);
 	}
+	
+	/**
+	 * Read four byte unsigned integer.
+	 * 
+	 * @param bb the buffer which data is read from.
+	 * @param default_value the default return value if fail to read.
+	 * @return an integer.
+	 */
 	public static final long readU4Int(ByteBuffer bb, long default_value)
 	{
 		return (bb.remaining()<4) ? default_value : bb.getInt() & 0xFFFFFFFFL;
 	}
 	
 	/**
-	 * Four byte floating point number
-	 * @param bb
-	 * @return
+	 * Read four byte floating point number
+	 * 
+	 * @param bb the buffer which data is read from.
+	 * @return a double.
 	 */
 	public static final double readR4Double(ByteBuffer bb)
 	{
 		return readR4Double(bb, 0.0);
 	}
+	
+	/**
+	 * Read four byte floating point number
+	 * 
+	 * @param bb the buffer which data is read from.
+	 * @param default_value the default return value if fail to read.
+	 * @return a double.
+	 */
 	public static final double readR4Double(ByteBuffer bb, double default_value)
 	{
 		if(bb.remaining()<4) return default_value;
@@ -461,15 +488,25 @@ public class StdfRecordUtils
 	}
 	
 	/**
-	 * Array of Four byte floating point number
-	 * @param bb
-	 * @param k
-	 * @return
+	 * Read array of four byte floating point number.
+	 * 
+	 * @param bb the buffer which data is read from.
+	 * @param k the number of elements to read.
+	 * @return an array of k doubles.
 	 */
 	public static final double[] readKR4Double(ByteBuffer bb, int k)
 	{
 		return readKR4Double(bb, k, 0.0);
 	}
+	
+	/**
+	 * Read array of four byte floating point number.
+	 * 
+	 * @param bb the buffer which data is read from.
+	 * @param k the number of elements to read.
+	 * @param default_value the default value of array element if fail to read.
+	 * @return an array of k doubles.
+	 */
 	public static final double[] readKR4Double(ByteBuffer bb, int k, double default_value)
 	{
 		double[] d = new double[k];
