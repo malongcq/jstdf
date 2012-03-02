@@ -92,7 +92,6 @@ public class Stdf2CsvExport
 		Options opts = createOptions();
 		try
 		{
-			System.out.println("cmd=" + Arrays.asList(args));
 			CommandLine cmd = parser.parse(opts, args);
 			
 			if(cmd.hasOption("help"))
@@ -141,6 +140,7 @@ public class Stdf2CsvExport
 		} 
 		catch (Exception e) 
 		{
+			System.out.println("cmd=" + Arrays.asList(args));
 			printHelp(opts);
 		}
 		finally
