@@ -29,7 +29,7 @@ public class Stdf2CsvExport
 				"omit this option to export all parameters. " +
 				"DON'T USE SINGLE * OR ?, SHELL DOES INTERCEPT IT." );
 		param.setArgName("parameter name");
-		Option out = new Option("out", true, "output directory for .csv files, default [./stdf_csv]" );
+		Option out = new Option("out", true, "output directory for .csv files, default is [stdf_csv]" );
 		out.setArgName("output dir");
 		
 		opts.addOption(help);
