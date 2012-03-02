@@ -28,7 +28,7 @@ public class Stdf2CsvExport
 		Option quiet = new Option("quiet", false, "be quiet when reading file" );
 		Option param = new Option("param", true, "search parameters for export, wildcard ? and * is supported, " +
 				"omit this option to export all parameters. " +
-				"DON'T PUT SINGLE * OR ?, SHELL DOES INTERCEPT IT." );
+				"DON'T USE SINGLE * OR ?, SHELL DOES INTERCEPT IT." );
 		param.setArgName("parameter name");
 		Option out = new Option("out", true, "output directory for .csv files, default [./stdf_csv]" );
 		out.setArgName("output dir");
