@@ -91,7 +91,7 @@ public class Stdf2CsvExport
 		Options opts = createOptions();
 		try
 		{
-			System.out.println(Arrays.asList(args));
+			System.out.println("cmd=" + Arrays.asList(args));
 			CommandLine cmd = parser.parse(opts, args);
 			
 			if(cmd.hasOption("help"))
@@ -104,6 +104,7 @@ public class Stdf2CsvExport
 			reader.setVerbose(!cmd.hasOption("quiet"));
 			
 			String in_file = cmd.getArgs()[0];
+			System.out.println("Reading file..." + in_file);
 			
 			Date d1, d2;
 			d1 = new Date();
@@ -137,7 +138,7 @@ public class Stdf2CsvExport
 		{
 			e.printStackTrace();
 		} 
-		catch (ParseException e) 
+		catch (Exception e) 
 		{
 			printHelp(opts);
 		}
