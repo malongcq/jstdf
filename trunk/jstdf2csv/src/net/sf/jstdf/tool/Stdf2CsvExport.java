@@ -1,6 +1,8 @@
 package net.sf.jstdf.tool;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.Date;
 
 import net.sf.jstdf.data.PartCsvExporter;
@@ -13,6 +15,7 @@ import org.apache.commons.cli.GnuParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
 
 public class Stdf2CsvExport 
 {
@@ -88,6 +91,7 @@ public class Stdf2CsvExport
 		Options opts = createOptions();
 		try
 		{
+			System.out.println(Arrays.asList(args));
 			CommandLine cmd = parser.parse(opts, args);
 			
 			if(cmd.hasOption("help"))
@@ -113,20 +117,33 @@ public class Stdf2CsvExport
 			else
 			{
 				String out_file = cmd.getOptionValue("out", "stdf_csv");
-				String param = wildcardToRegex(cmd.getOptionValue("param", ""));
-				
 				PartCsvExporter stdf = new PartCsvExporter(new File(out_file));
-				stdf.setTestParameterPattern(param);
+				
+				if(cmd.hasOption("param"))
+				{
+					String param = cmd.getOptionValue("param", "");
+					System.out.println("Searching parameters..." + param);
+					param = wildcardToRegex(param);
+					stdf.setTestParameterPattern(param);
+				}
 				
 				reader.setRecordHandler(stdf);
 				reader.loadFromSTDF(in_file);
 			}
 			d2 = new Date();
 			System.out.println((d2.getTime()-d1.getTime())/1000+"s"); 
-		}
-		catch(Exception e)
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		} 
+		catch (ParseException e) 
 		{
 			printHelp(opts);
+		}
+		finally
+		{
+			
 		}
 	}
 
