@@ -195,7 +195,7 @@ public class PartCsvExporter extends PartTestResult
 			out_fs.put(filename_bin_result, out_f);
 			
 			out_fw = new FileWriter(out_f, true);
-			out_fw.write("Seq,X,Y,H_Bin,S_Bin,ID,Txt\n");
+			out_fw.write("Seq,Head,Site,X,Y,H_Bin,S_Bin,ID,Txt\n");
 		}
 		else
 		{
