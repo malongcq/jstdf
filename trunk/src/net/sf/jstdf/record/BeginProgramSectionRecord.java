@@ -15,7 +15,10 @@ public class BeginProgramSectionRecord extends AbstractSTDFRecord
 	public static final byte Type = 20;
 	public static final byte SubType = 10;
 	
-	public String SEQ_NAME; //C*n Program section (or sequencer) name length byte = 0
+	/**
+	 * C*n Program section (or sequencer) name length byte = 0
+	 */
+	public String SEQ_NAME; 
 	
 	@Override
 	public void readContent(ByteBuffer bb)

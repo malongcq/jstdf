@@ -18,10 +18,12 @@ public class AuditTrailRecord extends AbstractSTDFRecord
 	
 	/**
 	 * MOD_TIM U*4 Date and time of STDF file modification
+	 */
+	public Date MOD_TIM;
+	
+	/**
 	 * CMD_LINE C*n Command line of program
 	 */
-	
-	public Date MOD_TIM;
 	public String CMD_LINE;
 	
 	@Override

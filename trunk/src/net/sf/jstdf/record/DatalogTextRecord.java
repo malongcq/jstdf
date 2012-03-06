@@ -15,7 +15,10 @@ public class DatalogTextRecord extends AbstractSTDFRecord
 	public static final byte Type = 50;
 	public static final byte SubType = 30;
 	
-	public String TEXT_DAT; //C*n ASCII text string
+	/**
+	 * C*n ASCII text string
+	 */
+	public String TEXT_DAT; 
 	
 	@Override
 	public void readContent(ByteBuffer bb)
