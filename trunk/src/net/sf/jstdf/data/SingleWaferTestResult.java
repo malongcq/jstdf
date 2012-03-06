@@ -26,7 +26,7 @@ public class SingleWaferTestResult extends PartTestResult
 		});
 	}
 	
-	Map<Point, PartResultSet> wmap = new HashMap<Point, PartResultSet>();
+	protected Map<Point, PartResultSet> wmap = new HashMap<Point, PartResultSet>();
 	protected WaferConfigurationRecord wcr;
 	protected WaferInformationRecord wir;
 	protected WaferResultsRecord wrr;

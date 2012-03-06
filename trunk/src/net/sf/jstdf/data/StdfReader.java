@@ -37,15 +37,32 @@ import net.sf.jstdf.record.WaferInformationRecord;
 import net.sf.jstdf.record.WaferResultsRecord;
 import net.sf.jstdf.util.StdfRecordUtils;
 
+/**
+ * Class for reading stdf file or gzipped stdf file
+ * 
+ * @author malong
+ *
+ */
 public class StdfReader 
 {
+	/**
+	 * stdf record header length of bytes
+	 */
 	public final static int STDF_HEAD_LEN = 4;
 	
+	/**
+	 * Create a new stdf reader, the default stdf record handler is SimpleSTDFSummary
+	 */
 	public StdfReader()
 	{
 		this.recordHandler = new SimpleSTDFSummary();
 	}
 	
+	/**
+	 * Create a new stdf reader, given the stdf record handler to process record.
+	 * 
+	 * @param recordHandler
+	 */
 	public StdfReader(StdfRecordHandler recordHandler)
 	{
 		this.recordHandler = recordHandler;
