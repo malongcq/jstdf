@@ -14,7 +14,13 @@ import org.jstdf.util.StdfRecordUtils;
  */
 public class FunctionalTestRecord extends AbstractSTDFRecord
 {
+	/**
+	 * 15
+	 */
 	public static final byte Type = 15;
+	/**
+	 * 20
+	 */
 	public static final byte SubType = 20;
 	
 	/**

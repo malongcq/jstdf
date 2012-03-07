@@ -13,7 +13,13 @@ import org.jstdf.util.StdfRecordUtils;
  */
 public class RetestDataRecord extends AbstractSTDFRecord
 {
+	/**
+	 * 1
+	 */
 	public static final byte Type = 1;
+	/**
+	 * 70
+	 */
 	public static final byte SubType = 70;
 	
 	/**

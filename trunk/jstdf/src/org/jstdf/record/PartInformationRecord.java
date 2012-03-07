@@ -13,7 +13,13 @@ import org.jstdf.util.StdfRecordUtils;
  */
 public class PartInformationRecord extends AbstractSTDFRecord
 {
+	/**
+	 * 5
+	 */
 	public static final byte Type = 5;
+	/**
+	 * 10
+	 */
 	public static final byte SubType = 10;
 	
 	/**

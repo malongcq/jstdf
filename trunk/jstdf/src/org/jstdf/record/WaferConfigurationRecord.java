@@ -13,7 +13,13 @@ import org.jstdf.util.StdfRecordUtils;
  */
 public class WaferConfigurationRecord extends AbstractSTDFRecord
 {
+	/**
+	 * 2
+	 */
 	public static final byte Type = 2;
+	/**
+	 * 30
+	 */
 	public static final byte SubType = 30;
 	
 	/**
