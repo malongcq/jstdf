@@ -28,7 +28,7 @@ import org.jstdf.record.WaferInformationRecord;
 import org.jstdf.record.WaferResultsRecord;
 
 /**
- * Defines how the handler read stdf record
+ * This interface defines the methods of stdf record handler 
  * @author malong
  *
  */

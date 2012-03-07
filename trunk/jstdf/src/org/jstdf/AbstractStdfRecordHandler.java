@@ -29,7 +29,7 @@ import org.jstdf.record.WaferInformationRecord;
 import org.jstdf.record.WaferResultsRecord;
 
 /**
- * An abstract class to provide the default methods for reading stdf record
+ * This class provides default implementations for the stdf record handler
  * @author malong
  *
  */
