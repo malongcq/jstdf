@@ -17,25 +17,85 @@ public class SiteDescriptionRecord extends AbstractSTDFRecord
 	public static final byte Type = 1;
 	public static final byte SubType = 80;
 	
+	/**
+	 * U*1 Test head number
+	 */
 	public int HEAD_NUM; //U*1 Test head number
+	/**
+	 * U*1 Site group number
+	 */
 	public int SITE_GRP; //U*1 Site group number
+	/**
+	 * U*1 Number (k) of test sites in site group
+	 */
 	public int SITE_CNT; //U*1 Number (k) of test sites in site group
+	/**
+	 * kxU*1 Array of test site numbers
+	 */
 	public int[] SITE_NUM; //kxU*1 Array of test site numbers
+	/**
+	 * C*n Handler or prober type length byte = 0 if data missing
+	 */
 	public String HAND_TYP; //C*n Handler or prober type length byte = 0
+	/**
+	 * C*n Handler or prober ID length byte = 0 if data missing
+	 */
 	public String HAND_ID; //C*n Handler or prober ID length byte = 0
+	/**
+	 * C*n Probe card type length byte = 0 if data missing
+	 */
 	public String CARD_TYP; //C*n Probe card type length byte = 0
+	/**
+	 * C*n Probe card ID length byte = 0 if data missing
+	 */
 	public String CARD_ID; //C*n Probe card ID length byte = 0
+	/**
+	 * C*n Load board type length byte = 0 if data missing
+	 */
 	public String LOAD_TYP; //C*n Load board type length byte = 0
+	/**
+	 * C*n Load board ID length byte = 0 if data missing
+	 */
 	public String LOAD_ID; //C*n Load board ID length byte = 0
+	/**
+	 * C*n DIB board type length byte = 0 if data missing
+	 */
 	public String DIB_TYP; //C*n DIB board type length byte = 0
+	/**
+	 * C*n DIB board ID length byte = 0 if data missing
+	 */
 	public String DIB_ID; //C*n DIB board ID length byte = 0
+	/**
+	 * C*n Interface cable type length byte = 0 if data missing
+	 */
 	public String CABL_TYP; //C*n Interface cable type length byte = 0
+	/**
+	 * C*n Interface cable ID length byte = 0 if data missing
+	 */
 	public String CABL_ID; //C*n Interface cable ID length byte = 0
+	/**
+	 * C*n Handler contactor type length byte = 0 if data missing
+	 */
 	public String CONT_TYP; //C*n Handler contactor type length byte = 0
+	/**
+	 * C*n Handler contactor ID length byte = 0 if data missing
+	 */
 	public String CONT_ID; //C*n Handler contactor ID length byte = 0
+	/**
+	 * C*n Laser type length byte = 0 if data missing
+	 */
 	public String LASR_TYP; //C*n Laser type length byte = 0
+	/**
+	 * C*n Laser ID length byte = 0 if data missing
+	 */
 	public String LASR_ID; //C*n Laser ID length byte = 0
+	/**
+	 * C*n Extra equipment type field length byte = 0 if data missing
+	 */
 	public String EXTR_TYP; //C*n Extra equipment type field length byte = 0
+	/**
+	 * C*n Extra equipment ID length byte = 0 if data missing
+	 */
 	public String EXTR_ID; //C*n Extra equipment ID length byte = 0
 	
 	public static final SiteDescriptionRecord getInstance(int seq, int len, int typ, int sub, ByteBuffer bb)

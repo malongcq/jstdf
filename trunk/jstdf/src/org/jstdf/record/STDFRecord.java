@@ -50,8 +50,8 @@ public interface STDFRecord
 	public void setHeadInfo(int seq, int len, int typ, int sub);
 	
 	/**
-	 * 
-	 * @param bb read data content from byte buffer of the record data
+	 * read data content from byte buffer of the record data
+	 * @param bb 
 	 */
 	public void readContent(ByteBuffer bb);
 }
