@@ -17,9 +17,21 @@ public class WaferInformationRecord extends AbstractSTDFRecord
 	public static final byte Type = 2;
 	public static final byte SubType = 10;
 	
+	/**
+	 * U*1 Test head number
+	 */
 	public int HEAD_NUM; //U*1 Test head number
+	/**
+	 * U*1 Site group number, 255 if data missing
+	 */
 	public int SITE_GRP; //U*1 Site group number 255
+	/**
+	 * U*4 Date and time first part tested
+	 */
 	public Date START_T; //U*4 Date and time first part tested
+	/**
+	 * C*n Wafer ID length byte = 0 if data missing
+	 */
 	public String WAFER_ID; //C*n Wafer ID length byte = 0
 	
 	public static final WaferInformationRecord getInstance(int seq, int len, int typ, int sub, ByteBuffer bb)

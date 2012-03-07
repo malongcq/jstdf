@@ -16,14 +16,41 @@ public class WaferConfigurationRecord extends AbstractSTDFRecord
 	public static final byte Type = 2;
 	public static final byte SubType = 30;
 	
+	/**
+	 * R*4 Diameter of wafer in WF_UNITS, 0 if data missing
+	 */
 	public double WAFR_SIZ; //R*4 Diameter of wafer in WF_UNITS 0
+	/**
+	 * R*4 Height of die in WF_UNITS, 0 if data missing
+	 */
 	public double DIE_HT; //R*4 Height of die in WF_UNITS 0
+	/**
+	 * R*4 Width of die in WF_UNITS, 0 if data missing
+	 */
 	public double DIE_WID; //R*4 Width of die in WF_UNITS 0
+	/**
+	 * U*1 Units for wafer and die dimensions, 0 if data missing
+	 */
 	public int WF_UNITS; //U*1 Units for wafer and die dimensions 0
+	/**
+	 * C*1 Orientation of wafer flat space
+	 */
 	public char WF_FLAT; //C*1 Orientation of wafer flat space
+	/**
+	 * I*2 X coordinate of center die on wafer, -32768 if data missing
+	 */
 	public int CENTER_X; //I*2 X coordinate of center die on wafer -32768
+	/**
+	 * I*2 Y coordinate of center die on wafer, -32768 if data missing
+	 */
 	public int CENTER_Y; //I*2 Y coordinate of center die on wafer -32768
+	/**
+	 * C*1 Positive X direction of wafer space
+	 */
 	public char POS_X; //C*1 Positive X direction of wafer space
+	/**
+	 * C*1 Positive Y direction of wafer space
+	 */
 	public char POS_Y; //C*1 Positive Y direction of wafer space
 	
 	public static final WaferConfigurationRecord getInstance(int seq, int len, int typ, int sub, ByteBuffer bb)

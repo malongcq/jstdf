@@ -17,21 +17,69 @@ public class TestSynopsisRecord extends AbstractSTDFRecord
 	public static final byte Type = 10;
 	public static final byte SubType = 30;
 	
+	/**
+	 * U*1 Test head number
+	 */
 	public int HEAD_NUM; //U*1 Test head number See note
+	/**
+	 * U*1 Test site number
+	 */
 	public int SITE_NUM; //U*1 Test site number
+	/**
+	 * C*1 Test type space
+	 */
 	public char TEST_TYP; //C*1 Test type space
+	/**
+	 * U*4 Test number
+	 */
 	public long TEST_NUM; //U*4 Test number
+	/**
+	 * U*4 Number of test executions, 4,294,967,295 if data missing
+	 */
 	public long EXEC_CNT; //U*4 Number of test executions 4,294,967,295
+	/**
+	 * U*4 Number of test failures, 4,294,967,295 if data missing
+	 */
 	public long FAIL_CNT; //U*4 Number of test failures 4,294,967,295
+	/**
+	 * U*4 Number of alarmed tests, 4,294,967,295 if data missing
+	 */
 	public long ALRM_CNT; //U*4 Number of alarmed tests 4,294,967,295
+	/**
+	 * C*n Test name length byte = 0 if data missing
+	 */
 	public String TEST_NAM; //C*n Test name length byte = 0
+	/**
+	 * C*n Sequencer (program segment/flow) name length byte = 0 if data missing
+	 */
 	public String SEQ_NAME; //C*n Sequencer (program segment/flow) name length byte = 0
+	/**
+	 * C*n Test label or text length byte = 0 if data missing
+	 */
 	public String TEST_LBL; //C*n Test label or text length byte = 0
+	/**
+	 * B*1 Optional data flag 
+	 */
 	public BitSet OPT_FLAG; //B*1 Optional data flag See note
+	/**
+	 * R*4 Average test execution time in seconds, OPT_FLAG bit 2 = 1 if data invalid
+	 */
 	public double TEST_TIM; //R*4 Average test execution time in seconds OPT_FLAG bit 2 = 1
+	/**
+	 * R*4 Lowest test result value, OPT_FLAG bit 0 = 1 if data invalid
+	 */
 	public double TEST_MIN; //R*4 Lowest test result value OPT_FLAG bit 0 = 1
+	/**
+	 * R*4 Highest test result value, OPT_FLAG bit 1 = 1 if data invalid
+	 */
 	public double TEST_MAX; //R*4 Highest test result value OPT_FLAG bit 1 = 1
+	/**
+	 * R*4 Sumof test result values, OPT_FLAG bit 4 = 1 if data invalid
+	 */
 	public double TST_SUMS; //R*4 Sumof test result values OPT_FLAG bit 4 = 1
+	/**
+	 * R*4 Sum of squares of test result values, OPT_FLAG bit 5 = 1 if data invalid
+	 */
 	public double TST_SQRS; //R*4 Sum of squares of test result values OPT_FLAG bit 5 = 1
 	
 	public static final TestSynopsisRecord getInstance(int seq, int len, int typ, int sub, ByteBuffer bb)

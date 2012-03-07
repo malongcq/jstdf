@@ -16,11 +16,29 @@ public class SoftwareBinRecord extends AbstractSTDFRecord
 	public static final byte Type = 1;
 	public static final byte SubType = 50;
 	
+	/**
+	 * U*1 Test head number 
+	 */
 	public int HEAD_NUM; //U*1 Test head number See note
+	/**
+	 * U*1 Test site number
+	 */
 	public int SITE_NUM; //U*1 Test site number
+	/**
+	 * U*2 Software bin number
+	 */
 	public int SBIN_NUM; //U*2 Software bin number
+	/**
+	 * U*4 Number of parts in bin
+	 */
 	public long SBIN_CNT; //U*4 Number of parts in bin
+	/**
+	 * C*1 Pass/fail indication space
+	 */
 	public char SBIN_PF; //C*1 Pass/fail indication space
+	/**
+	 * C*n Name of software bin length byte = 0 if data missing
+	 */
 	public String SBIN_NAM; //C*n Name of software bin length byte = 0
 	
 	public static final SoftwareBinRecord getInstance(int seq, int len, int typ, int sub, ByteBuffer bb)

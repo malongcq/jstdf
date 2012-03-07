@@ -17,19 +17,61 @@ public class WaferResultsRecord extends AbstractSTDFRecord
 	public static final byte Type = 2;
 	public static final byte SubType = 20;
 	
+	/**
+	 * U*1 Test head number
+	 */
 	public int HEAD_NUM; //U*1 Test head number
+	/**
+	 * U*1 Site group number, 255 if data missing
+	 */
 	public int SITE_GRP; //U*1 Site group number 255
+	/**
+	 * U*4 Date and time last part tested
+	 */
 	public Date FINISH_T; //U*4 Date and time last part tested
+	/**
+	 * U*4 Number of parts tested
+	 */
 	public long PART_CNT; //U*4 Number of parts tested
+	/**
+	 * U*4 Number of parts retested, 4,294,967,295255 if data missing
+	 */
 	public long RTST_CNT; //U*4 Number of parts retested 4,294,967,295
+	/**
+	 * U*4 Number of aborts during testing, 4,294,967,295255 if data missing
+	 */
 	public long ABRT_CNT; //U*4 Number of aborts during testing 4,294,967,295
+	/**
+	 * U*4 Number of good (passed) parts tested, 4,294,967,295255 if data missing
+	 */
 	public long GOOD_CNT; //U*4 Number of good (passed) parts tested 4,294,967,295
+	/**
+	 * U*4 Number of functional parts tested, 4,294,967,295255 if data missing
+	 */
 	public long FUNC_CNT; //U*4 Number of functional parts tested 4,294,967,295
+	/**
+	 * C*n Wafer ID length byte = 0 if data missing
+	 */
 	public String WAFER_ID; //C*n Wafer ID length byte = 0
+	/**
+	 * C*n Fab wafer ID length byte = 0 if data missing
+	 */
 	public String FABWF_ID; //C*n Fab wafer ID length byte = 0
+	/**
+	 * C*n Wafer frame ID length byte = 0 if data missing
+	 */
 	public String FRAME_ID; //C*n Wafer frame ID length byte = 0
+	/**
+	 * C*n Wafer mask ID length byte = 0 if data missing
+	 */
 	public String MASK_ID; //C*n Wafer mask ID length byte = 0
+	/**
+	 * C*n Wafer description supplied by user length byte = 0 if data missing
+	 */
 	public String USR_DESC; //C*n Wafer description supplied by user length byte = 0
+	/**
+	 * C*n Wafer description supplied by exec length byte = 0 if data missing
+	 */
 	public String EXC_DESC; //C*n Wafer description supplied by exec length byte = 0
 	
 	public static final WaferResultsRecord getInstance(int seq, int len, int typ, int sub, ByteBuffer bb)
