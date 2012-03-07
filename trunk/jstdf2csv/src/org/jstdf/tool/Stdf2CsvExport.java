@@ -23,13 +23,15 @@ public class Stdf2CsvExport
 		Options opts = new Options();
 		
 		Option help = new Option("help", false, "print help message");
-		Option summary = new Option("summary", false, "print summry of STDF data file");
 		Option quiet = new Option("quiet", false, "be quiet when reading file" );
-		Option param = new Option("param", true, "search parameters for export, wildcard ? and * is supported, " +
+		Option summary = new Option("summary", false, "print STDF data file summary");
+		Option param = new Option("param", true, "search parameters for export, " +
+				"wildcard ? and * is supported, " +
 				"omit this option to export all parameters. " +
 				"DON'T USE SINGLE * OR ?, SHELL DOES INTERCEPT IT." );
 		param.setArgName("parameter name");
-		Option out = new Option("out", true, "output directory for .csv files, default is [stdf_csv]" );
+		Option out = new Option("out", true, "output directory for .csv files, " +
+				"default is [stdf_csv]" );
 		out.setArgName("output dir");
 		
 		opts.addOption(help);
@@ -108,6 +110,7 @@ public class Stdf2CsvExport
 			
 			Date d1, d2;
 			d1 = new Date();
+			
 			if(cmd.hasOption("summary"))
 			{
 				SimpleSTDFSummary stdf = new SimpleSTDFSummary();
@@ -117,8 +120,8 @@ public class Stdf2CsvExport
 			}
 			else
 			{
-				String out_file = cmd.getOptionValue("out", "stdf_csv");
-				PartCsvExporter stdf = new PartCsvExporter(new File(out_file));
+				File out_dir = new File(cmd.getOptionValue("out", "stdf_out"));
+				PartCsvExporter stdf = new PartCsvExporter(out_dir);
 				
 				if(cmd.hasOption("param"))
 				{
