@@ -117,4 +117,17 @@ public class TestSynopsisRecord extends AbstractSTDFRecord
 	{
 		return STDFRecordType.TSR;
 	}
+
+	@Override
+	public String toString() {
+		return "TestSynopsisRecord [HEAD_NUM=" + HEAD_NUM + ", SITE_NUM="
+				+ SITE_NUM + ", TEST_TYP=" + TEST_TYP + ", TEST_NUM="
+				+ TEST_NUM + ", EXEC_CNT=" + EXEC_CNT + ", FAIL_CNT="
+				+ FAIL_CNT + ", ALRM_CNT=" + ALRM_CNT + ", TEST_NAM="
+				+ TEST_NAM + ", SEQ_NAME=" + SEQ_NAME + ", TEST_LBL="
+				+ TEST_LBL + ", OPT_FLAG=" + OPT_FLAG + ", TEST_TIM="
+				+ TEST_TIM + ", TEST_MIN=" + TEST_MIN + ", TEST_MAX="
+				+ TEST_MAX + ", TST_SUMS=" + TST_SUMS + ", TST_SQRS="
+				+ TST_SQRS + "]";
+	}
 }
