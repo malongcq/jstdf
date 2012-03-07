@@ -27,6 +27,11 @@ import org.jstdf.record.WaferConfigurationRecord;
 import org.jstdf.record.WaferInformationRecord;
 import org.jstdf.record.WaferResultsRecord;
 
+/**
+ * Defines how the handler read stdf record
+ * @author malong
+ *
+ */
 public interface StdfRecordHandler 
 {
 	public boolean readRecord(PartInformationRecord pir);
