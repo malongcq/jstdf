@@ -28,6 +28,11 @@ import org.jstdf.record.WaferConfigurationRecord;
 import org.jstdf.record.WaferInformationRecord;
 import org.jstdf.record.WaferResultsRecord;
 
+/**
+ * An abstract class to provide the default methods for reading stdf record
+ * @author malong
+ *
+ */
 public abstract class AbstractStdfRecordHandler implements StdfRecordHandler 
 {
 	protected boolean readSTDFRecord(STDFRecord rec) 
