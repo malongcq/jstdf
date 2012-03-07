@@ -16,43 +16,157 @@ public class MasterInformationRecord extends AbstractSTDFRecord
 	public static final byte Type = 1;
 	public static final byte SubType = 10;
 	
+	/**
+	 * U*4 Date and time of job setup
+	 */
 	public Date SETUP_T; //U*4 Date and time of job setup
+	/**
+	 * U*4 Date and time first part tested
+	 */
 	public Date START_T; //U*4 Date and time first part tested
+	/**
+	 * U*1 Tester station number
+	 */
 	public int STAT_NUM; //U*1 Tester station number
+	/**
+	 * Test mode code (e.g. prod, dev) space
+	 */
 	public char MODE_COD; //C*1 Test mode code (e.g. prod, dev) space
+	/**
+	 * C*1 Lot retest code space
+	 */
 	public char RTST_COD; //C*1 Lot retest code space
+	/**
+	 * C*1 Data protection code space
+	 */
 	public char PROT_COD; //C*1 Data protection code space
+	/**
+	 * U*2 Burn-in time (in minutes) 65,535 if data missing
+	 */
 	public int BURN_TIM; //U*2 Burn-in time (in minutes) 65,535
+	/**
+	 * C*1 Command mode code space
+	 */
 	public char CMOD_COD; //C*1 Command mode code space
+	/**
+	 * C*n Lot ID (customer specified)
+	 */
 	public String LOT_ID; //C*n Lot ID (customer specified)
+	/**
+	 * C*n Part Type (or product ID)
+	 */
 	public String PART_TYP; //C*n Part Type (or product ID)
+	/**
+	 * C*n Name of node that generated data
+	 */
 	public String NODE_NAM; //C*n Name of node that generated data
+	/**
+	 * C*n Tester type
+	 */
 	public String TSTR_TYP; //C*n Tester type
+	/**
+	 * C*n Job name (test program name)
+	 */
 	public String JOB_NAM; //C*n Job name (test program name)
+	/**
+	 * C*n Job (test program) revision number length byte = 0 if data missing
+	 */
 	public String JOB_REV; //C*n Job (test program) revision number length byte = 0
+	/**
+	 * C*n Sublot ID length byte = 0 if data missing
+	 */
 	public String SBLOT_ID; //C*n Sublot ID length byte = 0
+	/**
+	 * C*n Operator name or ID (at setup time) length byte = 0 if data missing
+	 */
 	public String OPER_NAM; //C*n Operator name or ID (at setup time) length byte = 0
+	/**
+	 * C*n Tester executive software type length byte = 0 if data missing
+	 */
 	public String EXEC_TYP; //C*n Tester executive software type length byte = 0
+	/**
+	 * C*n Tester exec software version number length byte = 0 if data missing
+	 */
 	public String EXEC_VER; //C*n Tester exec software version number length byte = 0
+	/**
+	 * C*n Test phase or step code length byte = 0 if data missing
+	 */
 	public String TEST_COD; //C*n Test phase or step code length byte = 0
+	/**
+	 * C*n Test temperature length byte = 0 if data missing
+	 */
 	public String TST_TEMP; //C*n Test temperature length byte = 0
+	/**
+	 * C*n Generic user text length byte = 0 if data missing
+	 */
 	public String USER_TXT; //C*n Generic user text length byte = 0
+	/**
+	 * C*n Name of auxiliary data file length byte = 0 if data missing
+	 */
 	public String AUX_FILE; //C*n Name of auxiliary data file length byte = 0
+	/**
+	 * C*n Package type length byte = 0 if data missing
+	 */
 	public String PKG_TYP; //C*n Package type length byte = 0
+	/**
+	 * C*n Product family ID length byte = 0 if data missing
+	 */
 	public String FAMLY_ID; //C*n Product family ID length byte = 0
+	/**
+	 * C*n Date code length byte = 0 if data missing
+	 */
 	public String DATE_COD; //C*n Date code length byte = 0
+	/**
+	 * C*n Test facility ID length byte = 0 if data missing
+	 */
 	public String FACIL_ID; //C*n Test facility ID length byte = 0
+	/**
+	 * C*n Test floor ID length byte = 0 if data missing
+	 */
 	public String FLOOR_ID; //C*n Test floor ID length byte = 0
+	/**
+	 * C*n Fabrication process ID length byte = 0 if data missing
+	 */
 	public String PROC_ID; //C*n Fabrication process ID length byte = 0
+	/**
+	 * C*n Operation frequency or step length byte = 0 if data missing
+	 */
 	public String OPER_FRQ; //C*n Operation frequency or step length byte = 0
+	/**
+	 * C*n Test specification name length byte = 0 if data missing
+	 */
 	public String SPEC_NAM; //C*n Test specification name length byte = 0
+	/**
+	 * C*n Test specification version number length byte = 0 if data missing
+	 */
 	public String SPEC_VER; //C*n Test specification version number length byte = 0
+	/**
+	 * C*n Test flow ID length byte = 0 if data missing
+	 */
 	public String FLOW_ID; //C*n Test flow ID length byte = 0
+	/**
+	 * C*n Test setup ID length byte = 0 if data missing
+	 */
 	public String SETUP_ID; //C*n Test setup ID length byte = 0
+	/**
+	 * C*n Device design revision length byte = 0 if data missing
+	 */
 	public String DSGN_REV; //C*n Device design revision length byte = 0
+	/**
+	 * C*n Engineering lot ID length byte = 0 if data missing
+	 */
 	public String ENG_ID; //C*n Engineering lot ID length byte = 0
+	/**
+	 * C*n ROM code ID length byte = 0 if data missing
+	 */
 	public String ROM_COD; //C*n ROM code ID length byte = 0
+	/**
+	 * C*n Tester serial number length byte = 0 if data missing
+	 */
 	public String SERL_NUM; //C*n Tester serial number length byte = 0
+	/**
+	 * C*n Supervisor name or ID length byte = 0 if data missing
+	 */
 	public String SUPR_NAM; //C*n Supervisor name or ID length byte = 0
 	
 	public static final MasterInformationRecord getInstance(int seq, int len, int typ, int sub, ByteBuffer bb)

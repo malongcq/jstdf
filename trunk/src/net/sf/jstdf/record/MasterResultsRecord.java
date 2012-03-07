@@ -16,9 +16,21 @@ public class MasterResultsRecord extends AbstractSTDFRecord
 	public static final byte Type = 1;
 	public static final byte SubType = 20;
 	
+	/**
+	 * U*4 Date and time last part tested
+	 */
 	public Date FINISH_T; //U*4 Date and time last part tested
+	/**
+	 * C*1 Lot disposition code space
+	 */
 	public char DISP_COD; //C*1 Lot disposition code space
+	/**
+	 * C*n Lot description supplied by user length byte = 0 if data missing
+	 */
 	public String USR_DESC; //C*n Lot description supplied by user length byte = 0
+	/**
+	 * C*n Lot description supplied by exec length byte = 0 if data missing
+	 */
 	public String EXC_DESC; //C*n Lot description supplied by exec length byte = 0
 	
 	public static final MasterResultsRecord getInstance(int seq, int len, int typ, int sub, ByteBuffer bb)

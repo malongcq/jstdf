@@ -17,17 +17,53 @@ public class PartResultsRecord extends AbstractSTDFRecord
 	public static final byte Type = 5;
 	public static final byte SubType = 20;
 	
+	/**
+	 * U*1 Test head number
+	 */
 	public int HEAD_NUM; //U*1 Test head number
+	/**
+	 * U*1 Test site number
+	 */
 	public int SITE_NUM; //U*1 Test site number
+	/**
+	 * B*1 Part information flag
+	 */
 	public BitSet PART_FLG; //B*1 Part information flag
+	/**
+	 * U*2 Number of tests executed
+	 */
 	public int NUM_TEST; //U*2 Number of tests executed
+	/**
+	 * U*2 Hardware bin number
+	 */
 	public int HARD_BIN; //U*2 Hardware bin number
+	/**
+	 * U*2 Software bin number, 65535 if data missing
+	 */
 	public int SOFT_BIN; //U*2 Software bin number 65535
+	/**
+	 * I*2 (Wafer) X coordinate, -32768 if data missing
+	 */
 	public int X_COORD; //I*2 (Wafer) X coordinate -32768
+	/**
+	 * I*2 (Wafer) Y coordinate, -32768 if data missing
+	 */
 	public int Y_COORD; //I*2 (Wafer) Y coordinate -32768
+	/**
+	 * U*4 Elapsed test time in milliseconds 0
+	 */
 	public long TEST_T; //U*4 Elapsed test time in milliseconds 0
+	/**
+	 * C*n Part identification, length byte = 0 if data missing
+	 */
 	public String PART_ID; //C*n Part identification length byte = 0
+	/**
+	 * C*n Part description text, length byte = 0 if data missing
+	 */
 	public String PART_TXT; //C*n Part description text length byte = 0
+	/**
+	 * B*n Part repair information, length byte = 0 if data missing
+	 */
 	public byte[] PART_FIX; //B*n Part repair information length byte = 0
 	
 	public static final PartResultsRecord getInstance(int seq, int len, int typ, int sub, ByteBuffer bb)

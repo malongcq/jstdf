@@ -16,37 +16,144 @@ public class FunctionalTestRecord extends AbstractSTDFRecord
 	public static final byte Type = 15;
 	public static final byte SubType = 20;
 	
+	/**
+	 * U*4 Test number
+	 */
 	public long TEST_NUM; //U*4 Test number
+	
+	/**
+	 * U*1 Test head number
+	 */
 	public int HEAD_NUM; // U*1 Test head number
+	
+	/**
+	 * U*1 Test site number
+	 */
 	public int SITE_NUM; // U*1 Test site number
+	
+	/**
+	 * B*1 Test flags (fail, alarm, etc.)
+	 */
 	public BitSet TEST_FLG; // B*1 Test flags (fail, alarm, etc.)
+	
+	/**
+	 * B*1 Optional data flag See note
+	 */
 	public BitSet OPT_FLAG; // B*1 Optional data flag See note
-	public long CYCL_CNT; // U*4 Cycle count of vector OPT_FLAG bit 0 = 1
-	public long REL_VADR; // U*4 Relative vector address OPT_FLAG bit 1 = 1
+	
+	/**
+	 * U*4 Cycle count of vector OPT_FLAG bit 0 = 1 if data invalid
+	 */
+	public long CYCL_CNT; // U*4 Cycle count of vector OPT_FLAG bit 0 = 1 
+	
+	/**
+	 * U*4 Relative vector address OPT_FLAG bit 1 = 1 if data invalid
+	 */
+	public long REL_VADR; // U*4 Relative vector address OPT_FLAG bit 1 = 1 
+	
+	/**
+	 * U*4 Repeat count of vector OPT_FLAG bit 2 = 1 if data invalid
+	 */
 	public long REPT_CNT; // U*4 Repeat count of vector OPT_FLAG bit 2 = 1
+	
+	/**
+	 * U*4 Number of pins with 1 or more failures OPT_FLAG bit 3 = 1 if data invalid
+	 */
 	public long NUM_FAIL; // U*4 Number of pins with 1 or more failures OPT_FLAG bit 3 = 1
+	
+	/**
+	 * I*4 X logical device failure address OPT_FLAG bit 4 = 1 if data invalid
+	 */
 	public int XFAIL_AD; // I*4 X logical device failure address OPT_FLAG bit 4 = 1
+	
+	/**
+	 * I*4 Y logical device failure address OPT_FLAG bit 4 = 1 if data invalid
+	 */
 	public int YFAIL_AD; // I*4 Y logical device failure address OPT_FLAG bit 4 = 1
+	
+	/**
+	 * I*2 Offset from vector of interest OPT_FLAG bit 5 = 1 if data invalid
+	 */
 	public int VECT_OFF; // I*2 Offset from vector of interest OPT_FLAG bit 5 = 1
 	
-	public int RTN_ICNT; // U*2 Count (j) of return data PMR indexes See note
-	public int PGM_ICNT; // U*2 Count (k) of programmed state indexes See note
+	/**
+	 * U*2 Count (j) of return data PMR indexes 
+	 */
+	public int RTN_ICNT; // U*2 Count (j) of return data PMR indexes 
 	
-	public int[] RTN_INDX; // jxU*2 Array of return data PMR indexes RTN_ICNT = 0
-	public BitSet[] RTN_STAT; // jxN*1 Array of returned states RTN_ICNT = 0
+	/**
+	 * U*2 Count (k) of programmed state indexes 
+	 */
+	public int PGM_ICNT; // U*2 Count (k) of programmed state indexes 
 	
-	public int[] PGM_INDX; // kxU*2 Array of programmed state indexes PGM_ICNT = 0
-	public BitSet[] PGM_STAT; // kxN*1 Array of programmed states PGM_ICNT = 0
+	/**
+	 * jxU*2 Array of return data PMR indexes RTN_ICNT = 0 if data missing
+	 */
+	public int[] RTN_INDX; // jxU*2 Array of return data PMR indexes RTN_ICNT = 0 
 	
-	public BitSet FAIL_PIN; // D*n Failing pin bitfield length bytes = 0
-	public String VECT_NAM; // C*n Vector module pattern name length byte = 0
-	public String TIME_SET; // C*n Time set name length byte = 0
-	public String OP_CODE; // C*n Vector Op Code length byte = 0
-	public String TEST_TXT; // C*n Descriptive text or label length byte = 0
-	public String ALARM_ID; // C*n Name of alarm length byte = 0
-	public String PROG_TXT; // C*n Additional programmed information length byte = 0
+	/**
+	 * jxN*1 Array of returned states RTN_ICNT = 0 if data missing
+	 */
+	public BitSet[] RTN_STAT; // jxN*1 Array of returned states RTN_ICNT = 0 
+	
+	/**
+	 * kxU*2 Array of programmed state indexes PGM_ICNT = 0 if data missing
+	 */
+	public int[] PGM_INDX; // kxU*2 Array of programmed state indexes PGM_ICNT = 0 
+	
+	/**
+	 * kxN*1 Array of programmed states PGM_ICNT = 0 if data missing
+	 */
+	public BitSet[] PGM_STAT; // kxN*1 Array of programmed states PGM_ICNT = 0 
+	
+	/**
+	 * D*n Failing pin bitfield length bytes = 0 if data missing
+	 */
+	public BitSet FAIL_PIN; // D*n Failing pin bitfield length bytes = 0 
+	
+	/**
+	 * C*n Vector module pattern name length byte = 0 if data missing
+	 */
+	public String VECT_NAM; // C*n Vector module pattern name length byte = 0 
+	
+	/**
+	 * C*n Time set name length byte = 0 if data missing
+	 */
+	public String TIME_SET; // C*n Time set name length byte = 0 
+	
+	/**
+	 * C*n Vector Op Code length byte = 0 if data missing
+	 */
+	public String OP_CODE; // C*n Vector Op Code length byte = 0 
+	
+	/**
+	 * C*n Descriptive text or label length byte = 0 if data missing
+	 */
+	public String TEST_TXT; // C*n Descriptive text or label length byte = 0 
+	
+	/**
+	 * C*n Name of alarm length byte = 0 if data missing
+	 */
+	public String ALARM_ID; // C*n Name of alarm length byte = 0 
+	
+	/**
+	 * C*n Additional programmed information length byte = 0 if data missing
+	 */
+	public String PROG_TXT; // C*n Additional programmed information length byte = 0 
+	
+	/**
+	 * C*n Additional result information length byte = 0 if data missing
+	 */
 	public String RSLT_TXT; // C*n Additional result information length byte = 0
+	
+	/**
+	 * U*1 Pattern generator number 255 if data missing
+	 */
 	public int PATG_NUM; // U*1 Pattern generator number 255
+	
+	/**
+	 * D*n Bit map of enabled comparators length byte = 0 if data missing
+	 */
 	public BitSet SPIN_MAP; // D*n Bit map of enabled comparators length byte = 0
 	
 	public static final FunctionalTestRecord getInstance(int seq, int len, int typ, int sub, ByteBuffer bb)

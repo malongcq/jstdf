@@ -15,7 +15,13 @@ public class RetestDataRecord extends AbstractSTDFRecord
 	public static final byte Type = 1;
 	public static final byte SubType = 70;
 	
+	/**
+	 * U*2 Number (k) of bins being retested
+	 */
 	public int NUM_BINS; //U*2 Number (k) of bins being retested
+	/**
+	 * kxU*2 Array of retest bin numbers, NUM_BINS = 0 if data missing
+	 */
 	public int[] RTST_BIN; //kxU*2 Array of retest bin numbers NUM_BINS = 0
 	
 	public static final RetestDataRecord getInstance(int seq, int len, int typ, int sub, ByteBuffer bb)

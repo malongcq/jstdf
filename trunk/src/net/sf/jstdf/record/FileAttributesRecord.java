@@ -15,7 +15,13 @@ public class FileAttributesRecord extends AbstractSTDFRecord
 	public static final byte Type = 0;
 	public static final byte SubType = 10;
 	
+	/**
+	 * CPU type that wrote this file
+	 */
 	public int CPU_TYPE;
+	/**
+	 * STDF version number
+	 */
 	public int STDF_VER;
 	
 	@Override

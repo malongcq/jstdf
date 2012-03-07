@@ -16,7 +16,14 @@ public class GenericDataRecord extends AbstractSTDFRecord
 	public static final byte Type = 50;
 	public static final byte SubType = 10;
 	
+	/**
+	 * U*2 Count of data fields in record
+	 */
 	public int FLD_CNT; //U*2 Count of data fields in record
+	
+	/**
+	 * V*n Data type code and data for one field
+	 */
 	public List<GenericDataItem> GEN_DATA; //V*n Data type code and data for one field
 	
 	@Override

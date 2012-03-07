@@ -15,13 +15,37 @@ public class PinListRecord extends AbstractSTDFRecord
 	public static final byte Type = 1;
 	public static final byte SubType = 63;
 	
+	/**
+	 * U*2 Count (k) of pins or pin groups
+	 */
 	public int GRP_CNT; //U*2 Count (k) of pins or pin groups
+	/**
+	 * kxU*2 Array of pin or pin group indexes
+	 */
 	public int[] GRP_INDX; //kxU*2 Array of pin or pin group indexes
+	/**
+	 * kxU*2 Operating mode of pin group, 0 if data missing
+	 */
 	public int[] GRP_MODE; //kxU*2 Operating mode of pin group 0
+	/**
+	 * kxU*1 Display radix of pin group, 0 if data missing
+	 */
 	public int[] GRP_RADX; //kxU*1 Display radix of pin group 0
+	/**
+	 * kxC*n Program state encoding characters length byte = 0 if data missing
+	 */
 	public String[] PGM_CHAR; //kxC*n Program state encoding characters length byte = 0
+	/**
+	 * kxC*n Return state encoding characters length byte = 0 if data missing
+	 */
 	public String[] RTN_CHAR; //kxC*n Return state encoding characters length byte = 0
+	/**
+	 * kxC*n Program state encoding characters length byte = 0 if data missing
+	 */
 	public String[] PGM_CHAL; //kxC*n Program state encoding characters length byte = 0
+	/**
+	 * kxC*n Return state encoding characters length byte = 0 if data missing
+	 */
 	public String[] RTN_CHAL; //kxC*n Return state encoding characters length byte = 0
 	
 	public static final PinListRecord getInstance(int seq, int len, int typ, int sub, ByteBuffer bb)

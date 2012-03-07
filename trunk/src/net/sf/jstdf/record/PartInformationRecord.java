@@ -15,7 +15,13 @@ public class PartInformationRecord extends AbstractSTDFRecord
 	public static final byte Type = 5;
 	public static final byte SubType = 10;
 	
+	/**
+	 * U*1 Test head number
+	 */
 	public int HEAD_NUM; //U*1 Test head number
+	/**
+	 * U*1 Test site number
+	 */
 	public int SITE_NUM; //U*1 Test site number
 	
 	@Override

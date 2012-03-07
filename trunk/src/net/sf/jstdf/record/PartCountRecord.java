@@ -15,12 +15,33 @@ public class PartCountRecord extends AbstractSTDFRecord
 	public static final byte Type = 1;
 	public static final byte SubType = 30;
 	
+	/**
+	 * U*1 Test head number See note
+	 */
 	public int HEAD_NUM; //U*1 Test head number See note
+	/**
+	 * U*1 Test site number
+	 */
 	public int SITE_NUM; //U*1 Test site number
+	/**
+	 * U*4 Number of parts tested
+	 */
 	public long PART_CNT; //U*4 Number of parts tested
+	/**
+	 * U*4 Number of parts retested, missing is 4,294,967,295
+	 */
 	public long RTST_CNT; //U*4 Number of parts retested 4,294,967,295
+	/**
+	 * U*4 Number of aborts during testing, missing is 4,294,967,295
+	 */
 	public long ABRT_CNT; //U*4 Number of aborts during testing 4,294,967,295
+	/**
+	 * U*4 Number of good (passed) parts tested, missing is 4,294,967,295
+	 */
 	public long GOOD_CNT; //U*4 Number of good (passed) parts tested 4,294,967,295
+	/**
+	 * U*4 Number of functional parts tested, missing is 4,294,967,295
+	 */
 	public long FUNC_CNT; //U*4 Number of functional parts tested 4,294,967,295
 	
 	public static final PartCountRecord getInstance(int seq, int len, int typ, int sub, ByteBuffer bb)
