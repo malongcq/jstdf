@@ -29,12 +29,17 @@ import org.jstdf.record.WaferInformationRecord;
 import org.jstdf.record.WaferResultsRecord;
 
 /**
- * This class provides default implementations for the stdf record handler
+ * This class provides generic method for reading the stdf record
  * @author malong
  *
  */
 public abstract class AbstractStdfRecordHandler implements StdfRecordHandler 
 {
+	/**
+	 * Generic method to read stdf record
+	 * @param rec
+	 * @return
+	 */
 	protected boolean readSTDFRecord(STDFRecord rec) 
 	{
 		return false;

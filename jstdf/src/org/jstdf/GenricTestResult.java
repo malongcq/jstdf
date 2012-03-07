@@ -11,7 +11,11 @@ import org.jstdf.record.PartCountRecord;
 import org.jstdf.record.RetestDataRecord;
 import org.jstdf.record.SiteDescriptionRecord;
 
-
+/**
+ * The default implementations for reading stdf data file
+ * @author malong
+ *
+ */
 public class GenricTestResult extends AbstractStdfRecordHandler 
 {
 	protected FileAttributesRecord far;
