@@ -13,7 +13,13 @@ import org.jstdf.util.StdfRecordUtils;
  */
 public class HardwareBinRecord extends AbstractSTDFRecord
 {
+	/**
+	 * 1
+	 */
 	public static final byte Type = 1;
+	/**
+	 * 40
+	 */
 	public static final byte SubType = 40;
 	
 	/**

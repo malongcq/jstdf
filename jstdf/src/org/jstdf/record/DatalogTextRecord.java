@@ -13,7 +13,13 @@ import org.jstdf.util.StdfRecordUtils;
  */
 public class DatalogTextRecord extends AbstractSTDFRecord
 {
+	/**
+	 * 50
+	 */
 	public static final byte Type = 50;
+	/**
+	 * 30
+	 */
 	public static final byte SubType = 30;
 	
 	/**

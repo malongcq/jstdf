@@ -14,7 +14,13 @@ import org.jstdf.util.StdfRecordUtils;
  */
 public class SiteDescriptionRecord extends AbstractSTDFRecord
 {
+	/**
+	 * 1
+	 */
 	public static final byte Type = 1;
+	/**
+	 * 80
+	 */
 	public static final byte SubType = 80;
 	
 	/**

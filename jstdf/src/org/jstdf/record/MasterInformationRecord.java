@@ -14,7 +14,13 @@ import org.jstdf.util.StdfRecordUtils;
  */
 public class MasterInformationRecord extends AbstractSTDFRecord
 {
+	/**
+	 * 1
+	 */
 	public static final byte Type = 1;
+	/**
+	 * 10
+	 */
 	public static final byte SubType = 10;
 	
 	/**

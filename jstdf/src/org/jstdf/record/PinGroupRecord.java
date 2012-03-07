@@ -13,7 +13,13 @@ import org.jstdf.util.StdfRecordUtils;
  */
 public class PinGroupRecord extends AbstractSTDFRecord
 {
+	/**
+	 * 1
+	 */
 	public static final byte Type = 1;
+	/**
+	 * 62
+	 */
 	public static final byte SubType = 62;
 	
 	/**

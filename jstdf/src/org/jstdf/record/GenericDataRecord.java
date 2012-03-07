@@ -14,7 +14,13 @@ import org.jstdf.util.StdfRecordUtils;
  */
 public class GenericDataRecord extends AbstractSTDFRecord
 {
+	/**
+	 * 50
+	 */
 	public static final byte Type = 50;
+	/**
+	 * 10
+	 */
 	public static final byte SubType = 10;
 	
 	/**

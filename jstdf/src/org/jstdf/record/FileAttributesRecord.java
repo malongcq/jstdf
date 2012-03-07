@@ -13,7 +13,13 @@ import org.jstdf.util.StdfRecordUtils;
  */
 public class FileAttributesRecord extends AbstractSTDFRecord
 {
+	/**
+	 * 0
+	 */
 	public static final byte Type = 0;
+	/**
+	 * 10
+	 */
 	public static final byte SubType = 10;
 	
 	/**

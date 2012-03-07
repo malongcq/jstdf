@@ -14,7 +14,13 @@ import org.jstdf.util.StdfRecordUtils;
  */
 public class AuditTrailRecord extends AbstractSTDFRecord
 {
+	/**
+	 * 0
+	 */
 	public static final byte Type = 0;
+	/**
+	 * 20
+	 */
 	public static final byte SubType = 20;
 	
 	/**

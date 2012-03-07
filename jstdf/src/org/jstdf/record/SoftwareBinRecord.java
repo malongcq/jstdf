@@ -13,7 +13,13 @@ import org.jstdf.util.StdfRecordUtils;
  */
 public class SoftwareBinRecord extends AbstractSTDFRecord
 {
+	/**
+	 * 1
+	 */
 	public static final byte Type = 1;
+	/**
+	 * 50
+	 */
 	public static final byte SubType = 50;
 	
 	/**

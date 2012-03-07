@@ -14,7 +14,13 @@ import org.jstdf.util.StdfRecordUtils;
  */
 public class TestSynopsisRecord extends AbstractSTDFRecord
 {
+	/**
+	 * 10
+	 */
 	public static final byte Type = 10;
+	/**
+	 * 30
+	 */
 	public static final byte SubType = 30;
 	
 	/**

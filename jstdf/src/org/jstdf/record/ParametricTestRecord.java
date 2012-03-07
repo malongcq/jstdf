@@ -14,7 +14,13 @@ import org.jstdf.util.StdfRecordUtils;
  */
 public class ParametricTestRecord extends AbstractSTDFRecord
 {
+	/**
+	 * 15
+	 */
 	public static final byte Type = 15;
+	/**
+	 * 10
+	 */
 	public static final byte SubType = 10;
 	
 	/**

@@ -13,7 +13,13 @@ import org.jstdf.util.StdfRecordUtils;
  */
 public class BeginProgramSectionRecord extends AbstractSTDFRecord
 {
+	/**
+	 * 20
+	 */
 	public static final byte Type = 20;
+	/**
+	 * 10
+	 */
 	public static final byte SubType = 10;
 	
 	/**
