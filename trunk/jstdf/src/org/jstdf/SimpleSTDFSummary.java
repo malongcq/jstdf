@@ -1,5 +1,6 @@
 package org.jstdf;
 
+import java.io.PrintWriter;
 import java.util.ArrayDeque;
 import java.util.Collection;
 import java.util.EnumMap;
@@ -58,7 +59,9 @@ public class SimpleSTDFSummary extends AbstractStdfRecordHandler
 		}
 		
 		if(EnumSet.of(STDFRecordType.MIR, STDFRecordType.SDR, STDFRecordType.MRR, 
-			STDFRecordType.WCR, STDFRecordType.WIR, STDFRecordType.WRR).contains(rec.getRecordType()))
+			STDFRecordType.WCR, STDFRecordType.WIR, STDFRecordType.WRR,
+			STDFRecordType.HBR, STDFRecordType.SBR,
+			STDFRecordType.TSR).contains(rec.getRecordType()))
 		{
 			summary_rec.add(rec);
 		}
@@ -68,22 +71,31 @@ public class SimpleSTDFSummary extends AbstractStdfRecordHandler
 
 	public void printSummary()
 	{
-		System.out.println(cnt_summary);
-		
-		System.out.println("----------------------PTR------------------------");
-		for(Map.Entry<String, Integer> e : ptrs.entrySet()) 
-			System.out.println(e.getKey()+" = "+e.getValue()); 
-		
-		System.out.println("----------------------MPR------------------------");
-		for(Map.Entry<String, Integer> e : mprs.entrySet()) 
-			System.out.println(e.getKey()+" = "+e.getValue()); 
-		
-		System.out.println("----------------------FTR------------------------");
-		for(Map.Entry<String, Integer> e : ftrs.entrySet()) 
-			System.out.println(e.getKey()+" = "+e.getValue()); 
-		
-		System.out.println("----------------------Summary------------------------");
-		for(STDFRecord rec : summary_rec)
-			System.out.println(rec);
+		PrintWriter pw = null;
+		try
+		{
+			pw = new PrintWriter(System.out);
+			
+			pw.println("----------------------PTR------------------------");
+			for(Map.Entry<String, Integer> e : ptrs.entrySet()) 
+				pw.println(e.getKey()+" = "+e.getValue()); 
+			
+			pw.println("----------------------MPR------------------------");
+			for(Map.Entry<String, Integer> e : mprs.entrySet()) 
+				pw.println(e.getKey()+" = "+e.getValue()); 
+			
+			pw.println("----------------------FTR------------------------");
+			for(Map.Entry<String, Integer> e : ftrs.entrySet()) 
+				pw.println(e.getKey()+" = "+e.getValue()); 
+			
+			pw.println("----------------------Summary------------------------");
+			for(STDFRecord rec : summary_rec)
+				pw.println(rec);
+			pw.println(cnt_summary);
+		} 
+		finally
+		{
+			if(pw!=null) pw.close();
+		}
 	}
 }
