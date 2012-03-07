@@ -70,29 +70,58 @@ public class StdfReader
 	}
 	
 	private boolean verbose = true;
+	/**
+	 * Returns whether print verbose output to System.out
+	 * @return true if output verbose, false otherwise 
+	 */
 	public boolean isVerbose()
 	{
 		return verbose;
 	}
+	/**
+	 * Sets verbose output
+	 * @param verbose 
+	 */
 	public void setVerbose(boolean verbose)
 	{
 		this.verbose = verbose;
 	}
 	
 	private StdfRecordHandler recordHandler;
+	/**
+	 * Gets the stdf record handler of the reader
+	 * @return
+	 */
 	public StdfRecordHandler getRecordHandler() {
 		return recordHandler;
 	}
-
+	/**
+	 * Sets the record handler for the reader
+	 * @param recordHandler
+	 */
 	public void setRecordHandler(StdfRecordHandler recordHandler) {
 		this.recordHandler = recordHandler;
 	}
 
+	/**
+	 * Read stdf data from a file
+	 * 
+	 * @param filename input stdf file
+	 * @return the number of record which successfully read
+	 * @throws IOException
+	 */
 	public int loadFromSTDF(String filename) throws IOException 
 	{
 		return loadFromSTDF(new File(filename));
 	}
 	
+	/**
+	 * Read stdf data from a file
+	 * 
+	 * @param f input stdf file
+	 * @return the number of record which successfully read
+	 * @throws IOException
+	 */
 	private int loadFromSTDF(File f) throws IOException
 	{
 		InputStream is = null;
@@ -112,7 +141,13 @@ public class StdfReader
 		return loadFromSTDF(is);
 	}
 	
-	
+	/**
+	 * Read stdf data from an input stream
+	 * 
+	 * @param ins stdf input stream
+	 * @return the number of record which successfully read
+	 * @throws IOException
+	 */
 	public int loadFromSTDF(InputStream ins) throws IOException
 	{
 		BufferedInputStream bis = new BufferedInputStream(ins);
@@ -169,6 +204,16 @@ public class StdfReader
 		return rec_cnt;
 	}
 	
+	/**
+	 * Read stdf data record
+	 * 
+	 * @param seq the sequence number when reading stdf data file
+	 * @param REC_LEN the length of stdf record
+	 * @param REC_TYP the stdf record type
+	 * @param REC_SUB the stdf record sub-type
+	 * @param bb the buffer which the data is read from
+	 * @return true if the record is successfully read, false otherwise 
+	 */
 	protected boolean readSTDFRecord(int seq, int REC_LEN, int REC_TYP, int REC_SUB, ByteBuffer bb)
 	{
 		switch(REC_TYP)
