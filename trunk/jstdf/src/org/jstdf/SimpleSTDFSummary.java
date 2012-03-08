@@ -1,5 +1,7 @@
 package org.jstdf;
 
+import java.io.BufferedWriter;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.ArrayDeque;
 import java.util.Collection;
@@ -71,31 +73,31 @@ public class SimpleSTDFSummary extends AbstractStdfRecordHandler
 
 	public void printSummary()
 	{
-		PrintWriter pw = null;
+		PrintWriter out = null;
 		try
 		{
-			pw = new PrintWriter(System.out);
+			out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
 			
-			pw.println("----------------------PTR------------------------");
+			out.println("----------------------PTR------------------------");
 			for(Map.Entry<String, Integer> e : ptrs.entrySet()) 
-				pw.println(e.getKey()+" = "+e.getValue()); 
+				out.println(e.getKey()+" = "+e.getValue()); 
 			
-			pw.println("----------------------MPR------------------------");
+			out.println("----------------------MPR------------------------");
 			for(Map.Entry<String, Integer> e : mprs.entrySet()) 
-				pw.println(e.getKey()+" = "+e.getValue()); 
+				out.println(e.getKey()+" = "+e.getValue()); 
 			
-			pw.println("----------------------FTR------------------------");
+			out.println("----------------------FTR------------------------");
 			for(Map.Entry<String, Integer> e : ftrs.entrySet()) 
-				pw.println(e.getKey()+" = "+e.getValue()); 
+				out.println(e.getKey()+" = "+e.getValue()); 
 			
-			pw.println("----------------------Summary------------------------");
+			out.println("----------------------Summary------------------------");
 			for(STDFRecord rec : summary_rec)
-				pw.println(rec);
-			pw.println(cnt_summary);
+				out.println(rec);
+			out.println(cnt_summary);
 		} 
 		finally
 		{
-			if(pw!=null) pw.close();
+			if(out!=null) out.close();
 		}
 	}
 }
