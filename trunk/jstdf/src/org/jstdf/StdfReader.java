@@ -122,7 +122,7 @@ public class StdfReader
 	 * @return the number of record which successfully read
 	 * @throws IOException
 	 */
-	private int loadFromSTDF(File f) throws IOException
+	public int loadFromSTDF(File f) throws IOException
 	{
 		InputStream is = null;
 		
