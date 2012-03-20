@@ -26,6 +26,41 @@ public class GenricTestResult extends AbstractStdfRecordHandler
 	protected Deque<PartCountRecord> pcrs;
 	protected MasterResultsRecord mrr;
 	
+	public FileAttributesRecord getFileAttributesRecord()
+	{
+		return far;
+	}
+	
+	public MasterInformationRecord getMasterInformationRecord()
+	{
+		return mir;
+	}
+	
+	public MasterResultsRecord getMasterResultsRecord()
+	{
+		return mrr;
+	}
+	
+	public RetestDataRecord getRetestDataRecord()
+	{
+		return rdr;
+	}
+	
+	public Deque<AuditTrailRecord> getAuditTrailRecords()
+	{
+		return atrs;
+	}
+	
+	public Deque<SiteDescriptionRecord> getSiteDescriptionRecords()
+	{
+		return sdrs;
+	}
+	
+	public Deque<PartCountRecord> getPartCountRecords()
+	{
+		return pcrs;
+	}
+	
 	@Override
 	public boolean readRecord(MasterInformationRecord mir) 
 	{
