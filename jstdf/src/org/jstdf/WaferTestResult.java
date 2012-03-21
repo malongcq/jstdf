@@ -3,6 +3,7 @@ package org.jstdf;
 import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.jstdf.record.WaferConfigurationRecord;
 import org.jstdf.record.WaferInformationRecord;
@@ -14,6 +15,20 @@ public class WaferTestResult extends AbstractPartTestResult
 	protected WaferConfigurationRecord wcr;
 	protected WaferInformationRecord wir;
 	protected WaferResultsRecord wrr;
+	
+	public Map<Integer, Integer> getBinSummary(boolean softBin)
+	{
+		Map<Integer, Integer> map = new TreeMap<Integer, Integer>();
+		for(PartResultSet p : wmap.values())
+		{
+			int bin = softBin ? p.getPartResultsRecord().SOFT_BIN : p.getPartResultsRecord().HARD_BIN;
+			Integer cnt = map.get(bin);
+			if(cnt==null) cnt = 0;
+			map.put(bin, ++cnt);
+		}
+		
+		return map;
+	}
 	
 	public Map<Point, PartResultSet> getWafermap()
 	{
