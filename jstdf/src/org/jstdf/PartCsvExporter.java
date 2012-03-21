@@ -17,7 +17,7 @@ import org.jstdf.record.STDFRecordType;
 import org.jstdf.record.SoftwareBinRecord;
 
 
-public class PartCsvExporter extends PartTestResult
+public class PartCsvExporter extends AbstractPartTestResult
 {
 	protected String filename_bin_result = "Bin_Result.csv";
 	protected String filename_bin_spec = "Bin_Spec.csv";
@@ -26,43 +26,6 @@ public class PartCsvExporter extends PartTestResult
 	{
 		out_dir = parent_dir;
 		out_dir.mkdirs();
-		
-		this.setPartResultHandler(new PartResultHandler()
-		{
-			@Override
-			public boolean readPartResult(PartResultSet part_result) 
-			{
-				try 
-				{
-					PartResultsRecord prr = part_result.getPartResultsRecord();
-					exportPartResult(prr);
-					
-					for(STDFRecord rec : part_result.getPartResult())
-					{
-						if(rec.getRecordType()==STDFRecordType.PTR)
-						{
-							ParametricTestRecord ptr = (ParametricTestRecord)rec;
-							exportParameter(prr, ptr);
-						}
-						else if(rec.getRecordType()==STDFRecordType.MPR)
-						{
-							MultipleResultParametricRecord mpr = (MultipleResultParametricRecord)rec;
-							exportParameter(prr, mpr);
-						}
-						else if(rec.getRecordType()==STDFRecordType.FTR)
-						{
-							FunctionalTestRecord ftr = (FunctionalTestRecord)rec;
-							exportParameter(prr, ftr);
-						}
-					}
-				} 
-				catch (IOException e) 
-				{
-					e.printStackTrace();
-				}
-				return true;
-			}
-		});
 	}
 	
 	protected File out_dir;
@@ -208,5 +171,39 @@ public class PartCsvExporter extends PartTestResult
 				prr.X_COORD, prr.Y_COORD, prr.HARD_BIN, prr.SOFT_BIN,
 				prr.PART_ID, prr.PART_TXT));
 		out_fw.close();
+	}
+
+	@Override
+	public boolean readPartResult(PartResultSet part_result)
+	{
+		try 
+		{
+			PartResultsRecord prr = part_result.getPartResultsRecord();
+			exportPartResult(prr);
+			
+			for(STDFRecord rec : part_result.getPartResult())
+			{
+				if(rec.getRecordType()==STDFRecordType.PTR)
+				{
+					ParametricTestRecord ptr = (ParametricTestRecord)rec;
+					exportParameter(prr, ptr);
+				}
+				else if(rec.getRecordType()==STDFRecordType.MPR)
+				{
+					MultipleResultParametricRecord mpr = (MultipleResultParametricRecord)rec;
+					exportParameter(prr, mpr);
+				}
+				else if(rec.getRecordType()==STDFRecordType.FTR)
+				{
+					FunctionalTestRecord ftr = (FunctionalTestRecord)rec;
+					exportParameter(prr, ftr);
+				}
+			}
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+		return true;
 	}
 }
