@@ -6,7 +6,7 @@ import org.jstdf.record.ParametricTestRecord;
 public class ParametricTestItem
 {
 	private long testNum;
-	private String testName;
+	private String testName, testUnit;
 	private Double lowLimit, highLimit, lowSpec, highSpec;
 	
 	public long getTestNum()
@@ -24,6 +24,14 @@ public class ParametricTestItem
 	public void setTestName(String testName)
 	{
 		this.testName = testName;
+	}
+	public String getTestUnit()
+	{
+		return testUnit;
+	}
+	public void setTestUnit(String testUnit)
+	{
+		this.testUnit = testUnit;
 	}
 	public Double getLowLimit()
 	{
@@ -103,6 +111,7 @@ public class ParametricTestItem
 	{
 		setTestNum(ptr.TEST_NUM);
 		setTestName(ptr.TEST_TXT);
+		setTestUnit(ptr.UNITS);
 		setHighLimit(ptr.HI_LIMIT);
 		setLowLimit(ptr.LO_LIMIT);
 		setHighSpec(ptr.HI_SPEC);
@@ -113,6 +122,7 @@ public class ParametricTestItem
 	{
 		setTestNum(mpr.TEST_NUM);
 		setTestName(mpr.TEST_TXT);
+		setTestUnit(mpr.UNITS);
 		setHighLimit(mpr.HI_LIMIT);
 		setLowLimit(mpr.LO_LIMIT);
 		setHighSpec(mpr.HI_SPEC);

@@ -86,6 +86,8 @@ public abstract class AbstractPartTestResult extends AbstractTestResult implemen
 		if(!acceptParameter(ptr.TEST_TXT)) return false;
 		String key = String.format(format_head_site, ptr.HEAD_NUM, ptr.SITE_NUM);
 		testParts.get(key).addPartResult(ptr);
+		
+		addParametricTestItem(ptr);
 		return true;
 	}
 	
@@ -95,6 +97,8 @@ public abstract class AbstractPartTestResult extends AbstractTestResult implemen
 		if(!acceptParameter(mpr.TEST_TXT)) return false;
 		String key = String.format(format_head_site, mpr.HEAD_NUM, mpr.SITE_NUM);
 		testParts.get(key).addPartResult(mpr);
+		
+		addParametricTestItem(mpr);
 		return true;
 	}
 	
