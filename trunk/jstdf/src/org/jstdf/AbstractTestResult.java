@@ -16,7 +16,7 @@ import org.jstdf.record.SiteDescriptionRecord;
  * @author malong
  *
  */
-public class GenricTestResult extends AbstractStdfRecordHandler 
+public abstract class AbstractTestResult extends AbstractStdfRecordHandler 
 {
 	protected FileAttributesRecord far;
 	protected Deque<AuditTrailRecord> atrs;

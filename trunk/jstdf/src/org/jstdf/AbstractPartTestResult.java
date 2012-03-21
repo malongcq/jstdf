@@ -15,7 +15,7 @@ import org.jstdf.record.PartResultsRecord;
 import org.jstdf.record.SoftwareBinRecord;
 
 
-public abstract class AbstractPartTestResult extends GenricTestResult implements PartResultSetHandler
+public abstract class AbstractPartTestResult extends AbstractTestResult implements PartResultSetHandler
 {
 	protected Deque<HardwareBinRecord> hbrs;
 	protected Deque<SoftwareBinRecord> sbrs;
