@@ -8,12 +8,17 @@ import org.jstdf.record.WaferConfigurationRecord;
 import org.jstdf.record.WaferInformationRecord;
 import org.jstdf.record.WaferResultsRecord;
 
-public class SingleWaferTestResult extends AbstractPartTestResult 
+public class WaferTestResult extends AbstractPartTestResult 
 {
 	protected Map<Point, PartResultSet> wmap = new HashMap<Point, PartResultSet>();
 	protected WaferConfigurationRecord wcr;
 	protected WaferInformationRecord wir;
 	protected WaferResultsRecord wrr;
+	
+	public Map<Point, PartResultSet> getWaferTestResult()
+	{
+		return wmap;
+	}
 	
 	public WaferConfigurationRecord getWaferConfigurationRecord()
 	{
