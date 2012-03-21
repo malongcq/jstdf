@@ -150,6 +150,8 @@ public class StdfReader
 	 */
 	public int loadFromSTDF(InputStream ins) throws IOException
 	{
+		recordHandler.beginReadRecord();
+		
 		BufferedInputStream bis = new BufferedInputStream(ins);
 		
 		byte[] head = new byte[STDF_HEAD_LEN], rec_data;
@@ -201,6 +203,7 @@ public class StdfReader
 		
 		bis.close();
 		
+		recordHandler.endReadRecord();
 		return rec_cnt;
 	}
 	
