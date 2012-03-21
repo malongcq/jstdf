@@ -35,6 +35,18 @@ import org.jstdf.record.WaferResultsRecord;
  */
 public abstract class AbstractStdfRecordHandler implements StdfRecordHandler 
 {
+	@Override
+	public void beginReadRecord()
+	{
+		//to override
+	}
+	
+	@Override
+	public void endReadRecord()
+	{
+		//to override
+	}
+	
 	/**
 	 * Generic method to read stdf record
 	 * @param rec

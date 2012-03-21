@@ -34,6 +34,9 @@ import org.jstdf.record.WaferResultsRecord;
  */
 public interface StdfRecordHandler 
 {
+	public void beginReadRecord();
+	public void endReadRecord();
+	
 	public boolean readRecord(PartInformationRecord pir);
 	public boolean readRecord(PartResultsRecord prr);
 	public boolean readRecord(ParametricTestRecord ptr);
