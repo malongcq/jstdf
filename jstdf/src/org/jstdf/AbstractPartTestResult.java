@@ -3,6 +3,7 @@ package org.jstdf;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -27,6 +28,21 @@ public abstract class AbstractPartTestResult extends AbstractTestResult implemen
 	protected Map<String, PartResultSet> testParts = new HashMap<String, PartResultSet>();
 	protected String format_head_site = "h=%d,s=%d";
 
+	public Set<ParametricTestItem> getParametricTestItems()
+	{
+		return testItems;
+	}
+	
+	public Deque<HardwareBinRecord> getHardwareBinRecords()
+	{
+		return hbrs;
+	}
+	
+	public Deque<SoftwareBinRecord> getSoftwareBinRecords()
+	{
+		return sbrs;
+	}
+	
 	public String getTestParameterPattern()
 	{
 		return testParameterPattern==null ? "" : testParameterPattern.pattern();
@@ -112,5 +128,23 @@ public abstract class AbstractPartTestResult extends AbstractTestResult implemen
 		}
 		sbrs.add(sbr);
 		return true;
+	}
+	
+	protected void addParametricTestItem(ParametricTestRecord ptr)
+	{
+		if(testItems==null) 
+		{
+			testItems = new HashSet<ParametricTestItem>();
+		}
+		testItems.add(new ParametricTestItem(ptr));
+	}
+	
+	protected void addParametricTestItem(MultipleResultParametricRecord mpr)
+	{
+		if(testItems==null) 
+		{
+			testItems = new HashSet<ParametricTestItem>();
+		}
+		testItems.add(new ParametricTestItem(mpr));
 	}
 }
