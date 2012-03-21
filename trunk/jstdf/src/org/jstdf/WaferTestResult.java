@@ -16,6 +16,19 @@ public class WaferTestResult extends AbstractPartTestResult
 	protected WaferInformationRecord wir;
 	protected WaferResultsRecord wrr;
 	
+	public String getWaferId()
+	{
+		if(wrr!=null && wrr.WAFER_ID!=null)
+		{
+			return wrr.WAFER_ID;
+		}
+		else if(wir!=null && wir.WAFER_ID!=null)
+		{
+			return wir.WAFER_ID;
+		}
+		return null;
+	}
+	
 	public Map<Integer, Integer> getBinResults(boolean softBin)
 	{
 		Map<Integer, Integer> map = new TreeMap<Integer, Integer>();
