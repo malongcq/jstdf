@@ -16,12 +16,13 @@ public class WaferTestResult extends AbstractPartTestResult
 	protected WaferInformationRecord wir;
 	protected WaferResultsRecord wrr;
 	
-	public Map<Integer, Integer> getBinSummary(boolean softBin)
+	public Map<Integer, Integer> getBinResults(boolean softBin)
 	{
 		Map<Integer, Integer> map = new TreeMap<Integer, Integer>();
 		for(PartResultSet p : wmap.values())
 		{
-			int bin = softBin ? p.getPartResultsRecord().SOFT_BIN : p.getPartResultsRecord().HARD_BIN;
+			int bin = softBin ? 
+				p.getPartResultsRecord().SOFT_BIN : p.getPartResultsRecord().HARD_BIN;
 			Integer cnt = map.get(bin);
 			if(cnt==null) cnt = 0;
 			map.put(bin, ++cnt);
