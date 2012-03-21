@@ -52,7 +52,7 @@ public class SingleWaferTestResult extends AbstractPartTestResult
 	}
 
 	@Override
-	public boolean readPartResult(PartResultSet part_result)
+	public boolean readPartResultSet(PartResultSet part_result)
 	{
 		int die_x = part_result.prr.X_COORD;
 		int die_y = part_result.prr.Y_COORD;

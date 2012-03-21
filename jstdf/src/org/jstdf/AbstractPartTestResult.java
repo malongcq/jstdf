@@ -15,7 +15,7 @@ import org.jstdf.record.PartResultsRecord;
 import org.jstdf.record.SoftwareBinRecord;
 
 
-public abstract class AbstractPartTestResult extends GenricTestResult implements PartResultHandler
+public abstract class AbstractPartTestResult extends GenricTestResult implements PartResultSetHandler
 {
 	protected Deque<HardwareBinRecord> hbrs;
 	protected Deque<SoftwareBinRecord> sbrs;
@@ -70,7 +70,7 @@ public abstract class AbstractPartTestResult extends GenricTestResult implements
 		PartResultSet rset = testParts.get(key);
 		rset.setPartResultsRecord(prr);
 		
-		return readPartResult(rset);
+		return readPartResultSet(rset);
 	}
 	
 	@Override
