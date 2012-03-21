@@ -30,12 +30,12 @@ public class PartCsvExporter extends AbstractPartTestResult
 		
 		try
 		{
-			FileWriter w = new FileWriter(filename_test_params);
-			w.write("Test_No,Name,Low_Spec,High_Spec,Low_Limit,High_Limit\n");
+			FileWriter w = new FileWriter(new File(out_dir, filename_test_params));
+			w.write("Test_No,Name,Unit,Low_Spec,High_Spec,Low_Limit,High_Limit\n");
 			for(ParametricTestItem t : testItems)
 			{
-				w.write(String.format("\"%d\",\"%s\",\"%g\",\"%g\",\"%g\",\"%g\"\n", 
-					t.getTestNum(),t.getTestName(),
+				w.write(String.format("\"%d\",\"%s\",\"%s\",\"%g\",\"%g\",\"%g\",\"%g\"\n", 
+					t.getTestNum(),t.getTestName(),t.getTestUnit(),
 					t.getLowSpec(),t.getHighSpec(),t.getLowLimit(),t.getHighLimit()));
 			}
 			w.close();
