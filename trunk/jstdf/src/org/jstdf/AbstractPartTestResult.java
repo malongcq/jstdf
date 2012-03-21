@@ -4,6 +4,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.jstdf.record.FunctionalTestRecord;
@@ -17,24 +18,14 @@ import org.jstdf.record.SoftwareBinRecord;
 
 public abstract class AbstractPartTestResult extends AbstractTestResult implements PartResultSetHandler
 {
+	protected Set<ParametricTestItem> testItems;
 	protected Deque<HardwareBinRecord> hbrs;
 	protected Deque<SoftwareBinRecord> sbrs;
 	
-//	PartResultHandler partResultHandler;
 	protected Pattern testParameterPattern;
 	
 	protected Map<String, PartResultSet> testParts = new HashMap<String, PartResultSet>();
 	protected String format_head_site = "h=%d,s=%d";
-	
-//	public PartResultHandler getPartResultHandler() 
-//	{
-//		return partResultHandler;
-//	}
-//	
-//	public void setPartResultHandler(PartResultHandler partResultHandler) 
-//	{
-//		this.partResultHandler = partResultHandler;
-//	}
 
 	public String getTestParameterPattern()
 	{

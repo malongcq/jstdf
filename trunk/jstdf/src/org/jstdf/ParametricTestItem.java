@@ -1,5 +1,8 @@
 package org.jstdf;
 
+import org.jstdf.record.MultipleResultParametricRecord;
+import org.jstdf.record.ParametricTestRecord;
+
 public class ParametricTestItem
 {
 	private long testNum;
@@ -94,5 +97,25 @@ public class ParametricTestItem
 				+ testName + ", lowLimit=" + lowLimit + ", highLimit="
 				+ highLimit + ", lowSpec=" + lowSpec + ", highSpec=" + highSpec
 				+ "]";
+	}
+	
+	public ParametricTestItem(ParametricTestRecord ptr)
+	{
+		setTestNum(ptr.TEST_NUM);
+		setTestName(ptr.TEST_TXT);
+		setHighLimit(ptr.HI_LIMIT);
+		setLowLimit(ptr.LO_LIMIT);
+		setHighSpec(ptr.HI_SPEC);
+		setLowSpec(ptr.LO_SPEC);
+	}
+	
+	public ParametricTestItem(MultipleResultParametricRecord mpr)
+	{
+		setTestNum(mpr.TEST_NUM);
+		setTestName(mpr.TEST_TXT);
+		setHighLimit(mpr.HI_LIMIT);
+		setLowLimit(mpr.LO_LIMIT);
+		setHighSpec(mpr.HI_SPEC);
+		setLowSpec(mpr.LO_SPEC);
 	}
 }
