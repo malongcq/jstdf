@@ -21,6 +21,29 @@ public class PartCsvExporter extends AbstractPartTestResult
 {
 	protected String filename_bin_result = "Bin_Result.csv";
 	protected String filename_bin_spec = "Bin_Spec.csv";
+	protected String filename_test_params = "Test_Params.csv";
+	
+	@Override
+	public void endReadRecord()
+	{
+		if(testItems==null) return;
+		
+		try
+		{
+			FileWriter w = new FileWriter(filename_test_params);
+			w.write("Test_No,Name,Low_Spec,High_Spec,Low_Limit,High_Limit\n");
+			for(ParametricTestItem t : testItems)
+			{
+				w.write(String.format("%d,\"%s\",%g,%g,%g,%g", t.getTestNum(),t.getTestName(),
+					t.getLowSpec(),t.getHighSpec(),t.getLowLimit(),t.getHighLimit()));
+			}
+			w.close();
+		} 
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
 	
 	public PartCsvExporter(File parent_dir) throws IOException
 	{
