@@ -8,7 +8,16 @@ public class ParametricTestItem
 	private long testNum;
 	private String testName, testUnit;
 	private Double lowLimit, highLimit, lowSpec, highSpec;
+	private boolean multipleResult;
 	
+	public boolean isMultipleResult()
+	{
+		return multipleResult;
+	}
+	public void setMultipleResult(boolean multipleResult)
+	{
+		this.multipleResult = multipleResult;
+	}
 	public long getTestNum()
 	{
 		return testNum;
@@ -116,6 +125,7 @@ public class ParametricTestItem
 		setLowLimit(ptr.LO_LIMIT);
 		setHighSpec(ptr.HI_SPEC);
 		setLowSpec(ptr.LO_SPEC);
+		setMultipleResult(false);
 	}
 	
 	public ParametricTestItem(MultipleResultParametricRecord mpr)
@@ -127,5 +137,6 @@ public class ParametricTestItem
 		setLowLimit(mpr.LO_LIMIT);
 		setHighSpec(mpr.HI_SPEC);
 		setLowSpec(mpr.LO_SPEC);
+		setMultipleResult(true);
 	}
 }
