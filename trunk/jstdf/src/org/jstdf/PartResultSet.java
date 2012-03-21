@@ -34,11 +34,11 @@ public class PartResultSet
 	}
 	
 	Deque<STDFRecord> rset = new ArrayDeque<STDFRecord>();
-	public Deque<STDFRecord> getPartResult()
+	public Deque<STDFRecord> getPartResults()
 	{
 		return rset;
 	}
-	public void setPartResult(Deque<STDFRecord> rset)
+	public void setPartResults(Deque<STDFRecord> rset)
 	{
 		this.rset = rset;
 	}

@@ -205,7 +205,7 @@ public class PartCsvExporter extends AbstractPartTestResult
 			PartResultsRecord prr = part_result.getPartResultsRecord();
 			exportPartResult(prr);
 			
-			for(STDFRecord rec : part_result.getPartResult())
+			for(STDFRecord rec : part_result.getPartResults())
 			{
 				if(rec.getRecordType()==STDFRecordType.PTR)
 				{
