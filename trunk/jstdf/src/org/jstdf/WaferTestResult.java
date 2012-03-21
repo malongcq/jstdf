@@ -15,7 +15,7 @@ public class WaferTestResult extends AbstractPartTestResult
 	protected WaferInformationRecord wir;
 	protected WaferResultsRecord wrr;
 	
-	public Map<Point, PartResultSet> getWaferTestResult()
+	public Map<Point, PartResultSet> getWafermap()
 	{
 		return wmap;
 	}
