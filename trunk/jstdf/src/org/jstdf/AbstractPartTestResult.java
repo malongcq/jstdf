@@ -1,27 +1,41 @@
 package org.jstdf;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.jstdf.record.FunctionalTestRecord;
+import org.jstdf.record.HardwareBinRecord;
 import org.jstdf.record.MultipleResultParametricRecord;
 import org.jstdf.record.ParametricTestRecord;
 import org.jstdf.record.PartInformationRecord;
 import org.jstdf.record.PartResultsRecord;
+import org.jstdf.record.SoftwareBinRecord;
 
 
-public class PartTestResult extends GenricTestResult
+public abstract class AbstractPartTestResult extends GenricTestResult implements PartResultHandler
 {
-	PartResultHandler partResultHandler;
-	public PartResultHandler getPartResultHandler() {
-		return partResultHandler;
-	}
-	public void setPartResultHandler(PartResultHandler partResultHandler) {
-		this.partResultHandler = partResultHandler;
-	}
-
+	protected Deque<HardwareBinRecord> hbrs;
+	protected Deque<SoftwareBinRecord> sbrs;
+	
+//	PartResultHandler partResultHandler;
 	protected Pattern testParameterPattern;
+	
+	protected Map<String, PartResultSet> testParts = new HashMap<String, PartResultSet>();
+	protected String format_head_site = "h=%d,s=%d";
+	
+//	public PartResultHandler getPartResultHandler() 
+//	{
+//		return partResultHandler;
+//	}
+//	
+//	public void setPartResultHandler(PartResultHandler partResultHandler) 
+//	{
+//		this.partResultHandler = partResultHandler;
+//	}
+
 	public String getTestParameterPattern()
 	{
 		return testParameterPattern==null ? "" : testParameterPattern.pattern();
@@ -38,9 +52,6 @@ public class PartTestResult extends GenricTestResult
 		return testParameterPattern==null ? 
 			true : testParameterPattern.matcher(name).matches();
 	}
-
-	protected Map<String, PartResultSet> testParts = new HashMap<String, PartResultSet>();
-	protected String format_head_site = "h=%d,s=%d";
 	
 	@Override
 	public boolean readRecord(PartInformationRecord pir)
@@ -59,7 +70,7 @@ public class PartTestResult extends GenricTestResult
 		PartResultSet rset = testParts.get(key);
 		rset.setPartResultsRecord(prr);
 		
-		return partResultHandler==null ? true : partResultHandler.readPartResult(rset);
+		return readPartResult(rset);
 	}
 	
 	@Override
@@ -86,6 +97,29 @@ public class PartTestResult extends GenricTestResult
 		if(!acceptParameter(ftr.TEST_TXT)) return false;
 		String key = String.format("h=%d,s=%d", ftr.HEAD_NUM, ftr.SITE_NUM);
 		testParts.get(key).addPartResult(ftr);
+		return true;
+	}
+	
+	@Override
+	public boolean readRecord(HardwareBinRecord hbr) 
+	{
+		if(hbrs==null)
+		{
+			hbrs = new ArrayDeque<HardwareBinRecord>();
+		}
+		hbrs.add(hbr);
+		
+		return true;
+	}
+	
+	@Override
+	public boolean readRecord(SoftwareBinRecord sbr) 
+	{
+		if(sbrs==null)
+		{
+			sbrs = new ArrayDeque<SoftwareBinRecord>();
+		}
+		sbrs.add(sbr);
 		return true;
 	}
 }
