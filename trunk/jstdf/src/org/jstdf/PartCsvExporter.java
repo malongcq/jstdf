@@ -174,7 +174,7 @@ public class PartCsvExporter extends AbstractPartTestResult
 	}
 
 	@Override
-	public boolean readPartResult(PartResultSet part_result)
+	public boolean readPartResultSet(PartResultSet part_result)
 	{
 		try 
 		{
