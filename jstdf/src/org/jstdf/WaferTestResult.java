@@ -16,6 +16,13 @@ public class WaferTestResult extends AbstractPartTestResult
 	protected WaferInformationRecord wir;
 	protected WaferResultsRecord wrr;
 	
+	public int getSiteGroup()
+	{
+		if(wir!=null) return wir.SITE_GRP;
+		else if (wrr!=null) return wrr.SITE_GRP;
+		else return 255;
+	}
+	
 	public String getWaferId()
 	{
 		if(wrr!=null && wrr.WAFER_ID!=null)
