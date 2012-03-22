@@ -86,4 +86,9 @@ public class HardwareBinRecord extends AbstractSTDFRecord
 				+ HBIN_CNT + ", HBIN_PF=" + HBIN_PF + ", HBIN_NAM=" + HBIN_NAM
 				+ "]";
 	}
+	
+	public boolean isPass()
+	{
+		return HBIN_PF=='P';
+	}
 }
