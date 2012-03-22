@@ -81,4 +81,9 @@ public class SoftwareBinRecord extends AbstractSTDFRecord
 				+ SBIN_CNT + ", SBIN_PF=" + SBIN_PF + ", SBIN_NAM=" + SBIN_NAM
 				+ "]";
 	}
+	
+	public boolean isPass()
+	{
+		return SBIN_PF=='P';
+	}
 }

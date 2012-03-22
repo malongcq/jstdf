@@ -1,11 +1,15 @@
 package org.jstdf.util;
 
 import java.awt.Point;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
 import org.jstdf.PartResultSet;
+import org.jstdf.record.HardwareBinRecord;
 import org.jstdf.record.PartResultsRecord;
+import org.jstdf.record.SoftwareBinRecord;
 import org.jstdf.record.WaferConfigurationRecord;
 
 
@@ -69,7 +73,7 @@ public class StdfWaferUtils
 	 * @param softBin true to use soft bin, false to use hard bin.
 	 * @return a map stored bin-count pair of data.
 	 */
-	public Map<Integer, Integer> createWafermapBinCountSummary(
+	public final static Map<Integer, Integer> createWafermapBinCountSummary(
 			Map<Point, PartResultSet> wafermap,
 			boolean softBin)
 	{
@@ -84,5 +88,75 @@ public class StdfWaferUtils
 		}
 		
 		return map;
-	}	
+	}
+	
+	/**
+	 * 
+	 * @param hbrs
+	 * @return
+	 */
+	public final static Map<Integer, HardwareBinRecord> createHardwareBinMap(Collection<HardwareBinRecord> hbrs)
+	{
+		Map<Integer, HardwareBinRecord> map = new HashMap<Integer, HardwareBinRecord>();
+		
+		for(HardwareBinRecord hbr : hbrs)
+		{
+			map.put(hbr.HBIN_NUM, hbr);
+		}
+		
+		return map;
+	}
+	
+	/**
+	 * 
+	 * @param sbrs
+	 * @return
+	 */
+	public final static Map<Integer, SoftwareBinRecord> createSoftwareBinMap(Collection<SoftwareBinRecord> sbrs)
+	{
+		Map<Integer, SoftwareBinRecord> map = new HashMap<Integer, SoftwareBinRecord>();
+		
+		for(SoftwareBinRecord sbr : sbrs)
+		{
+			map.put(sbr.SBIN_NUM, sbr);
+		}
+		
+		return map;
+	}
+	
+	/**
+	 * 
+	 * @param wmap
+	 * @param hbrs
+	 * @return
+	 */
+	public final static int calculateHardwareBinPass(Map<Point, PartResultSet> wmap, Collection<HardwareBinRecord> hbrs)
+	{
+		Map<Integer, HardwareBinRecord> map = createHardwareBinMap(hbrs);
+		int pass = 0;
+		for(PartResultSet p : wmap.values())
+		{
+			HardwareBinRecord hbr = map.get(p.getPartResultsRecord().HARD_BIN);
+			pass += (hbr!=null && hbr.isPass()) ? 1 : 0;
+		}
+		return pass;
+	}
+	
+	/**
+	 * 
+	 * @param wmap
+	 * @param sbrs
+	 * @return
+	 */
+	public final static int calculateSoftwareBinPass(Map<Point, PartResultSet> wmap, Collection<SoftwareBinRecord> sbrs)
+	{
+		Map<Integer, SoftwareBinRecord> map = createSoftwareBinMap(sbrs);
+		int pass = 0;
+		for(PartResultSet p : wmap.values())
+		{
+			SoftwareBinRecord sbr = map.get(p.getPartResultsRecord().SOFT_BIN);
+			pass += (sbr!=null && sbr.isPass()) ? 1 : 0;
+		}
+		return pass;
+	}
 }
