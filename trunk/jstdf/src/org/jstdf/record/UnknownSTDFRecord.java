@@ -10,6 +10,10 @@ import java.nio.ByteBuffer;
  */
 public class UnknownSTDFRecord extends AbstractSTDFRecord
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8278144797420056932L;
 	public byte[] Raw_Bytes;
 	
 	public static final UnknownSTDFRecord getInstance(int seq, int len, int typ, int sub, ByteBuffer bb)

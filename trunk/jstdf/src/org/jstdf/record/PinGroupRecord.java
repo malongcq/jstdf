@@ -14,6 +14,10 @@ import org.jstdf.util.StdfRecordUtils;
 public class PinGroupRecord extends AbstractSTDFRecord
 {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 365308550109658516L;
+	/**
 	 * 1
 	 */
 	public static final byte Type = 1;

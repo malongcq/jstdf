@@ -14,6 +14,10 @@ import org.jstdf.util.StdfRecordUtils;
 public class PinMapRecord extends AbstractSTDFRecord
 {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 414091317995878812L;
+	/**
 	 * 1
 	 */
 	public static final byte Type = 1;

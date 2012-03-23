@@ -15,6 +15,10 @@ import org.jstdf.util.StdfRecordUtils;
 public class MasterResultsRecord extends AbstractSTDFRecord
 {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4749368768014362936L;
+	/**
 	 * 1
 	 */
 	public static final byte Type = 1;

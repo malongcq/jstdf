@@ -14,6 +14,10 @@ import org.jstdf.util.StdfRecordUtils;
 public class DatalogTextRecord extends AbstractSTDFRecord
 {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -104685357081907194L;
+	/**
 	 * 50
 	 */
 	public static final byte Type = 50;

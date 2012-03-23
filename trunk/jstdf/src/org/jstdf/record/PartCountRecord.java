@@ -14,6 +14,10 @@ import org.jstdf.util.StdfRecordUtils;
 public class PartCountRecord extends AbstractSTDFRecord
 {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1958524348834447276L;
+	/**
 	 * 1
 	 */
 	public static final byte Type = 1;

@@ -14,6 +14,10 @@ import org.jstdf.util.StdfRecordUtils;
 public class BeginProgramSectionRecord extends AbstractSTDFRecord
 {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4024265929595505640L;
+	/**
 	 * 20
 	 */
 	public static final byte Type = 20;

@@ -14,6 +14,10 @@ import org.jstdf.util.StdfRecordUtils;
 public class WaferConfigurationRecord extends AbstractSTDFRecord
 {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6378235238335122620L;
+	/**
 	 * 2
 	 */
 	public static final byte Type = 2;

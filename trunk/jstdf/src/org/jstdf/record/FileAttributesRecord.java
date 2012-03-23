@@ -14,6 +14,10 @@ import org.jstdf.util.StdfRecordUtils;
 public class FileAttributesRecord extends AbstractSTDFRecord
 {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6920632304334548583L;
+	/**
 	 * 0
 	 */
 	public static final byte Type = 0;

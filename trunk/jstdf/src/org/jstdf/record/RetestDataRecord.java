@@ -14,6 +14,10 @@ import org.jstdf.util.StdfRecordUtils;
 public class RetestDataRecord extends AbstractSTDFRecord
 {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6781761957965065925L;
+	/**
 	 * 1
 	 */
 	public static final byte Type = 1;

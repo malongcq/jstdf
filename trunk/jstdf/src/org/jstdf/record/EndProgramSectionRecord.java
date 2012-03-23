@@ -11,6 +11,10 @@ import java.nio.ByteBuffer;
 public class EndProgramSectionRecord extends AbstractSTDFRecord
 {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8212008419818022541L;
+	/**
 	 * 20
 	 */
 	public static final byte Type = 20;
