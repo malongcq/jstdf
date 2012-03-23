@@ -1,11 +1,11 @@
 package org.jstdf.util;
 
-import java.awt.Point;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.jstdf.PartLocation;
 import org.jstdf.PartResultSet;
 import org.jstdf.record.HardwareBinRecord;
 import org.jstdf.record.PartResultsRecord;
@@ -32,7 +32,7 @@ public class StdfWaferUtils
 	 * @return the bin wafermap in 2D array.
 	 */
 	public static final int[][] createWafermapBin2DArray(
-			Map<Point, PartResultSet> wafermap,
+			Map<PartLocation, PartResultSet> wafermap,
 			boolean softBin,
 			WaferConfigurationRecord wcr)
 	{
@@ -41,7 +41,7 @@ public class StdfWaferUtils
 		
 		int max_x = Integer.MIN_VALUE, min_x = Integer.MAX_VALUE;
 		int max_y = Integer.MIN_VALUE, min_y = Integer.MAX_VALUE;
-		for(Point p : wafermap.keySet())
+		for(PartLocation p : wafermap.keySet())
 		{
 			int xx = p.x * x_f;
 			int yy = p.y * y_f;
@@ -69,16 +69,15 @@ public class StdfWaferUtils
 	/**
 	 * Create Hard/Soft bin count summary.
 	 * 
-	 * @param wafermap the wafer part test results. 
+	 * @param parts the wafer part test results. 
 	 * @param softBin true to use soft bin, false to use hard bin.
 	 * @return a map stored bin-count pair of data.
 	 */
-	public final static Map<Integer, Integer> createWafermapBinCountSummary(
-			Map<Point, PartResultSet> wafermap,
-			boolean softBin)
+	public final static Map<Integer, Integer> calculateBinResult(
+			Collection<PartResultSet> parts, boolean softBin)
 	{
 		Map<Integer, Integer> map = new TreeMap<Integer, Integer>();
-		for(PartResultSet part : wafermap.values())
+		for(PartResultSet part : parts)
 		{
 			PartResultsRecord prr = part.getPartResultsRecord();
 			int bin = softBin ? prr.SOFT_BIN : prr.HARD_BIN;
@@ -130,11 +129,12 @@ public class StdfWaferUtils
 	 * @param hbrs
 	 * @return
 	 */
-	public final static int calculateHardwareBinPass(Map<Point, PartResultSet> wmap, Collection<HardwareBinRecord> hbrs)
+	public final static int calculateHardwareBinPass(Collection<PartResultSet> parts, 
+			Collection<HardwareBinRecord> hbrs)
 	{
 		Map<Integer, HardwareBinRecord> map = createHardwareBinMap(hbrs);
 		int pass = 0;
-		for(PartResultSet p : wmap.values())
+		for(PartResultSet p : parts)
 		{
 			HardwareBinRecord hbr = map.get(p.getPartResultsRecord().HARD_BIN);
 			pass += (hbr!=null && hbr.isPass()) ? 1 : 0;
@@ -148,11 +148,12 @@ public class StdfWaferUtils
 	 * @param sbrs
 	 * @return
 	 */
-	public final static int calculateSoftwareBinPass(Map<Point, PartResultSet> wmap, Collection<SoftwareBinRecord> sbrs)
+	public final static int calculateSoftwareBinPass(Collection<PartResultSet> parts, 
+			Collection<SoftwareBinRecord> sbrs)
 	{
 		Map<Integer, SoftwareBinRecord> map = createSoftwareBinMap(sbrs);
 		int pass = 0;
-		for(PartResultSet p : wmap.values())
+		for(PartResultSet p : parts)
 		{
 			SoftwareBinRecord sbr = map.get(p.getPartResultsRecord().SOFT_BIN);
 			pass += (sbr!=null && sbr.isPass()) ? 1 : 0;
