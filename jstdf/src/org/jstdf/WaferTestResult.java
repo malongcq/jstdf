@@ -1,17 +1,15 @@
 package org.jstdf;
 
-import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.jstdf.record.WaferConfigurationRecord;
 import org.jstdf.record.WaferInformationRecord;
 import org.jstdf.record.WaferResultsRecord;
-import org.jstdf.util.StdfWaferUtils;
 
 public class WaferTestResult extends AbstractPartTestResult 
 {
-	protected Map<Point, PartResultSet> wmap = new HashMap<Point, PartResultSet>();
+	protected Map<PartLocation, PartResultSet> wmap = new HashMap<PartLocation, PartResultSet>();
 	protected WaferConfigurationRecord wcr;
 	protected WaferInformationRecord wir;
 	protected WaferResultsRecord wrr;
@@ -36,12 +34,7 @@ public class WaferTestResult extends AbstractPartTestResult
 		return null;
 	}
 	
-	public Map<Integer, Integer> getBinResults(boolean softBin)
-	{
-		return StdfWaferUtils.createWafermapBinCountSummary(wmap, softBin);
-	}
-	
-	public Map<Point, PartResultSet> getWafermap()
+	public Map<PartLocation, PartResultSet> getWafermap()
 	{
 		return wmap;
 	}
@@ -87,7 +80,7 @@ public class WaferTestResult extends AbstractPartTestResult
 	{
 		int die_x = part_result.prr.X_COORD;
 		int die_y = part_result.prr.Y_COORD;
-		Point p = new Point(die_x, die_y);
+		PartLocation p = new PartLocation(die_x, die_y);
 		// the new part result should always replace old in same test execution 
 		wmap.put(p, part_result);
 		return true;
