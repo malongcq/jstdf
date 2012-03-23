@@ -15,6 +15,10 @@ import org.jstdf.util.StdfRecordUtils;
 public class ParametricTestRecord extends AbstractSTDFRecord
 {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8807662107326539960L;
+	/**
 	 * 15
 	 */
 	public static final byte Type = 15;

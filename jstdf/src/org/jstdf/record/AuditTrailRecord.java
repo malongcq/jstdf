@@ -15,6 +15,10 @@ import org.jstdf.util.StdfRecordUtils;
 public class AuditTrailRecord extends AbstractSTDFRecord
 {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6412278264147076941L;
+	/**
 	 * 0
 	 */
 	public static final byte Type = 0;

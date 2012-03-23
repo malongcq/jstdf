@@ -15,6 +15,10 @@ import org.jstdf.util.StdfRecordUtils;
 public class FunctionalTestRecord extends AbstractSTDFRecord
 {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8018755175977895816L;
+	/**
 	 * 15
 	 */
 	public static final byte Type = 15;

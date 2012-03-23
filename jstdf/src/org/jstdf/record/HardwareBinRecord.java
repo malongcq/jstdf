@@ -14,6 +14,10 @@ import org.jstdf.util.StdfRecordUtils;
 public class HardwareBinRecord extends AbstractSTDFRecord
 {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7159422809036600041L;
+	/**
 	 * 1
 	 */
 	public static final byte Type = 1;

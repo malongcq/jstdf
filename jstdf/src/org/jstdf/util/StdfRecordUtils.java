@@ -1,10 +1,10 @@
 package org.jstdf.util;
 
 import java.nio.ByteBuffer;
-import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.Date;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.jstdf.record.AuditTrailRecord;
 import org.jstdf.record.BeginProgramSectionRecord;
@@ -12,7 +12,6 @@ import org.jstdf.record.DatalogTextRecord;
 import org.jstdf.record.EndProgramSectionRecord;
 import org.jstdf.record.FileAttributesRecord;
 import org.jstdf.record.FunctionalTestRecord;
-import org.jstdf.record.GenericDataItem;
 import org.jstdf.record.GenericDataRecord;
 import org.jstdf.record.HardwareBinRecord;
 import org.jstdf.record.MasterInformationRecord;
@@ -51,64 +50,64 @@ public class StdfRecordUtils
 	 * 
 	 * @param bb the buffer which data is read from.
 	 * @param cnt the number of data items.
-	 * @return the list of generic data items.
+	 * @return the list of generic data items contains code-data pair.
 	 */
-	public static final List<GenericDataItem> readVnList(ByteBuffer bb, int cnt)
+	public static final Map<Integer, Object> readVnList(ByteBuffer bb, int cnt)
 	{
-		List<GenericDataItem> lst = new ArrayList<GenericDataItem>(cnt);
+		Map<Integer, Object> map = new HashMap<Integer, Object>(cnt);
 		
 		for(int i=0; i<cnt; i++)
 		{
 			if( !bb.hasRemaining() ) break;
-			GenericDataItem item = new GenericDataItem();
-			item.Code = readU1Int(bb);
+			int code = readU1Int(bb);
+			Object item = null;
 			
-			switch(item.Code)
+			switch(code)
 			{
 			case 0: //B*0 Special pad field, of length 0 (See note below)
 				break;
 			case 1: //U*1 One byte unsigned integer
-				item.Data = readU1Int(bb);
+				item = readU1Int(bb);
 				break;
 			case 2: //U*2 Two byte unsigned integer
-				item.Data = readU2Int(bb);
+				item = readU2Int(bb);
 				break;
 			case 3: //U*4 Four byte unsigned integer
-				item.Data = readU4Int(bb);
+				item = readU4Int(bb);
 				break;
 			case 4: //I*1 One byte signed integer
-				item.Data = readI1Int(bb);
+				item = readI1Int(bb);
 				break;
 			case 5: //I*2 Two byte signed integer
-				item.Data = readI2Int(bb);
+				item = readI2Int(bb);
 				break;
 			case 6: //I*4 Four byte signed integer
-				item.Data = readI4Int(bb);
+				item = readI4Int(bb);
 				break;
 			case 7: //R*4 Four byte floating point number
-				item.Data = readR4Double(bb);
+				item = readR4Double(bb);
 				break;
 			case 8: //R*8 Eight byte floating point number
-				item.Data = readR8Double(bb);
+				item = readR8Double(bb);
 				break;
 			case 10: //C*n Variable length ASCII character string (first byte is string length in bytes)
-				item.Data = readCnString(bb);
+				item = readCnString(bb);
 				break;
 			case 11: //B*n Variable length binary data string (first byte is string length in bytes)
-				item.Data = readBytes(bb);
+				item = readBytes(bb);
 				break;
 			case 12: //D*n Bit encoded data (first two bytes of string are length in bits)
-				item.Data = readDnBits(bb);
+				item = readDnBits(bb);
 				break;
 			case 13: //N*1 Unsigned nibble
-				item.Data = readKNBits(bb, 1);
+				item = readKNBits(bb, 1);
 				break;
 			}
 			
-			lst.add(item);
+			map.put(code, item);
 		}
 		
-		return lst;
+		return map;
 	}
 	
 	/**

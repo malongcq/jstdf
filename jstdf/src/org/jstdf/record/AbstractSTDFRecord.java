@@ -1,13 +1,20 @@
 package org.jstdf.record;
 
+import java.io.Serializable;
+
 /**
  * An abstract class implements STDFRecord
  * 
  * @author malong
  *
  */
-public abstract class AbstractSTDFRecord implements STDFRecord
+public abstract class AbstractSTDFRecord implements STDFRecord, Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3324904248547773062L;
+
 	protected int REC_NO;
 	
 	protected int REC_LEN;

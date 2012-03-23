@@ -1,7 +1,7 @@
 package org.jstdf.record;
 
 import java.nio.ByteBuffer;
-import java.util.List;
+import java.util.Map;
 
 import org.jstdf.util.StdfRecordUtils;
 
@@ -14,6 +14,10 @@ import org.jstdf.util.StdfRecordUtils;
  */
 public class GenericDataRecord extends AbstractSTDFRecord
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6410255123211275462L;
 	/**
 	 * 50
 	 */
@@ -31,7 +35,7 @@ public class GenericDataRecord extends AbstractSTDFRecord
 	/**
 	 * V*n Data type code and data for one field
 	 */
-	public List<GenericDataItem> GEN_DATA; //V*n Data type code and data for one field
+	public Map<Integer, Object> GEN_DATA; //V*n Data type code and data for one field
 	
 	@Override
 	public void readContent(ByteBuffer bb)

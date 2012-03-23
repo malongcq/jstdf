@@ -15,6 +15,10 @@ import org.jstdf.util.StdfRecordUtils;
 public class TestSynopsisRecord extends AbstractSTDFRecord
 {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1768197232034929601L;
+	/**
 	 * 10
 	 */
 	public static final byte Type = 10;

@@ -15,6 +15,10 @@ import org.jstdf.util.StdfRecordUtils;
 public class SiteDescriptionRecord extends AbstractSTDFRecord
 {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8421769228834837661L;
+	/**
 	 * 1
 	 */
 	public static final byte Type = 1;
