@@ -60,14 +60,18 @@ public abstract class AbstractPartTestResult extends AbstractTestResult implemen
 			true : testParameterPattern.matcher(name).matches();
 	}
 	
-	protected PartResultSet getTestPart(int head, int site)
+	protected PartResultSet getTestPart(int head, int site, boolean createNew)
 	{
 		String key = String.format(format_head_site, head, site);
-		PartResultSet rset = testParts.get(key);
-		if(rset==null) 
+		PartResultSet rset = null;
+		if(createNew)
 		{
 			rset = new PartResultSet();
 			testParts.put(key, rset);
+		}
+		else
+		{
+			rset = testParts.get(key);
 		}
 		return rset;
 	}
@@ -79,7 +83,7 @@ public abstract class AbstractPartTestResult extends AbstractTestResult implemen
 //		PartResultSet rset = new PartResultSet();
 //		rset.setPartInformationRecord(pir);
 //		testParts.put(key, rset);
-		PartResultSet rset = getTestPart(pir.HEAD_NUM, pir.SITE_NUM);
+		PartResultSet rset = getTestPart(pir.HEAD_NUM, pir.SITE_NUM, true);
 		rset.setPartInformationRecord(pir);
 		return true;
 	}
@@ -90,8 +94,13 @@ public abstract class AbstractPartTestResult extends AbstractTestResult implemen
 //		String key = String.format(format_head_site, prr.HEAD_NUM, prr.SITE_NUM);
 //		PartResultSet rset = testParts.get(key);
 //		rset.setPartResultsRecord(prr);
-		PartResultSet rset = getTestPart(prr.HEAD_NUM, prr.SITE_NUM);
+		PartResultSet rset = getTestPart(prr.HEAD_NUM, prr.SITE_NUM, false);
+		if(rset==null)
+		{
+			rset = getTestPart(prr.HEAD_NUM, prr.SITE_NUM, true);
+		}
 		rset.setPartResultsRecord(prr);
+		
 		return readPartResultSet(rset);
 	}
 	
@@ -101,10 +110,13 @@ public abstract class AbstractPartTestResult extends AbstractTestResult implemen
 		if(!acceptParameter(ptr.TEST_TXT)) return false;
 //		String key = String.format(format_head_site, ptr.HEAD_NUM, ptr.SITE_NUM);
 //		testParts.get(key).addPartResult(ptr);
-		PartResultSet rset = getTestPart(ptr.HEAD_NUM, ptr.SITE_NUM);
-		rset.addPartResult(ptr);
+		PartResultSet rset = getTestPart(ptr.HEAD_NUM, ptr.SITE_NUM, false);
+		if(rset!=null)
+		{
+			rset.addPartResult(ptr);
+			addParametricTestItem(ptr);
+		}
 		
-		addParametricTestItem(ptr);
 		return true;
 	}
 	
@@ -114,10 +126,13 @@ public abstract class AbstractPartTestResult extends AbstractTestResult implemen
 		if(!acceptParameter(mpr.TEST_TXT)) return false;
 //		String key = String.format(format_head_site, mpr.HEAD_NUM, mpr.SITE_NUM);
 //		testParts.get(key).addPartResult(mpr);
-		PartResultSet rset = getTestPart(mpr.HEAD_NUM, mpr.SITE_NUM);
-		rset.addPartResult(mpr);
+		PartResultSet rset = getTestPart(mpr.HEAD_NUM, mpr.SITE_NUM, false);
+		if(rset!=null)
+		{
+			rset.addPartResult(mpr);
+			addParametricTestItem(mpr);
+		}
 		
-		addParametricTestItem(mpr);
 		return true;
 	}
 	
@@ -127,10 +142,13 @@ public abstract class AbstractPartTestResult extends AbstractTestResult implemen
 		if(!acceptParameter(ftr.TEST_TXT)) return false;
 //		String key = String.format("h=%d,s=%d", ftr.HEAD_NUM, ftr.SITE_NUM);
 //		testParts.get(key).addPartResult(ftr);
-		PartResultSet rset = getTestPart(ftr.HEAD_NUM, ftr.SITE_NUM);
-		rset.addPartResult(ftr);
+		PartResultSet rset = getTestPart(ftr.HEAD_NUM, ftr.SITE_NUM, false);
+		if(rset!=null)
+		{
+			rset.addPartResult(ftr);
+//			addParametricTestItem(ftr);
+		}
 		
-//		addParametricTestItem(ftr);
 		return true;
 	}
 	
