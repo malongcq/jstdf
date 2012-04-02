@@ -101,6 +101,13 @@ public abstract class AbstractPartTestResult extends AbstractTestResult implemen
 		}
 		rset.setPartResultsRecord(prr);
 		
+//		System.out.println(testParts.size());
+//		for(String k : testParts.keySet())
+//		{
+//			PartResultSet s = testParts.get(k);
+//			System.out.println(k +","+ s.getPartResults().size());
+//		}
+		
 		return readPartResultSet(rset);
 	}
 	
