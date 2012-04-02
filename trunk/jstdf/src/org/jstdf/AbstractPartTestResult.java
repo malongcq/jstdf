@@ -60,23 +60,38 @@ public abstract class AbstractPartTestResult extends AbstractTestResult implemen
 			true : testParameterPattern.matcher(name).matches();
 	}
 	
+	protected PartResultSet getTestPart(int head, int site)
+	{
+		String key = String.format(format_head_site, head, site);
+		PartResultSet rset = testParts.get(key);
+		if(rset==null) 
+		{
+			rset = new PartResultSet();
+			testParts.put(key, rset);
+		}
+		return rset;
+	}
+	
 	@Override
 	public boolean readRecord(PartInformationRecord pir)
 	{
-		String key = String.format(format_head_site, pir.HEAD_NUM, pir.SITE_NUM);
-		PartResultSet rset = new PartResultSet();
+//		String key = String.format(format_head_site, pir.HEAD_NUM, pir.SITE_NUM);
+//		PartResultSet rset = new PartResultSet();
+//		rset.setPartInformationRecord(pir);
+//		testParts.put(key, rset);
+		PartResultSet rset = getTestPart(pir.HEAD_NUM, pir.SITE_NUM);
 		rset.setPartInformationRecord(pir);
-		testParts.put(key, rset);
 		return true;
 	}
 	
 	@Override
 	public boolean readRecord(PartResultsRecord prr) 
 	{
-		String key = String.format(format_head_site, prr.HEAD_NUM, prr.SITE_NUM);
-		PartResultSet rset = testParts.get(key);
+//		String key = String.format(format_head_site, prr.HEAD_NUM, prr.SITE_NUM);
+//		PartResultSet rset = testParts.get(key);
+//		rset.setPartResultsRecord(prr);
+		PartResultSet rset = getTestPart(prr.HEAD_NUM, prr.SITE_NUM);
 		rset.setPartResultsRecord(prr);
-		
 		return readPartResultSet(rset);
 	}
 	
@@ -84,8 +99,10 @@ public abstract class AbstractPartTestResult extends AbstractTestResult implemen
 	public boolean readRecord(ParametricTestRecord ptr)
 	{
 		if(!acceptParameter(ptr.TEST_TXT)) return false;
-		String key = String.format(format_head_site, ptr.HEAD_NUM, ptr.SITE_NUM);
-		testParts.get(key).addPartResult(ptr);
+//		String key = String.format(format_head_site, ptr.HEAD_NUM, ptr.SITE_NUM);
+//		testParts.get(key).addPartResult(ptr);
+		PartResultSet rset = getTestPart(ptr.HEAD_NUM, ptr.SITE_NUM);
+		rset.addPartResult(ptr);
 		
 		addParametricTestItem(ptr);
 		return true;
@@ -95,8 +112,10 @@ public abstract class AbstractPartTestResult extends AbstractTestResult implemen
 	public boolean readRecord(MultipleResultParametricRecord mpr)
 	{
 		if(!acceptParameter(mpr.TEST_TXT)) return false;
-		String key = String.format(format_head_site, mpr.HEAD_NUM, mpr.SITE_NUM);
-		testParts.get(key).addPartResult(mpr);
+//		String key = String.format(format_head_site, mpr.HEAD_NUM, mpr.SITE_NUM);
+//		testParts.get(key).addPartResult(mpr);
+		PartResultSet rset = getTestPart(mpr.HEAD_NUM, mpr.SITE_NUM);
+		rset.addPartResult(mpr);
 		
 		addParametricTestItem(mpr);
 		return true;
@@ -106,8 +125,12 @@ public abstract class AbstractPartTestResult extends AbstractTestResult implemen
 	public boolean readRecord(FunctionalTestRecord ftr)
 	{
 		if(!acceptParameter(ftr.TEST_TXT)) return false;
-		String key = String.format("h=%d,s=%d", ftr.HEAD_NUM, ftr.SITE_NUM);
-		testParts.get(key).addPartResult(ftr);
+//		String key = String.format("h=%d,s=%d", ftr.HEAD_NUM, ftr.SITE_NUM);
+//		testParts.get(key).addPartResult(ftr);
+		PartResultSet rset = getTestPart(ftr.HEAD_NUM, ftr.SITE_NUM);
+		rset.addPartResult(ftr);
+		
+//		addParametricTestItem(ftr);
 		return true;
 	}
 	
