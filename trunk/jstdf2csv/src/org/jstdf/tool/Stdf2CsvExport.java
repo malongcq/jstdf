@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
 
-
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.GnuParser;
@@ -15,6 +14,7 @@ import org.apache.commons.cli.Options;
 import org.jstdf.PartCsvExporter;
 import org.jstdf.SimpleSTDFSummary;
 import org.jstdf.StdfReader;
+import org.jstdf.WaferTestResult;
 
 public class Stdf2CsvExport 
 {
@@ -25,6 +25,7 @@ public class Stdf2CsvExport
 		Option help = new Option("help", false, "print help message");
 		Option quiet = new Option("quiet", false, "be quiet when reading file" );
 		Option summary = new Option("summary", false, "print STDF data file summary");
+		Option wafer = new Option("wafer", false, "<under test>");
 		Option param = new Option("param", true, "search parameters for export, " +
 				"wildcard ? and * is supported, " +
 				"omit this option to export all parameters. " +
@@ -36,6 +37,7 @@ public class Stdf2CsvExport
 		
 		opts.addOption(help);
 		opts.addOption(summary);
+		opts.addOption(wafer);
 		opts.addOption(quiet);
 		opts.addOption(param);
 		opts.addOption(out);
@@ -117,6 +119,12 @@ public class Stdf2CsvExport
 				reader.setRecordHandler(stdf);
 				reader.loadFromSTDF(in_file);
 				stdf.printSummary();
+			}
+			else if(cmd.hasOption("wafer"))
+			{
+				WaferTestResult stdf = new WaferTestResult();
+				reader.setRecordHandler(stdf);
+				reader.loadFromSTDF(in_file);
 			}
 			else
 			{
