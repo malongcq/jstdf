@@ -2,9 +2,7 @@ package org.jstdf;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
@@ -25,8 +23,14 @@ public abstract class AbstractPartTestResult extends AbstractTestResult implemen
 	
 	protected Pattern testParameterPattern;
 	
-	private Map<String, PartResultSet> testParts = new HashMap<String, PartResultSet>();
-	private String format_head_site = "h=%d,s=%d";
+//	private Map<String, PartResultSet> testParts = new HashMap<String, PartResultSet>();
+//	private String format_head_site = "h=%d,s=%d";
+	
+	/*
+	 * allocate as large as possible to handle all possible head/site
+	 * head/site=U*1 then max=255
+	 */
+	private PartResultSet[][] testParts = new PartResultSet[255][255];
 
 	public Set<ParametricTestItem> getParametricTestItems()
 	{
@@ -62,22 +66,26 @@ public abstract class AbstractPartTestResult extends AbstractTestResult implemen
 	
 	protected void removeCachedTestPart(int head, int site)
 	{
-		String key = String.format(format_head_site, head, site);
-		testParts.remove(key);
+//		String key = String.format(format_head_site, head, site);
+//		testParts.remove(key);
+		testParts[head][site] = null;
 	}
 	
 	protected PartResultSet createCachedTestPart(int head, int site)
 	{
-		String key = String.format(format_head_site, head, site);
 		PartResultSet rset = new PartResultSet();
-		testParts.put(key, rset);
+//		String key = String.format(format_head_site, head, site);
+//		testParts.put(key, rset);
+		testParts[head][site] = rset;
+		
 		return rset;
 	}
 	
 	protected PartResultSet getCachedTestPart(int head, int site)
 	{
-		String key = String.format(format_head_site, head, site);
-		return testParts.get(key);
+//		String key = String.format(format_head_site, head, site);
+//		return testParts.get(key);
+		return testParts[head][site];
 	}
 	
 	@Override
