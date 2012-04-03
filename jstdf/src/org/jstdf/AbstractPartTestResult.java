@@ -30,7 +30,7 @@ public abstract class AbstractPartTestResult extends AbstractTestResult implemen
 	 * allocate as large as possible to handle all possible head/site
 	 * head/site=U*1 then max=255
 	 */
-	private PartResultSet[][] testParts = new PartResultSet[255][255];
+	private PartResultSet[][] testParts = new PartResultSet[256][256];
 
 	public Set<ParametricTestItem> getParametricTestItems()
 	{
