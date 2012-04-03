@@ -25,8 +25,8 @@ public abstract class AbstractPartTestResult extends AbstractTestResult implemen
 	
 	protected Pattern testParameterPattern;
 	
-	protected Map<String, PartResultSet> testParts = new HashMap<String, PartResultSet>();
-	protected String format_head_site = "h=%d,s=%d";
+	private Map<String, PartResultSet> testParts = new HashMap<String, PartResultSet>();
+	private String format_head_site = "h=%d,s=%d";
 
 	public Set<ParametricTestItem> getParametricTestItems()
 	{
@@ -60,20 +60,24 @@ public abstract class AbstractPartTestResult extends AbstractTestResult implemen
 			true : testParameterPattern.matcher(name).matches();
 	}
 	
-	protected PartResultSet getTestPart(int head, int site, boolean createNew)
+	protected void removeCachedTestPart(int head, int site)
 	{
 		String key = String.format(format_head_site, head, site);
-		PartResultSet rset = null;
-		if(createNew)
-		{
-			rset = new PartResultSet();
-			testParts.put(key, rset);
-		}
-		else
-		{
-			rset = testParts.get(key);
-		}
+		testParts.remove(key);
+	}
+	
+	protected PartResultSet createCachedTestPart(int head, int site)
+	{
+		String key = String.format(format_head_site, head, site);
+		PartResultSet rset = new PartResultSet();
+		testParts.put(key, rset);
 		return rset;
+	}
+	
+	protected PartResultSet getCachedTestPart(int head, int site)
+	{
+		String key = String.format(format_head_site, head, site);
+		return testParts.get(key);
 	}
 	
 	@Override
@@ -83,7 +87,7 @@ public abstract class AbstractPartTestResult extends AbstractTestResult implemen
 //		PartResultSet rset = new PartResultSet();
 //		rset.setPartInformationRecord(pir);
 //		testParts.put(key, rset);
-		PartResultSet rset = getTestPart(pir.HEAD_NUM, pir.SITE_NUM, true);
+		PartResultSet rset = createCachedTestPart(pir.HEAD_NUM, pir.SITE_NUM);
 		rset.setPartInformationRecord(pir);
 		return true;
 	}
@@ -94,20 +98,11 @@ public abstract class AbstractPartTestResult extends AbstractTestResult implemen
 //		String key = String.format(format_head_site, prr.HEAD_NUM, prr.SITE_NUM);
 //		PartResultSet rset = testParts.get(key);
 //		rset.setPartResultsRecord(prr);
-		PartResultSet rset = getTestPart(prr.HEAD_NUM, prr.SITE_NUM, false);
-		if(rset==null)
-		{
-			rset = getTestPart(prr.HEAD_NUM, prr.SITE_NUM, true);
-		}
+		PartResultSet rset = getCachedTestPart(prr.HEAD_NUM, prr.SITE_NUM);
+		if(rset==null) rset = new PartResultSet();
 		rset.setPartResultsRecord(prr);
 		
-//		System.out.println(testParts.size());
-//		for(String k : testParts.keySet())
-//		{
-//			PartResultSet s = testParts.get(k);
-//			System.out.println(k +","+ s.getPartResults().size());
-//		}
-		
+		removeCachedTestPart(prr.HEAD_NUM, prr.SITE_NUM);
 		return readPartResultSet(rset);
 	}
 	
@@ -117,7 +112,7 @@ public abstract class AbstractPartTestResult extends AbstractTestResult implemen
 		if(!acceptParameter(ptr.TEST_TXT)) return false;
 //		String key = String.format(format_head_site, ptr.HEAD_NUM, ptr.SITE_NUM);
 //		testParts.get(key).addPartResult(ptr);
-		PartResultSet rset = getTestPart(ptr.HEAD_NUM, ptr.SITE_NUM, false);
+		PartResultSet rset = getCachedTestPart(ptr.HEAD_NUM, ptr.SITE_NUM);
 		if(rset!=null)
 		{
 			rset.addPartResult(ptr);
@@ -133,7 +128,7 @@ public abstract class AbstractPartTestResult extends AbstractTestResult implemen
 		if(!acceptParameter(mpr.TEST_TXT)) return false;
 //		String key = String.format(format_head_site, mpr.HEAD_NUM, mpr.SITE_NUM);
 //		testParts.get(key).addPartResult(mpr);
-		PartResultSet rset = getTestPart(mpr.HEAD_NUM, mpr.SITE_NUM, false);
+		PartResultSet rset = getCachedTestPart(mpr.HEAD_NUM, mpr.SITE_NUM);
 		if(rset!=null)
 		{
 			rset.addPartResult(mpr);
@@ -149,7 +144,7 @@ public abstract class AbstractPartTestResult extends AbstractTestResult implemen
 		if(!acceptParameter(ftr.TEST_TXT)) return false;
 //		String key = String.format("h=%d,s=%d", ftr.HEAD_NUM, ftr.SITE_NUM);
 //		testParts.get(key).addPartResult(ftr);
-		PartResultSet rset = getTestPart(ftr.HEAD_NUM, ftr.SITE_NUM, false);
+		PartResultSet rset = getCachedTestPart(ftr.HEAD_NUM, ftr.SITE_NUM);
 		if(rset!=null)
 		{
 			rset.addPartResult(ftr);
