@@ -41,23 +41,29 @@ public class SimpleSTDFSummary extends AbstractStdfRecordHandler
 		if(rec.getRecordType()==STDFRecordType.PTR)
 		{
 			ParametricTestRecord ptr = (ParametricTestRecord)rec;
-			Integer p_cnt = ptrs.get(ptr.TEST_TXT);
+			String key = String.format("%d_%s", ptr.TEST_NUM, ptr.TEST_TXT);
+			
+			Integer p_cnt = ptrs.get(key);
 			if(p_cnt==null) p_cnt = 0;
-			ptrs.put(ptr.TEST_TXT, ++p_cnt);
+			ptrs.put(key, ++p_cnt);
 		}
 		else if(rec.getRecordType()==STDFRecordType.MPR)
 		{
 			MultipleResultParametricRecord mpr = (MultipleResultParametricRecord)rec;
-			Integer p_cnt = mprs.get(mpr.TEST_TXT);
+			String key = String.format("%d_%s", mpr.TEST_NUM, mpr.TEST_TXT);
+			
+			Integer p_cnt = mprs.get(key);
 			if(p_cnt==null) p_cnt = 0;
-			mprs.put(mpr.TEST_TXT, ++p_cnt);
+			mprs.put(key, ++p_cnt);
 		}
 		else if(rec.getRecordType()==STDFRecordType.FTR)
 		{
 			FunctionalTestRecord ftr = (FunctionalTestRecord)rec;
-			Integer p_cnt = ftrs.get(ftr.TEST_TXT);
+			String key = String.format("%d_%s", ftr.TEST_NUM, ftr.TEST_TXT);
+			
+			Integer p_cnt = ftrs.get(key);
 			if(p_cnt==null) p_cnt = 0;
-			ftrs.put(ftr.TEST_TXT, ++p_cnt);
+			ftrs.put(key, ++p_cnt);
 		}
 		
 		if(EnumSet.of(STDFRecordType.MIR, STDFRecordType.SDR, STDFRecordType.MRR, 
