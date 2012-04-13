@@ -103,6 +103,28 @@ public class StdfReader
 		this.recordHandler = recordHandler;
 	}
 
+	private int progressInterval = 10000;
+	public int getProgressInterval()
+	{
+		return progressInterval;
+	}
+
+	public void setProgressInterval(int progressInterval)
+	{
+		this.progressInterval = progressInterval;
+	}
+
+	private String progressInfoFormat = "{1}/{2} processed...\n";
+	public String getProgressInfoFormat()
+	{
+		return progressInfoFormat;
+	}
+
+	public void setProgressInfoFormat(String progressInfoFormat)
+	{
+		this.progressInfoFormat = progressInfoFormat;
+	}
+
 	/**
 	 * Read stdf data from a file
 	 * 
@@ -188,9 +210,10 @@ public class StdfReader
 //			readSTDFRecord(rec_cnt, REC_LEN, REC_TYP, REC_SUB, rec_buf);
 			read_cnt += readSTDFRecord(rec_cnt, REC_LEN, REC_TYP, REC_SUB, rec_buf) ? 1 : 0;
 
-			if( (++rec_cnt)%10000==0 && verbose) 
+			if( (++rec_cnt)%progressInterval==0 && verbose) 
 			{
-				System.out.printf("%d/%d processed...\n", read_cnt, rec_cnt);
+				System.out.printf(progressInfoFormat.replace("{1}", "%1$d").replace("{2}", "%2$d"), 
+						read_cnt, rec_cnt);
 			}
 			
 			read_len = bis.read(head, 0, STDF_HEAD_LEN);
