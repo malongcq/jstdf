@@ -26,6 +26,9 @@ public class Stdf2CsvExport
 		Option quiet = new Option("quiet", false, "be quiet when reading file" );
 		Option summary = new Option("summary", false, "print STDF data file summary");
 		Option wafer = new Option("wafer", false, "<under test>");
+		Option ptr = new Option("ptr", false, "export PTR");
+		Option mpr = new Option("mpr", false, "export MPR");
+		Option ftr = new Option("ftr", false, "export FTR");
 		Option param = new Option("param", true, "search parameters for export, " +
 				"wildcard ? and * is supported, " +
 				"omit this option to export all parameters. " +
