@@ -45,6 +45,10 @@ public class Stdf2CsvExport
 		opts.addOption(param);
 		opts.addOption(out);
 		
+		opts.addOption(ptr);
+		opts.addOption(mpr);
+		opts.addOption(ftr);
+		
 		return opts;
 	}
 	
@@ -134,6 +138,10 @@ public class Stdf2CsvExport
 			{
 				File out_dir = new File(cmd.getOptionValue("out", "stdf_out"));
 				PartCsvExporter stdf = new PartCsvExporter(out_dir);
+				
+				stdf.setExportFTR(cmd.hasOption("ftr"));
+				stdf.setExportMPR(cmd.hasOption("mpr"));
+				stdf.setExportPTR(cmd.hasOption("ptr"));
 				
 				if(cmd.hasOption("param"))
 				{
