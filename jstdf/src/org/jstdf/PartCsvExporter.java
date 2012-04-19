@@ -98,9 +98,20 @@ public class PartCsvExporter extends AbstractPartTestResult
 		{
 			e.printStackTrace();
 		}
+		
+		//finish parameters results
+		for(FileWriter fw : fws)
+		{
+			try
+			{
+				if(fw!=null) fw.close();
+			} catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+		}
 	}
 	
-	protected String filename_part_result = "Part_Result.csv";
 	protected String filename_bin_spec = "Bin_Spec.csv";
 	protected String filename_test_params = "Test_Params.csv";
 	
@@ -108,75 +119,119 @@ public class PartCsvExporter extends AbstractPartTestResult
 	{
 		out_dir = parent_dir;
 		out_dir.mkdirs();
+		
+		fws = new FileWriter[] {null, null, null, null};
+		fws_cnt = new int[] {0,0,0,0};
+		//fws_typ = new String[] {"PRR"};
 	}
 	
-	protected File out_dir, out_prr, out_ptr, out_mpr, out_ftr;
-	//protected Map<String, File> out_fs = new HashMap<String, File>();
-	protected FileWriter out_fw;
+	protected File out_dir;
+	protected FileWriter[] fws;
+	protected int[] fws_cnt;
+	//protected String[] fws_typ;
+	public final static int FW_IDX_PRR = 0;
+	public final static int FW_IDX_PTR = 1;
+	public final static int FW_IDX_MPR = 2;
+	public final static int FW_IDX_FTR = 3;
 	
-	protected void setFileWriter(String filename, String header) throws IOException
+	protected void writeFile(int idx, String line, String header, String prefix) throws IOException
 	{
-		File out_f = new File(out_dir, filename);
-		if(out_f.exists())
+		if(fws_cnt[idx]%pageLimit==0)
 		{
-			out_fw = new FileWriter(out_f, true);
+			if(fws[idx]!=null)
+			{
+				fws[idx].flush();
+				fws[idx].close();
+			}
+			
+			String filename = String.format("%s_%d.csv", prefix,fws_cnt[idx]/pageLimit);
+			fws[idx] = new FileWriter(new File(out_dir, filename));
+			fws[idx].write(header);
 		}
-		else
-		{
-			out_fw = new FileWriter(out_f, true);
-			out_fw.write(header);
-		}
+		
+		fws[idx].write(line);
+		fws_cnt[idx]++;
 	}
 	
 	protected void exportParameter(PartResultsRecord prr, ParametricTestRecord ptr) throws IOException
 	{
-		setFileWriter("PTR.csv", "Seq,X,Y,H_Bin,S_Bin,Param,Test_No,Value,Pass\n");
-		
-		out_fw.write(String.format("%d,%d,%d,%d,%d,%s,%d,%g,%d\n", prr.getRecordNo(), 
+		String header = "Seq,X,Y,H_Bin,S_Bin,Param,Test_No,Value,Pass\n";
+		String line = String.format("%d,%d,%d,%d,%d,%s,%d,%g,%d\n", prr.getRecordNo(), 
 				prr.X_COORD, prr.Y_COORD, prr.HARD_BIN, prr.SOFT_BIN,
-				ptr.TEST_TXT, ptr.TEST_NUM, ptr.RESULT, ptr.isPass() ? 1 : 0));
-		out_fw.close();
+				ptr.TEST_TXT, ptr.TEST_NUM, ptr.RESULT, ptr.isPass() ? 1 : 0);
+		
+		writeFile(FW_IDX_PTR, line, header, "PTR");
+		
+//		setFileWriter("PTR.csv", "Seq,X,Y,H_Bin,S_Bin,Param,Test_No,Value,Pass\n");
+//		
+//		out_fw.write(String.format("%d,%d,%d,%d,%d,%s,%d,%g,%d\n", prr.getRecordNo(), 
+//				prr.X_COORD, prr.Y_COORD, prr.HARD_BIN, prr.SOFT_BIN,
+//				ptr.TEST_TXT, ptr.TEST_NUM, ptr.RESULT, ptr.isPass() ? 1 : 0));
+//		out_fw.close();
 	}
 	
 	protected void exportParameter(PartResultsRecord prr, MultipleResultParametricRecord mpr) throws IOException
 	{
-		setFileWriter("MPR.csv", "Seq,X,Y,H_Bin,S_Bin,Param,Test_No,N,Values\n");
-		
-		out_fw.write(String.format("%d,%d,%d,%d,%d,%s,%d,%d,%s\n", prr.getRecordNo(), 
+		String header = "Seq,X,Y,H_Bin,S_Bin,Param,Test_No,N,Values\n";
+		String line = String.format("%d,%d,%d,%d,%d,%s,%d,%d,%s\n", prr.getRecordNo(), 
 				prr.X_COORD, prr.Y_COORD, prr.HARD_BIN, prr.SOFT_BIN,
 				mpr.TEST_TXT, mpr.TEST_NUM, 
-				mpr.RSLT_CNT, Arrays.toString(mpr.RTN_RSLT)));
-		out_fw.close();
+				mpr.RSLT_CNT, Arrays.toString(mpr.RTN_RSLT));
+		
+		writeFile(FW_IDX_MPR, line, header, "MPR");
+		
+//		setFileWriter("MPR.csv", "Seq,X,Y,H_Bin,S_Bin,Param,Test_No,N,Values\n");
+//		
+//		out_fw.write(String.format("%d,%d,%d,%d,%d,%s,%d,%d,%s\n", prr.getRecordNo(), 
+//				prr.X_COORD, prr.Y_COORD, prr.HARD_BIN, prr.SOFT_BIN,
+//				mpr.TEST_TXT, mpr.TEST_NUM, 
+//				mpr.RSLT_CNT, Arrays.toString(mpr.RTN_RSLT)));
+//		out_fw.close();
 	}
 	
 	protected void exportParameter(PartResultsRecord prr, FunctionalTestRecord ftr) throws IOException
 	{
-		setFileWriter("FTR.csv", "Seq,X,Y,H_Bin,S_Bin,Param,Test_No,XFail_Ad,YFail_Ad,Fail_Pin\n");
-		
-		out_fw.write(String.format("%d,%d,%d,%d,%d,%s,%d,%d,%d,%d\n", prr.getRecordNo(), 
+		String header = "Seq,X,Y,H_Bin,S_Bin,Param,Test_No,XFail_Ad,YFail_Ad,Fail_Pin\n";
+		String line = String.format("%d,%d,%d,%d,%d,%s,%d,%d,%d,%d\n", prr.getRecordNo(), 
 				prr.X_COORD, prr.Y_COORD, prr.HARD_BIN, prr.SOFT_BIN,
-				ftr.TEST_TXT, ftr.TEST_NUM, ftr.XFAIL_AD, ftr.YFAIL_AD, ftr.NUM_FAIL));
-		out_fw.close();
+				ftr.TEST_TXT, ftr.TEST_NUM, ftr.XFAIL_AD, ftr.YFAIL_AD, ftr.NUM_FAIL);
+		
+		writeFile(FW_IDX_FTR, line, header, "FTR");
+		
+//		setFileWriter("FTR.csv", "Seq,X,Y,H_Bin,S_Bin,Param,Test_No,XFail_Ad,YFail_Ad,Fail_Pin\n");
+//		
+//		out_fw.write(String.format("%d,%d,%d,%d,%d,%s,%d,%d,%d,%d\n", prr.getRecordNo(), 
+//				prr.X_COORD, prr.Y_COORD, prr.HARD_BIN, prr.SOFT_BIN,
+//				ftr.TEST_TXT, ftr.TEST_NUM, ftr.XFAIL_AD, ftr.YFAIL_AD, ftr.NUM_FAIL));
+//		out_fw.close();
 	}
 	
 	protected void exportPartResult(PartResultsRecord prr) throws IOException
 	{
-		if(out_prr==null)
-		{
-			out_prr = new File(out_dir, filename_part_result);
-			out_fw = new FileWriter(out_prr, true);
-			out_fw.write("Seq,Head,Site,X,Y,H_Bin,S_Bin,ID,Txt\n");
-		}
-		else
-		{
-			out_fw = new FileWriter(out_prr, true);
-		}
-		
-		out_fw.write(String.format("%d,%d,%d,%d,%d,%d,%d,%s,%s\n", prr.getRecordNo(), 
+		String header = "Seq,Head,Site,X,Y,H_Bin,S_Bin,ID,Txt\n";
+		String line = String.format("%d,%d,%d,%d,%d,%d,%d,%s,%s\n", prr.getRecordNo(), 
 				prr.HEAD_NUM, prr.SITE_NUM,
 				prr.X_COORD, prr.Y_COORD, prr.HARD_BIN, prr.SOFT_BIN,
-				prr.PART_ID, prr.PART_TXT));
-		out_fw.close();
+				prr.PART_ID, prr.PART_TXT);
+		
+		writeFile(FW_IDX_PRR, line, header, "PRR");
+		
+//		if(out_prr==null)
+//		{
+//			out_prr = new File(out_dir, filename_part_result);
+//			out_fw = new FileWriter(out_prr, true);
+//			out_fw.write("Seq,Head,Site,X,Y,H_Bin,S_Bin,ID,Txt\n");
+//		}
+//		else
+//		{
+//			out_fw = new FileWriter(out_prr, true);
+//		}
+//		
+//		out_fw.write(String.format("%d,%d,%d,%d,%d,%d,%d,%s,%s\n", prr.getRecordNo(), 
+//				prr.HEAD_NUM, prr.SITE_NUM,
+//				prr.X_COORD, prr.Y_COORD, prr.HARD_BIN, prr.SOFT_BIN,
+//				prr.PART_ID, prr.PART_TXT));
+//		out_fw.close();
 	}
 
 	@Override
