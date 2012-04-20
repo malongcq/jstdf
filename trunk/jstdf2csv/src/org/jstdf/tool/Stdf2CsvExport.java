@@ -29,6 +29,8 @@ public class Stdf2CsvExport
 		Option ptr = new Option("ptr", false, "export PTR");
 		Option mpr = new Option("mpr", false, "export MPR");
 		Option ftr = new Option("ftr", false, "export FTR");
+		Option page = new Option("page", true, "line limit for each paramters result file, " +
+				"default is 65530");
 		Option param = new Option("param", true, "search parameters for export, " +
 				"wildcard ? and * is supported, " +
 				"omit this option to export all parameters. " +
@@ -48,6 +50,7 @@ public class Stdf2CsvExport
 		opts.addOption(ptr);
 		opts.addOption(mpr);
 		opts.addOption(ftr);
+		opts.addOption(page);
 		
 		return opts;
 	}
@@ -142,6 +145,7 @@ public class Stdf2CsvExport
 				stdf.setExportFTR(cmd.hasOption("ftr"));
 				stdf.setExportMPR(cmd.hasOption("mpr"));
 				stdf.setExportPTR(cmd.hasOption("ptr"));
+				stdf.setPageLimit(Integer.valueOf(cmd.getOptionValue("page", "65530")));
 				
 				if(cmd.hasOption("param"))
 				{
