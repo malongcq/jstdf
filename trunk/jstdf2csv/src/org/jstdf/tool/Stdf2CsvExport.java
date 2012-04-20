@@ -29,7 +29,7 @@ public class Stdf2CsvExport
 		Option ptr = new Option("ptr", false, "export PTR");
 		Option mpr = new Option("mpr", false, "export MPR");
 		Option ftr = new Option("ftr", false, "export FTR");
-		Option page = new Option("page", true, "line limit for each paramters result file, " +
+		Option page = new Option("page", true, "row limit for each paramters result file, " +
 				"default is 65530");
 		Option param = new Option("param", true, "search parameters for export, " +
 				"wildcard ? and * is supported, " +
