@@ -170,9 +170,5 @@ public class Stdf2CsvExport
 			System.out.println("cmd=" + Arrays.asList(args));
 			printHelp(opts);
 		}
-		finally
-		{
-			
-		}
 	}
 }
