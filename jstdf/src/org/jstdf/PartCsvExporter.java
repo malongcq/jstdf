@@ -209,7 +209,9 @@ public class PartCsvExporter extends AbstractPartTestResult
 				fws[idx].close();
 			}
 			
-			String filename = String.format("%s_%d.csv", prefix,fws_cnt[idx]/pageLimit);
+			int lbl = fws_cnt[idx]/pageLimit;
+			String filename = lbl==0 ? String.format("%s.csv", prefix) : 
+				String.format("%s_%d.csv",prefix,lbl);
 			fws[idx] = new FileWriter(new File(out_dir, filename));
 			fws[idx].write(header);
 		}
@@ -282,7 +284,7 @@ public class PartCsvExporter extends AbstractPartTestResult
 				prr.X_COORD, prr.Y_COORD, prr.HARD_BIN, prr.SOFT_BIN,
 				prr.PART_ID, prr.PART_TXT);
 		
-		writeFile(FW_IDX_PRR, line, header, "PRR");
+		writeFile(FW_IDX_PRR, line, header, "Part_Result");
 		
 //		if(out_prr==null)
 //		{
