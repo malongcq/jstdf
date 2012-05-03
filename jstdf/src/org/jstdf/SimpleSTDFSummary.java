@@ -68,8 +68,8 @@ public class SimpleSTDFSummary extends AbstractStdfRecordHandler
 		
 		if(EnumSet.of(STDFRecordType.MIR, STDFRecordType.SDR, STDFRecordType.MRR, 
 			STDFRecordType.WCR, STDFRecordType.WIR, STDFRecordType.WRR,
-			STDFRecordType.HBR, STDFRecordType.SBR,
-			STDFRecordType.TSR).contains(rec.getRecordType()))
+			//STDFRecordType.HBR, STDFRecordType.SBR,
+			STDFRecordType.PCR).contains(rec.getRecordType()))
 		{
 			summary_rec.add(rec);
 		}

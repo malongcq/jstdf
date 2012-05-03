@@ -81,4 +81,13 @@ public class PartCountRecord extends AbstractSTDFRecord
 	{
 		return STDFRecordType.PCR;
 	}
+
+	@Override
+	public String toString()
+	{
+		return "PartCountRecord [HEAD_NUM=" + HEAD_NUM + ", SITE_NUM="
+				+ SITE_NUM + ", PART_CNT=" + PART_CNT + ", RTST_CNT="
+				+ RTST_CNT + ", ABRT_CNT=" + ABRT_CNT + ", GOOD_CNT="
+				+ GOOD_CNT + ", FUNC_CNT=" + FUNC_CNT + "]";
+	}
 }

@@ -13,6 +13,7 @@ import org.jstdf.record.ParametricTestRecord;
 import org.jstdf.record.PartInformationRecord;
 import org.jstdf.record.PartResultsRecord;
 import org.jstdf.record.SoftwareBinRecord;
+import org.jstdf.record.TestSynopsisRecord;
 
 
 public abstract class AbstractPartTestResult extends AbstractTestResult implements PartResultSetHandler
@@ -20,6 +21,7 @@ public abstract class AbstractPartTestResult extends AbstractTestResult implemen
 	protected Set<ParametricTestItem> testItems;
 	protected Deque<HardwareBinRecord> hbrs;
 	protected Deque<SoftwareBinRecord> sbrs;
+	protected Deque<TestSynopsisRecord> tsrs;
 	
 	protected Pattern testParameterPattern;
 	
@@ -45,6 +47,11 @@ public abstract class AbstractPartTestResult extends AbstractTestResult implemen
 	public Deque<SoftwareBinRecord> getSoftwareBinRecords()
 	{
 		return sbrs;
+	}
+	
+	public Deque<TestSynopsisRecord> getTestSynopsisRecords()
+	{
+		return tsrs;
 	}
 	
 	public String getTestParameterPattern()
@@ -182,6 +189,17 @@ public abstract class AbstractPartTestResult extends AbstractTestResult implemen
 			sbrs = new ArrayDeque<SoftwareBinRecord>();
 		}
 		sbrs.add(sbr);
+		return true;
+	}
+	
+	@Override
+	public boolean readRecord(TestSynopsisRecord tsr) 
+	{
+		if(tsrs==null)
+		{
+			tsrs = new ArrayDeque<TestSynopsisRecord>();
+		}
+		tsrs.add(tsr);
 		return true;
 	}
 	
