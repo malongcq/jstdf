@@ -222,8 +222,8 @@ public class PartCsvExporter extends AbstractPartTestResult
 	
 	protected void exportParameter(PartResultsRecord prr, ParametricTestRecord ptr) throws IOException
 	{
-		String header = "Seq,Head,Site,X,Y,H_Bin,S_Bin,Param,Test_No,Value,Pass\n";
-		String line = String.format("%d,%d,%d,%d,%d,%d,%d,%s,%d,%g,%d\n", 
+		String header = "Seq,Head,Site,X,Y,H_Bin,S_Bin,Param,Test_Num,Value,Pass\n";
+		String line = String.format("%d,%d,%d,%d,%d,%d,%d,\"%s\",%d,%g,%d\n", 
 				ptr.getRecordNo(), ptr.HEAD_NUM, ptr.SITE_NUM, 
 				prr.X_COORD, prr.Y_COORD, prr.HARD_BIN, prr.SOFT_BIN,
 				ptr.TEST_TXT, ptr.TEST_NUM, ptr.RESULT, ptr.isPass() ? 1 : 0);
@@ -240,8 +240,8 @@ public class PartCsvExporter extends AbstractPartTestResult
 	
 	protected void exportParameter(PartResultsRecord prr, MultipleResultParametricRecord mpr) throws IOException
 	{
-		String header = "Seq,Head,Site,X,Y,H_Bin,S_Bin,Param,Test_No,N,Values\n";
-		String line = String.format("%d,%d,%d,%d,%d,%d,%d,%s,%d,%d,%s\n", 
+		String header = "Seq,Head,Site,X,Y,H_Bin,S_Bin,Param,Test_Num,N,Values\n";
+		String line = String.format("%d,%d,%d,%d,%d,%d,%d,\"%s\",%d,%d,%s\n", 
 				mpr.getRecordNo(), mpr.HEAD_NUM, mpr.SITE_NUM,
 				prr.X_COORD, prr.Y_COORD, prr.HARD_BIN, prr.SOFT_BIN,
 				mpr.TEST_TXT, mpr.TEST_NUM, 
@@ -260,8 +260,8 @@ public class PartCsvExporter extends AbstractPartTestResult
 	
 	protected void exportParameter(PartResultsRecord prr, FunctionalTestRecord ftr) throws IOException
 	{
-		String header = "Seq,Head,Site,X,Y,H_Bin,S_Bin,Param,Test_No,XFail_Ad,YFail_Ad,Fail_Pin\n";
-		String line = String.format("%d,%d,%d,%d,%d,%d,%d,%s,%d,%d,%d,%d\n", 
+		String header = "Seq,Head,Site,X,Y,H_Bin,S_Bin,Param,Test_Num,XFail_Ad,YFail_Ad,Fail_Pin\n";
+		String line = String.format("%d,%d,%d,%d,%d,%d,%d,\"%s\",%d,%d,%d,%d\n", 
 				ftr.getRecordNo(), ftr.HEAD_NUM, ftr.SITE_NUM, 
 				prr.X_COORD, prr.Y_COORD, prr.HARD_BIN, prr.SOFT_BIN,
 				ftr.TEST_TXT, ftr.TEST_NUM, ftr.XFAIL_AD, ftr.YFAIL_AD, ftr.NUM_FAIL);
