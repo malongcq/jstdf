@@ -12,7 +12,9 @@ import org.jstdf.record.ParametricTestRecord;
 import org.jstdf.record.PartResultsRecord;
 import org.jstdf.record.STDFRecord;
 import org.jstdf.record.STDFRecordType;
+import org.jstdf.record.SiteDescriptionRecord;
 import org.jstdf.record.SoftwareBinRecord;
+import org.jstdf.record.TestSynopsisRecord;
 
 
 public class PartCsvExporter extends AbstractPartTestResult
@@ -53,9 +55,75 @@ public class PartCsvExporter extends AbstractPartTestResult
 		this.exportMPR = exportMPR;
 	}
 
+	protected String filename_bin_spec = "Bin_Spec.csv";
+	protected String filename_test_params = "Test_Params.csv";
+	protected String filename_site_desc = "Site_Desc.csv";
+	protected String filename_tsr = "TSR.csv";
+	
 	@Override
 	public void endReadRecord()
 	{
+		//export TSR
+		try
+		{
+			FileWriter w = new FileWriter(new File(out_dir, filename_tsr));
+			w.write("Head,Site,Type,Test_Num," +
+					"Exec_Cnt,Fail_Cnt,Alarm_Cnt," +
+					"Test_Name,Seq_Name,Test_Label,Test_Opts," +
+					"Time,Min,Max,Sum,Sum_Sqr\n");
+			
+			for(TestSynopsisRecord tsr : this.getTestSynopsisRecords())
+			{
+				w.write(String.format("%d,%d,%c,%d," +
+						"%d,%d,%d," +
+						"%s,%s,%s,%s," +
+						"%g,%g,%g,%g,%g\n", 
+					tsr.HEAD_NUM, tsr.SITE_NUM, tsr.TEST_TYP, tsr.TEST_NUM,
+					tsr.EXEC_CNT, tsr.FAIL_CNT, tsr.ALRM_CNT,
+					tsr.TEST_NAM, tsr.SEQ_NAME, tsr.TEST_LBL, tsr.OPT_FLAG.toString(),
+					tsr.TEST_TIM, tsr.TEST_MIN, tsr.TEST_MAX, tsr.TST_SUMS, tsr.TST_SQRS));
+			}
+			
+			w.flush();
+			w.close();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		
+		//export site description
+		try
+		{
+			FileWriter w = new FileWriter(new File(out_dir, filename_site_desc));
+			w.write("Head,Site_Grp,Site_Cnt,Site_Nums," +
+					"Handler_Type, Handler_ID, Probe_Card_Type, Probe_Card_ID," +
+					"Load_Type, Load_ID, DIB_Type, DIB_ID," +
+					"Cable_Type, Cable_ID, Contactor_Type, Contactor_ID," +
+					"Laser_Type, Laser_ID, Extra_Type, Extra_ID\n");
+			
+			for(SiteDescriptionRecord sdr : this.getSiteDescriptionRecords())
+			{
+				w.write(String.format("%d,%d,%d,\"%s\"," +
+						"\"%s\",\"%s\",\"%s\",\"%s\"," +
+						"\"%s\",\"%s\",\"%s\",\"%s\"," +
+						"\"%s\",\"%s\",\"%s\",\"%s\"," +
+						"\"%s\",\"%s\",\"%s\",\"%s\"\n", 
+					sdr.HEAD_NUM, sdr.SITE_GRP, sdr.SITE_CNT, Arrays.toString(sdr.SITE_NUM), 
+					sdr.HAND_TYP, sdr.HAND_ID, sdr.CARD_TYP, sdr.CARD_ID,
+					sdr.LOAD_TYP, sdr.LOAD_ID,sdr.DIB_TYP, sdr.DIB_ID,
+					sdr.CABL_TYP, sdr.CABL_ID,sdr.CONT_TYP, sdr.CONT_ID,
+					sdr.LASR_TYP, sdr.LASR_ID,sdr.EXTR_TYP, sdr.EXTR_ID));
+			}
+			
+			w.flush();
+			w.close();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		
 		//export test parameters
 		try
 		{
@@ -112,9 +180,6 @@ public class PartCsvExporter extends AbstractPartTestResult
 		}
 	}
 	
-	protected String filename_bin_spec = "Bin_Spec.csv";
-	protected String filename_test_params = "Test_Params.csv";
-	
 	public PartCsvExporter(File parent_dir) throws IOException
 	{
 		out_dir = parent_dir;
@@ -155,8 +220,9 @@ public class PartCsvExporter extends AbstractPartTestResult
 	
 	protected void exportParameter(PartResultsRecord prr, ParametricTestRecord ptr) throws IOException
 	{
-		String header = "Seq,X,Y,H_Bin,S_Bin,Param,Test_No,Value,Pass\n";
-		String line = String.format("%d,%d,%d,%d,%d,%s,%d,%g,%d\n", prr.getRecordNo(), 
+		String header = "Seq,Head,Site,X,Y,H_Bin,S_Bin,Param,Test_No,Value,Pass\n";
+		String line = String.format("%d,%d,%d,%d,%d,%d,%d,%s,%d,%g,%d\n", 
+				ptr.getRecordNo(), ptr.HEAD_NUM, ptr.SITE_NUM, 
 				prr.X_COORD, prr.Y_COORD, prr.HARD_BIN, prr.SOFT_BIN,
 				ptr.TEST_TXT, ptr.TEST_NUM, ptr.RESULT, ptr.isPass() ? 1 : 0);
 		
@@ -172,8 +238,9 @@ public class PartCsvExporter extends AbstractPartTestResult
 	
 	protected void exportParameter(PartResultsRecord prr, MultipleResultParametricRecord mpr) throws IOException
 	{
-		String header = "Seq,X,Y,H_Bin,S_Bin,Param,Test_No,N,Values\n";
-		String line = String.format("%d,%d,%d,%d,%d,%s,%d,%d,%s\n", prr.getRecordNo(), 
+		String header = "Seq,Head,Site,X,Y,H_Bin,S_Bin,Param,Test_No,N,Values\n";
+		String line = String.format("%d,%d,%d,%d,%d,%d,%d,%s,%d,%d,%s\n", 
+				mpr.getRecordNo(), mpr.HEAD_NUM, mpr.SITE_NUM,
 				prr.X_COORD, prr.Y_COORD, prr.HARD_BIN, prr.SOFT_BIN,
 				mpr.TEST_TXT, mpr.TEST_NUM, 
 				mpr.RSLT_CNT, Arrays.toString(mpr.RTN_RSLT));
@@ -191,8 +258,9 @@ public class PartCsvExporter extends AbstractPartTestResult
 	
 	protected void exportParameter(PartResultsRecord prr, FunctionalTestRecord ftr) throws IOException
 	{
-		String header = "Seq,X,Y,H_Bin,S_Bin,Param,Test_No,XFail_Ad,YFail_Ad,Fail_Pin\n";
-		String line = String.format("%d,%d,%d,%d,%d,%s,%d,%d,%d,%d\n", prr.getRecordNo(), 
+		String header = "Seq,Head,Site,X,Y,H_Bin,S_Bin,Param,Test_No,XFail_Ad,YFail_Ad,Fail_Pin\n";
+		String line = String.format("%d,%d,%d,%d,%d,%d,%d,%s,%d,%d,%d,%d\n", 
+				ftr.getRecordNo(), ftr.HEAD_NUM, ftr.SITE_NUM, 
 				prr.X_COORD, prr.Y_COORD, prr.HARD_BIN, prr.SOFT_BIN,
 				ftr.TEST_TXT, ftr.TEST_NUM, ftr.XFAIL_AD, ftr.YFAIL_AD, ftr.NUM_FAIL);
 		
