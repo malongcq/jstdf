@@ -58,7 +58,7 @@ public class PartCsvExporter extends AbstractPartTestResult
 	protected String filename_bin_spec = "Bin_Spec.csv";
 	protected String filename_test_params = "Test_Params.csv";
 	protected String filename_site_desc = "Site_Desc.csv";
-	protected String filename_tsr = "TSR.csv";
+	protected String filename_tsr = "Test_Synopsis.csv";
 	
 	@Override
 	public void endReadRecord()
@@ -76,7 +76,7 @@ public class PartCsvExporter extends AbstractPartTestResult
 			{
 				w.write(String.format("%d,%d,%c,%d," +
 						"%d,%d,%d," +
-						"%s,%s,%s,%s," +
+						"\"%s\",\"%s\",\"%s\",\"%s\"," +
 						"%g,%g,%g,%g,%g\n", 
 					tsr.HEAD_NUM, tsr.SITE_NUM, tsr.TEST_TYP, tsr.TEST_NUM,
 					tsr.EXEC_CNT, tsr.FAIL_CNT, tsr.ALRM_CNT,
@@ -128,7 +128,7 @@ public class PartCsvExporter extends AbstractPartTestResult
 		try
 		{
 			FileWriter w = new FileWriter(new File(out_dir, filename_test_params));
-			w.write("Test_No,Name,Unit,Low_Spec,High_Spec,Low_Limit,High_Limit\n");
+			w.write("Test_Num,Name,Unit,Low_Spec,High_Spec,Low_Limit,High_Limit\n");
 			if(testItems!=null)
 			{
 				for(ParametricTestItem t : testItems)
