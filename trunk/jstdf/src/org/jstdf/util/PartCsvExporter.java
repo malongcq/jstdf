@@ -23,16 +23,6 @@ import org.jstdf.record.TestSynopsisRecord;
 
 public class PartCsvExporter extends AbstractPartTestResult
 {
-	private int pageLimit = 100000;
-	public int getPageLimit()
-	{
-		return pageLimit;
-	}
-	public void setPageLimit(int pageLimit)
-	{
-		this.pageLimit = pageLimit;
-	}
-
 	private boolean exportPTR, exportFTR, exportMPR;
 	public boolean isExportPTR()
 	{
@@ -84,16 +74,7 @@ public class PartCsvExporter extends AbstractPartTestResult
 		_exportBinSpec();
 		
 		//finish parameters results
-		for(FileWriter fw : fws)
-		{
-			try
-			{
-				if(fw!=null) fw.close();
-			} catch (IOException e)
-			{
-				e.printStackTrace();
-			}
-		}
+		txtw.dispose();
 	}
 	
 	private void _exportPMR()
@@ -242,45 +223,47 @@ public class PartCsvExporter extends AbstractPartTestResult
 		}
 	}
 	
-	public PartCsvExporter(File parent_dir) throws IOException
-	{
-		out_dir = parent_dir;
-		out_dir.mkdirs();
-		
-		fws = new FileWriter[] {null, null, null, null};
-		fws_cnt = new int[] {0,0,0,0};
-		//fws_typ = new String[] {"PRR"};
-	}
-	
+	private MultiPageTextFileWriter txtw;
 	protected File out_dir;
-	protected FileWriter[] fws;
-	protected int[] fws_cnt;
-	//protected String[] fws_typ;
 	public final static int FW_IDX_PRR = 0;
 	public final static int FW_IDX_PTR = 1;
 	public final static int FW_IDX_MPR = 2;
 	public final static int FW_IDX_FTR = 3;
 	
-	protected void writeFile(int idx, String line, String header, String prefix) throws IOException
+	public PartCsvExporter(File parent_dir, int page_limit) throws IOException
 	{
-		if(fws_cnt[idx]%pageLimit==0)
-		{
-			if(fws[idx]!=null)
-			{
-				fws[idx].flush();
-				fws[idx].close();
-			}
-			
-			int lbl = fws_cnt[idx]/pageLimit;
-			String filename = lbl==0 ? String.format("%s.csv", prefix) : 
-				String.format("%s_%d.csv",prefix,lbl);
-			fws[idx] = new FileWriter(new File(out_dir, filename));
-			fws[idx].write(header);
-		}
+		out_dir = parent_dir;
+//		out_dir.mkdirs();
+//		
+//		fws = new FileWriter[] {null, null, null, null};
+//		fws_cnt = new int[] {0,0,0,0};
+		//fws_typ = new String[] {"PRR"};
 		
-		fws[idx].write(line);
-		fws_cnt[idx]++;
+		txtw = new MultiPageTextFileWriter(out_dir, 4);
+		txtw.setPageLimit(page_limit);
 	}
+	
+	
+//	protected void writeFile(int idx, String line, String header, String prefix) throws IOException
+//	{
+//		if(fws_cnt[idx]%pageLimit==0)
+//		{
+//			if(fws[idx]!=null)
+//			{
+//				fws[idx].flush();
+//				fws[idx].close();
+//			}
+//			
+//			int lbl = fws_cnt[idx]/pageLimit;
+//			String filename = lbl==0 ? String.format("%s.csv", prefix) : 
+//				String.format("%s_%d.csv",prefix,lbl);
+//			fws[idx] = new FileWriter(new File(out_dir, filename));
+//			fws[idx].write(header);
+//		}
+//		
+//		fws[idx].write(line);
+//		fws_cnt[idx]++;
+//	}
 	
 	protected void exportParameter(PartResultsRecord prr, ParametricTestRecord ptr) throws IOException
 	{
@@ -290,14 +273,7 @@ public class PartCsvExporter extends AbstractPartTestResult
 				prr.X_COORD, prr.Y_COORD, prr.HARD_BIN, prr.SOFT_BIN,
 				ptr.TEST_TXT, ptr.TEST_NUM, ptr.RESULT, ptr.isPass() ? 1 : 0);
 		
-		writeFile(FW_IDX_PTR, line, header, "PTR");
-		
-//		setFileWriter("PTR.csv", "Seq,X,Y,H_Bin,S_Bin,Param,Test_No,Value,Pass\n");
-//		
-//		out_fw.write(String.format("%d,%d,%d,%d,%d,%s,%d,%g,%d\n", prr.getRecordNo(), 
-//				prr.X_COORD, prr.Y_COORD, prr.HARD_BIN, prr.SOFT_BIN,
-//				ptr.TEST_TXT, ptr.TEST_NUM, ptr.RESULT, ptr.isPass() ? 1 : 0));
-//		out_fw.close();
+		txtw.write(FW_IDX_PTR, line, header, "PTR", "csv");
 	}
 	
 	protected void exportParameter(PartResultsRecord prr, MultipleResultParametricRecord mpr) throws IOException
@@ -314,16 +290,8 @@ public class PartCsvExporter extends AbstractPartTestResult
 					mpr.TEST_TXT, mpr.TEST_NUM, 
 					mpr.RSLT_CNT, pmr_idx, v);
 			
-			writeFile(FW_IDX_MPR, line, header, "MPR");
+			txtw.write(FW_IDX_MPR, line, header, "MPR", "csv");
 		}
-		
-//		setFileWriter("MPR.csv", "Seq,X,Y,H_Bin,S_Bin,Param,Test_No,N,Values\n");
-//		
-//		out_fw.write(String.format("%d,%d,%d,%d,%d,%s,%d,%d,%s\n", prr.getRecordNo(), 
-//				prr.X_COORD, prr.Y_COORD, prr.HARD_BIN, prr.SOFT_BIN,
-//				mpr.TEST_TXT, mpr.TEST_NUM, 
-//				mpr.RSLT_CNT, Arrays.toString(mpr.RTN_RSLT)));
-//		out_fw.close();
 	}
 	
 	protected void exportParameter(PartResultsRecord prr, FunctionalTestRecord ftr) throws IOException
@@ -334,14 +302,7 @@ public class PartCsvExporter extends AbstractPartTestResult
 				prr.X_COORD, prr.Y_COORD, prr.HARD_BIN, prr.SOFT_BIN,
 				ftr.TEST_TXT, ftr.TEST_NUM, ftr.XFAIL_AD, ftr.YFAIL_AD, ftr.NUM_FAIL);
 		
-		writeFile(FW_IDX_FTR, line, header, "FTR");
-		
-//		setFileWriter("FTR.csv", "Seq,X,Y,H_Bin,S_Bin,Param,Test_No,XFail_Ad,YFail_Ad,Fail_Pin\n");
-//		
-//		out_fw.write(String.format("%d,%d,%d,%d,%d,%s,%d,%d,%d,%d\n", prr.getRecordNo(), 
-//				prr.X_COORD, prr.Y_COORD, prr.HARD_BIN, prr.SOFT_BIN,
-//				ftr.TEST_TXT, ftr.TEST_NUM, ftr.XFAIL_AD, ftr.YFAIL_AD, ftr.NUM_FAIL));
-//		out_fw.close();
+		txtw.write(FW_IDX_FTR, line, header, "FTR", "csv");
 	}
 	
 	protected void exportPartResult(PartResultsRecord prr) throws IOException
@@ -352,24 +313,7 @@ public class PartCsvExporter extends AbstractPartTestResult
 				prr.X_COORD, prr.Y_COORD, prr.HARD_BIN, prr.SOFT_BIN,
 				prr.PART_ID, prr.PART_TXT);
 		
-		writeFile(FW_IDX_PRR, line, header, "Part_Result");
-		
-//		if(out_prr==null)
-//		{
-//			out_prr = new File(out_dir, filename_part_result);
-//			out_fw = new FileWriter(out_prr, true);
-//			out_fw.write("Seq,Head,Site,X,Y,H_Bin,S_Bin,ID,Txt\n");
-//		}
-//		else
-//		{
-//			out_fw = new FileWriter(out_prr, true);
-//		}
-//		
-//		out_fw.write(String.format("%d,%d,%d,%d,%d,%d,%d,%s,%s\n", prr.getRecordNo(), 
-//				prr.HEAD_NUM, prr.SITE_NUM,
-//				prr.X_COORD, prr.Y_COORD, prr.HARD_BIN, prr.SOFT_BIN,
-//				prr.PART_ID, prr.PART_TXT));
-//		out_fw.close();
+		txtw.write(FW_IDX_PRR, line, header, "Part_Result", "csv");
 	}
 
 	@Override
