@@ -7,7 +7,6 @@ import org.jstdf.record.AuditTrailRecord;
 import org.jstdf.record.FileAttributesRecord;
 import org.jstdf.record.MasterInformationRecord;
 import org.jstdf.record.MasterResultsRecord;
-import org.jstdf.record.PartCountRecord;
 import org.jstdf.record.RetestDataRecord;
 import org.jstdf.record.SiteDescriptionRecord;
 
