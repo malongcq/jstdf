@@ -140,12 +140,12 @@ public class Stdf2CsvExport
 			else
 			{
 				File out_dir = new File(cmd.getOptionValue("out", "stdf_out"));
-				PartCsvExporter stdf = new PartCsvExporter(out_dir);
+				PartCsvExporter stdf = new PartCsvExporter(out_dir, 
+						Integer.valueOf(cmd.getOptionValue("page", "65530")));
 				
 				stdf.setExportFTR(cmd.hasOption("ftr"));
 				stdf.setExportMPR(cmd.hasOption("mpr"));
 				stdf.setExportPTR(cmd.hasOption("ptr"));
-				stdf.setPageLimit(Integer.valueOf(cmd.getOptionValue("page", "65530")));
 				
 				if(cmd.hasOption("param"))
 				{
