@@ -244,7 +244,7 @@ public class PartCsvExporter extends AbstractPartTestResult
 	protected void exportParameter(PartResultsRecord prr, MultipleResultParametricRecord mpr) throws IOException
 	{
 		String header = "Seq,Head,Site,X,Y,H_Bin,S_Bin,Param,Test_Num,N,Values\n";
-		String line = String.format("%d,%d,%d,%d,%d,%d,%d,\"%s\",%d,%d,%s\n", 
+		String line = String.format("%d,%d,%d,%d,%d,%d,%d,\"%s\",%d,%d,\"%s\"\n", 
 				mpr.getRecordNo(), mpr.HEAD_NUM, mpr.SITE_NUM,
 				prr.X_COORD, prr.Y_COORD, prr.HARD_BIN, prr.SOFT_BIN,
 				mpr.TEST_TXT, mpr.TEST_NUM, 
