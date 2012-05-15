@@ -1,6 +1,7 @@
 package org.jstdf.record;
 
 import java.nio.ByteBuffer;
+import java.util.Arrays;
 
 import org.jstdf.util.StdfRecordUtils;
 
@@ -153,5 +154,18 @@ public class PinListRecord extends AbstractSTDFRecord
 	public STDFRecordType getRecordType()
 	{
 		return STDFRecordType.PLR;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "PinListRecord [GRP_CNT=" + GRP_CNT + ", GRP_INDX="
+				+ Arrays.toString(GRP_INDX) + ", GRP_MODE="
+				+ Arrays.toString(GRP_MODE) + ", GRP_RADX="
+				+ Arrays.toString(GRP_RADX) + ", PGM_CHAR="
+				+ Arrays.toString(PGM_CHAR) + ", RTN_CHAR="
+				+ Arrays.toString(RTN_CHAR) + ", PGM_CHAL="
+				+ Arrays.toString(PGM_CHAL) + ", RTN_CHAL="
+				+ Arrays.toString(RTN_CHAL) + "]";
 	}
 }
