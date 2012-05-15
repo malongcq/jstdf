@@ -11,10 +11,10 @@ import org.apache.commons.cli.GnuParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
-import org.jstdf.PartCsvExporter;
-import org.jstdf.SimpleSTDFSummary;
 import org.jstdf.StdfReader;
 import org.jstdf.WaferTestResult;
+import org.jstdf.util.PartCsvExporter;
+import org.jstdf.util.SimpleSTDFSummary;
 
 public class Stdf2CsvExport 
 {
