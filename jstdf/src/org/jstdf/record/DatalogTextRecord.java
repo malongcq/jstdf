@@ -50,4 +50,10 @@ public class DatalogTextRecord extends AbstractSTDFRecord
 	{
 		return STDFRecordType.DTR;
 	}
+
+	@Override
+	public String toString()
+	{
+		return "DatalogTextRecord [TEXT_DAT=" + TEXT_DAT + "]";
+	}
 }
