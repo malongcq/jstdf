@@ -103,6 +103,7 @@ public class PartCsvExporter extends AbstractPartTestResult
 			FileWriter w = new FileWriter(new File(out_dir, filename_pmr));
 			w.write("PMR_IDX,Channel_Type,Channel_Name,Physical_Name,Logic_Name,Head,Site\n");
 			
+			if(this.getPinMapRecords()!=null)
 			for(PinMapRecord pmr : this.getPinMapRecords())
 			{
 				w.write(String.format("%d,%d,\"%s\",\"%s\",\"%s\",%d,%d\n", 
@@ -128,6 +129,7 @@ public class PartCsvExporter extends AbstractPartTestResult
 					"Test_Name,Seq_Name,Test_Label,Test_Opts," +
 					"Time,Min,Max,Sum,Sum_Sqr\n");
 			
+			if(this.getTestSynopsisRecords()!=null)
 			for(TestSynopsisRecord tsr : this.getTestSynopsisRecords())
 			{
 				w.write(String.format("%d,%d,%c,%d," +
@@ -160,6 +162,7 @@ public class PartCsvExporter extends AbstractPartTestResult
 					"Cable_Type, Cable_ID, Contactor_Type, Contactor_ID," +
 					"Laser_Type, Laser_ID, Extra_Type, Extra_ID\n");
 			
+			if(this.getSiteDescriptionRecords()!=null)
 			for(SiteDescriptionRecord sdr : this.getSiteDescriptionRecords())
 			{
 				w.write(String.format("%d,%d,%d,\"%s\"," +
@@ -213,14 +216,23 @@ public class PartCsvExporter extends AbstractPartTestResult
 		{
 			FileWriter w = new FileWriter(new File(out_dir, filename_bin_spec));
 			w.write("Type,Num,Name,Pass_Fail\n");
-			for(HardwareBinRecord hbr : hbrs)
+			
+			if(hbrs!=null)
 			{
-				w.write(String.format("H,%d,%s,%s\n", hbr.HBIN_NUM, hbr.HBIN_NAM, hbr.HBIN_PF));
+				for(HardwareBinRecord hbr : hbrs)
+				{
+					w.write(String.format("H,%d,%s,%s\n", hbr.HBIN_NUM, hbr.HBIN_NAM, hbr.HBIN_PF));
+				}
 			}
-			for(SoftwareBinRecord sbr : sbrs)
+			
+			if(sbrs!=null)
 			{
-				w.write(String.format("S,%d,%s,%s\n", sbr.SBIN_NUM, sbr.SBIN_NAM, sbr.SBIN_PF));
+				for(SoftwareBinRecord sbr : sbrs)
+				{
+					w.write(String.format("S,%d,%s,%s\n", sbr.SBIN_NUM, sbr.SBIN_NAM, sbr.SBIN_PF));
+				}
 			}
+
 			w.flush();
 			w.close();
 		}
@@ -296,7 +308,7 @@ public class PartCsvExporter extends AbstractPartTestResult
 			double v = mpr.RTN_RSLT[i];
 			int pmr_idx = mpr.RTN_INDX[i];
 			
-			String line = String.format("%d,%d,%d,%d,%d,%d,%d,\"%s\",%d,%d,%g\n", 
+			String line = String.format("%d,%d,%d,%d,%d,%d,%d,\"%s\",%d,%d,%d,%g\n", 
 					mpr.getRecordNo(), mpr.HEAD_NUM, mpr.SITE_NUM,
 					prr.X_COORD, prr.Y_COORD, prr.HARD_BIN, prr.SOFT_BIN,
 					mpr.TEST_TXT, mpr.TEST_NUM, 
