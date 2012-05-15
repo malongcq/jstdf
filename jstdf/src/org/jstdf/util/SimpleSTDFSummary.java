@@ -1,4 +1,4 @@
-package org.jstdf;
+package org.jstdf.util;
 
 import java.io.BufferedWriter;
 import java.io.OutputStreamWriter;
@@ -10,6 +10,7 @@ import java.util.EnumSet;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.jstdf.AbstractStdfRecordHandler;
 import org.jstdf.record.FunctionalTestRecord;
 import org.jstdf.record.MultipleResultParametricRecord;
 import org.jstdf.record.ParametricTestRecord;
@@ -19,6 +20,14 @@ import org.jstdf.record.STDFRecordType;
 
 public class SimpleSTDFSummary extends AbstractStdfRecordHandler
 {
+	static final EnumSet<STDFRecordType> STDF_TYPS = EnumSet.of(
+			STDFRecordType.FAR, STDFRecordType.ATR, STDFRecordType.RDR,
+			STDFRecordType.MIR, STDFRecordType.SDR, STDFRecordType.MRR, 
+			STDFRecordType.WCR, STDFRecordType.WIR, STDFRecordType.WRR,
+			STDFRecordType.HBR, STDFRecordType.SBR,
+			STDFRecordType.PGR, STDFRecordType.PLR, STDFRecordType.PMR,
+			STDFRecordType.PCR, STDFRecordType.TSR);
+	
 	EnumMap<STDFRecordType, Integer> cnt_summary = new EnumMap<STDFRecordType, Integer>(STDFRecordType.class); 
 	
 	TreeMap<String, Integer> ptrs = new TreeMap<String, Integer>();
@@ -66,10 +75,7 @@ public class SimpleSTDFSummary extends AbstractStdfRecordHandler
 			ftrs.put(key, ++p_cnt);
 		}
 		
-		if(EnumSet.of(STDFRecordType.MIR, STDFRecordType.SDR, STDFRecordType.MRR, 
-			STDFRecordType.WCR, STDFRecordType.WIR, STDFRecordType.WRR,
-			//STDFRecordType.HBR, STDFRecordType.SBR,
-			STDFRecordType.PCR).contains(rec.getRecordType()))
+		if(STDF_TYPS.contains(rec.getRecordType()))
 		{
 			summary_rec.add(rec);
 		}

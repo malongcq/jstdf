@@ -1,10 +1,13 @@
-package org.jstdf;
+package org.jstdf.util;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 
+import org.jstdf.AbstractPartTestResult;
+import org.jstdf.ParametricTestItem;
+import org.jstdf.PartResultSet;
 import org.jstdf.record.FunctionalTestRecord;
 import org.jstdf.record.HardwareBinRecord;
 import org.jstdf.record.MultipleResultParametricRecord;

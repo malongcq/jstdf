@@ -35,6 +35,7 @@ import org.jstdf.record.UnknownSTDFRecord;
 import org.jstdf.record.WaferConfigurationRecord;
 import org.jstdf.record.WaferInformationRecord;
 import org.jstdf.record.WaferResultsRecord;
+import org.jstdf.util.SimpleSTDFSummary;
 import org.jstdf.util.StdfRecordUtils;
 
 
