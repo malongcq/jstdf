@@ -1,6 +1,7 @@
 package org.jstdf.record;
 
 import java.nio.ByteBuffer;
+import java.util.Arrays;
 
 import org.jstdf.util.StdfRecordUtils;
 
@@ -64,5 +65,13 @@ public class PinGroupRecord extends AbstractSTDFRecord
 	public STDFRecordType getRecordType()
 	{
 		return STDFRecordType.PGR;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "PinGroupRecord [GRP_INDX=" + GRP_INDX + ", GRP_NAM=" + GRP_NAM
+				+ ", INDX_CNT=" + INDX_CNT + ", PMR_INDX="
+				+ Arrays.toString(PMR_INDX) + "]";
 	}
 }
