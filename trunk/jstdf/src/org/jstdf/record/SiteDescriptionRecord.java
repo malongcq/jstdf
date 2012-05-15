@@ -151,7 +151,7 @@ public class SiteDescriptionRecord extends AbstractSTDFRecord
 	@Override
 	public String toString()
 	{
-		return "SiteDescriptionRecord [HEAD_NUM=" + HEAD_NUM + ", SITE_GRP="
+		return getRecordNo()+": SiteDescriptionRecord [HEAD_NUM=" + HEAD_NUM + ", SITE_GRP="
 				+ SITE_GRP + ", SITE_CNT=" + SITE_CNT + ", SITE_NUM="
 				+ Arrays.toString(SITE_NUM) + ", HAND_TYP=" + HAND_TYP
 				+ ", HAND_ID=" + HAND_ID + ", CARD_TYP=" + CARD_TYP

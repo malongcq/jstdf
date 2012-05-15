@@ -54,6 +54,6 @@ public class DatalogTextRecord extends AbstractSTDFRecord
 	@Override
 	public String toString()
 	{
-		return "DatalogTextRecord [TEXT_DAT=" + TEXT_DAT + "]";
+		return getRecordNo()+": DatalogTextRecord [TEXT_DAT=" + TEXT_DAT + "]";
 	}
 }

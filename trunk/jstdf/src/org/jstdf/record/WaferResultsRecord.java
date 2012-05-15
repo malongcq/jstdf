@@ -121,7 +121,7 @@ public class WaferResultsRecord extends AbstractSTDFRecord
 	@Override
 	public String toString()
 	{
-		return "WaferResultsRecord [HEAD_NUM=" + HEAD_NUM + ", SITE_GRP="
+		return getRecordNo()+": WaferResultsRecord [HEAD_NUM=" + HEAD_NUM + ", SITE_GRP="
 				+ SITE_GRP + ", FINISH_T=" + FINISH_T + ", PART_CNT="
 				+ PART_CNT + ", RTST_CNT=" + RTST_CNT + ", ABRT_CNT="
 				+ ABRT_CNT + ", GOOD_CNT=" + GOOD_CNT + ", FUNC_CNT="

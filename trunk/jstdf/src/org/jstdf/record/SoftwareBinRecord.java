@@ -80,7 +80,7 @@ public class SoftwareBinRecord extends AbstractSTDFRecord
 	@Override
 	public String toString()
 	{
-		return "SoftwareBinRecord [HEAD_NUM=" + HEAD_NUM + ", SITE_NUM="
+		return getRecordNo()+": SoftwareBinRecord [HEAD_NUM=" + HEAD_NUM + ", SITE_NUM="
 				+ SITE_NUM + ", SBIN_NUM=" + SBIN_NUM + ", SBIN_CNT="
 				+ SBIN_CNT + ", SBIN_PF=" + SBIN_PF + ", SBIN_NAM=" + SBIN_NAM
 				+ "]";

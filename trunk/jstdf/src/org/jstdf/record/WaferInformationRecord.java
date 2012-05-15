@@ -70,7 +70,7 @@ public class WaferInformationRecord extends AbstractSTDFRecord
 	@Override
 	public String toString()
 	{
-		return "WaferInformationRecord [HEAD_NUM=" + HEAD_NUM + ", SITE_GRP="
+		return getRecordNo()+": WaferInformationRecord [HEAD_NUM=" + HEAD_NUM + ", SITE_GRP="
 				+ SITE_GRP + ", START_T=" + START_T + ", WAFER_ID=" + WAFER_ID
 				+ "]";
 	}

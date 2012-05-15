@@ -159,7 +159,7 @@ public class PinListRecord extends AbstractSTDFRecord
 	@Override
 	public String toString()
 	{
-		return "PinListRecord [GRP_CNT=" + GRP_CNT + ", GRP_INDX="
+		return getRecordNo()+": PinListRecord [GRP_CNT=" + GRP_CNT + ", GRP_INDX="
 				+ Arrays.toString(GRP_INDX) + ", GRP_MODE="
 				+ Arrays.toString(GRP_MODE) + ", GRP_RADX="
 				+ Arrays.toString(GRP_RADX) + ", PGM_CHAR="

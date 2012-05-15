@@ -242,7 +242,7 @@ public class MasterInformationRecord extends AbstractSTDFRecord
 	@Override
 	public String toString()
 	{
-		return "MasterInformationRecord [SETUP_T=" + SETUP_T + ", START_T="
+		return getRecordNo()+": MasterInformationRecord [SETUP_T=" + SETUP_T + ", START_T="
 				+ START_T + ", STAT_NUM=" + STAT_NUM + ", MODE_COD=" + MODE_COD
 				+ ", RTST_COD=" + RTST_COD + ", PROT_COD=" + PROT_COD
 				+ ", BURN_TIM=" + BURN_TIM + ", CMOD_COD=" + CMOD_COD
