@@ -13,6 +13,7 @@ import org.jstdf.record.HardwareBinRecord;
 import org.jstdf.record.MultipleResultParametricRecord;
 import org.jstdf.record.ParametricTestRecord;
 import org.jstdf.record.PartResultsRecord;
+import org.jstdf.record.PinMapRecord;
 import org.jstdf.record.STDFRecord;
 import org.jstdf.record.STDFRecordType;
 import org.jstdf.record.SiteDescriptionRecord;
@@ -60,13 +61,65 @@ public class PartCsvExporter extends AbstractPartTestResult
 
 	protected String filename_bin_spec = "Bin_Spec.csv";
 	protected String filename_test_params = "Test_Params.csv";
-	protected String filename_site_desc = "Site_Desc.csv";
+	protected String filename_sdr = "Site_Desc.csv";
 	protected String filename_tsr = "Test_Synopsis.csv";
+	protected String filename_pmr = "Pin_Map.csv";
 	
 	@Override
 	public void endReadRecord()
 	{
+		//export PMR
+		_exportPMR();
+		
 		//export TSR
+		_exportTSR();
+		
+		//export site description
+		_exportSDR();
+		
+		//export test parameters
+		_exportTestParams();
+		
+		//export bins 
+		_exportBinSpec();
+		
+		//finish parameters results
+		for(FileWriter fw : fws)
+		{
+			try
+			{
+				if(fw!=null) fw.close();
+			} catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	private void _exportPMR()
+	{
+		try
+		{
+			FileWriter w = new FileWriter(new File(out_dir, filename_pmr));
+			w.write("PMR_IDX,Channel_Type,Channel_Name,Physical_Name,Logic_Name,Head,Site\n");
+			
+			for(PinMapRecord pmr : this.getPinMapRecords())
+			{
+				w.write(String.format("%d,%d,\"%s\",\"%s\",\"%s\",%d,%d\n", 
+					pmr.PMR_INDX,pmr.CHAN_TYP,pmr.CHAN_NAM,pmr.PHY_NAM,pmr.LOG_NAM,pmr.HEAD_NUM,pmr.SITE_NUM));
+			}
+			
+			w.flush();
+			w.close();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	private void _exportTSR()
+	{
 		try
 		{
 			FileWriter w = new FileWriter(new File(out_dir, filename_tsr));
@@ -94,11 +147,13 @@ public class PartCsvExporter extends AbstractPartTestResult
 		{
 			e.printStackTrace();
 		}
-		
-		//export site description
+	}
+	
+	private void _exportSDR()
+	{
 		try
 		{
-			FileWriter w = new FileWriter(new File(out_dir, filename_site_desc));
+			FileWriter w = new FileWriter(new File(out_dir, filename_sdr));
 			w.write("Head,Site_Grp,Site_Cnt,Site_Nums," +
 					"Handler_Type, Handler_ID, Probe_Card_Type, Probe_Card_ID," +
 					"Load_Type, Load_ID, DIB_Type, DIB_ID," +
@@ -126,8 +181,10 @@ public class PartCsvExporter extends AbstractPartTestResult
 		{
 			e.printStackTrace();
 		}
-		
-		//export test parameters
+	}
+	
+	private void _exportTestParams()
+	{
 		try
 		{
 			FileWriter w = new FileWriter(new File(out_dir, filename_test_params));
@@ -148,8 +205,10 @@ public class PartCsvExporter extends AbstractPartTestResult
 		{
 			e.printStackTrace();
 		}
-		
-		//export bins 
+	}
+	
+	private void _exportBinSpec()
+	{
 		try
 		{
 			FileWriter w = new FileWriter(new File(out_dir, filename_bin_spec));
@@ -168,18 +227,6 @@ public class PartCsvExporter extends AbstractPartTestResult
 		catch (IOException e)
 		{
 			e.printStackTrace();
-		}
-		
-		//finish parameters results
-		for(FileWriter fw : fws)
-		{
-			try
-			{
-				if(fw!=null) fw.close();
-			} catch (IOException e)
-			{
-				e.printStackTrace();
-			}
 		}
 	}
 	

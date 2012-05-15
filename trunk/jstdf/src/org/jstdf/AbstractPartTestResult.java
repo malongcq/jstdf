@@ -13,6 +13,7 @@ import org.jstdf.record.ParametricTestRecord;
 import org.jstdf.record.PartCountRecord;
 import org.jstdf.record.PartInformationRecord;
 import org.jstdf.record.PartResultsRecord;
+import org.jstdf.record.PinMapRecord;
 import org.jstdf.record.SoftwareBinRecord;
 import org.jstdf.record.TestSynopsisRecord;
 
@@ -24,6 +25,7 @@ public abstract class AbstractPartTestResult extends AbstractTestResult implemen
 	protected Deque<SoftwareBinRecord> sbrs;
 	protected Deque<TestSynopsisRecord> tsrs;
 	protected Deque<PartCountRecord> pcrs;
+	protected Deque<PinMapRecord> pmrs;
 	
 	protected Pattern testParameterPattern;
 	
@@ -59,6 +61,11 @@ public abstract class AbstractPartTestResult extends AbstractTestResult implemen
 	public Deque<PartCountRecord> getPartCountRecords()
 	{
 		return pcrs;
+	}
+	
+	public Deque<PinMapRecord> getPinMapRecords()
+	{
+		return pmrs;
 	}
 	
 	public String getTestParameterPattern()
@@ -218,6 +225,18 @@ public abstract class AbstractPartTestResult extends AbstractTestResult implemen
 			this.pcrs = new ArrayDeque<PartCountRecord>();
 		}
 		this.pcrs.add(pcr);
+		
+		return true;
+	}
+	
+	@Override
+	public boolean readRecord(PinMapRecord pmr) 
+	{
+		if(this.pmrs==null)
+		{
+			this.pmrs = new ArrayDeque<PinMapRecord>();
+		}
+		this.pmrs.add(pmr);
 		
 		return true;
 	}
