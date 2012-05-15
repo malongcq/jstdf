@@ -23,7 +23,6 @@ public abstract class AbstractTestResult extends AbstractStdfRecordHandler
 	protected MasterInformationRecord mir;
 	protected RetestDataRecord rdr;
 	protected Deque<SiteDescriptionRecord> sdrs;
-	protected Deque<PartCountRecord> pcrs;
 	protected MasterResultsRecord mrr;
 	
 	public FileAttributesRecord getFileAttributesRecord()
@@ -56,11 +55,6 @@ public abstract class AbstractTestResult extends AbstractStdfRecordHandler
 		return sdrs;
 	}
 	
-	public Deque<PartCountRecord> getPartCountRecords()
-	{
-		return pcrs;
-	}
-	
 	@Override
 	public boolean readRecord(MasterInformationRecord mir) 
 	{
@@ -72,18 +66,6 @@ public abstract class AbstractTestResult extends AbstractStdfRecordHandler
 	public boolean readRecord(MasterResultsRecord mrr) 
 	{
 		this.mrr = mrr;
-		return true;
-	}
-
-	@Override
-	public boolean readRecord(PartCountRecord pcr) 
-	{
-		if(this.pcrs==null)
-		{
-			this.pcrs = new ArrayDeque<PartCountRecord>();
-		}
-		this.pcrs.add(pcr);
-		
 		return true;
 	}
 	
