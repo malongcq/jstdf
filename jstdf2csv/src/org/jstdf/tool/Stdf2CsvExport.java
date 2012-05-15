@@ -168,7 +168,7 @@ public class Stdf2CsvExport
 		catch (Exception e) 
 		{
 			System.out.println("cmd=" + Arrays.asList(args));
-			printHelp(opts);
+			e.printStackTrace();
 		}
 	}
 }
