@@ -1,6 +1,7 @@
 package org.jstdf.util;
 
 import java.io.BufferedWriter;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.ArrayDeque;
@@ -85,10 +86,15 @@ public class SimpleSTDFSummary extends AbstractStdfRecordHandler
 
 	public void printSummary()
 	{
+		printSummary(System.out);
+	}
+	
+	public void printSummary(OutputStream os)
+	{
 		PrintWriter out = null;
 		try
 		{
-			out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
+			out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(os)));
 			
 			out.println("----------------------PTR------------------------");
 			for(Map.Entry<String, Integer> e : ptrs.entrySet()) 

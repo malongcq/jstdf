@@ -55,4 +55,11 @@ public class FileAttributesRecord extends AbstractSTDFRecord
 	{
 		return STDFRecordType.FAR;
 	}
+
+	@Override
+	public String toString()
+	{
+		return "FileAttributesRecord [CPU_TYPE=" + CPU_TYPE + ", STDF_VER="
+				+ STDF_VER + "]";
+	}
 }
