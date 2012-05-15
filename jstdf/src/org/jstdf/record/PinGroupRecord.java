@@ -70,7 +70,7 @@ public class PinGroupRecord extends AbstractSTDFRecord
 	@Override
 	public String toString()
 	{
-		return "PinGroupRecord [GRP_INDX=" + GRP_INDX + ", GRP_NAM=" + GRP_NAM
+		return getRecordNo()+": PinGroupRecord [GRP_INDX=" + GRP_INDX + ", GRP_NAM=" + GRP_NAM
 				+ ", INDX_CNT=" + INDX_CNT + ", PMR_INDX="
 				+ Arrays.toString(PMR_INDX) + "]";
 	}

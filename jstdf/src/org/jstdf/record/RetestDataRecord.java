@@ -1,6 +1,7 @@
 package org.jstdf.record;
 
 import java.nio.ByteBuffer;
+import java.util.Arrays;
 
 import org.jstdf.util.StdfRecordUtils;
 
@@ -54,5 +55,12 @@ public class RetestDataRecord extends AbstractSTDFRecord
 	public STDFRecordType getRecordType()
 	{
 		return STDFRecordType.RDR;
+	}
+
+	@Override
+	public String toString()
+	{
+		return getRecordNo()+": RetestDataRecord [NUM_BINS=" + NUM_BINS + ", RTST_BIN="
+				+ Arrays.toString(RTST_BIN) + "]";
 	}
 }

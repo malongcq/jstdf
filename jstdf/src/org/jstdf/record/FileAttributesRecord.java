@@ -59,7 +59,7 @@ public class FileAttributesRecord extends AbstractSTDFRecord
 	@Override
 	public String toString()
 	{
-		return "FileAttributesRecord [CPU_TYPE=" + CPU_TYPE + ", STDF_VER="
+		return getRecordNo()+": FileAttributesRecord [CPU_TYPE=" + CPU_TYPE + ", STDF_VER="
 				+ STDF_VER + "]";
 	}
 }

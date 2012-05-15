@@ -61,7 +61,7 @@ public class AuditTrailRecord extends AbstractSTDFRecord
 	@Override
 	public String toString()
 	{
-		return "AuditTrailRecord [MOD_TIM=" + MOD_TIM + ", CMD_LINE="
+		return getRecordNo()+": AuditTrailRecord [MOD_TIM=" + MOD_TIM + ", CMD_LINE="
 				+ CMD_LINE + "]";
 	}
 }

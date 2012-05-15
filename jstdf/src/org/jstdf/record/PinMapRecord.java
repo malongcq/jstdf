@@ -84,7 +84,7 @@ public class PinMapRecord extends AbstractSTDFRecord
 	@Override
 	public String toString()
 	{
-		return "PinMapRecord [PMR_INDX=" + PMR_INDX + ", CHAN_TYP=" + CHAN_TYP
+		return getRecordNo()+": PinMapRecord [PMR_INDX=" + PMR_INDX + ", CHAN_TYP=" + CHAN_TYP
 				+ ", CHAN_NAM=" + CHAN_NAM + ", PHY_NAM=" + PHY_NAM
 				+ ", LOG_NAM=" + LOG_NAM + ", HEAD_NUM=" + HEAD_NUM
 				+ ", SITE_NUM=" + SITE_NUM + "]";

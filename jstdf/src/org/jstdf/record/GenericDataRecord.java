@@ -61,7 +61,7 @@ public class GenericDataRecord extends AbstractSTDFRecord
 	@Override
 	public String toString()
 	{
-		return "GenericDataRecord [FLD_CNT=" + FLD_CNT + ", GEN_DATA="
+		return getRecordNo()+": GenericDataRecord [FLD_CNT=" + FLD_CNT + ", GEN_DATA="
 				+ GEN_DATA + "]";
 	}
 }

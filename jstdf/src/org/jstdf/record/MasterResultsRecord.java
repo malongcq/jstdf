@@ -70,7 +70,7 @@ public class MasterResultsRecord extends AbstractSTDFRecord
 	@Override
 	public String toString()
 	{
-		return "MasterResultsRecord [FINISH_T=" + FINISH_T + ", DISP_COD="
+		return getRecordNo()+": MasterResultsRecord [FINISH_T=" + FINISH_T + ", DISP_COD="
 				+ DISP_COD + ", USR_DESC=" + USR_DESC + ", EXC_DESC="
 				+ EXC_DESC + "]";
 	}

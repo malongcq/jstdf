@@ -152,7 +152,7 @@ public class WaferConfigurationRecord extends AbstractSTDFRecord
 	@Override
 	public String toString()
 	{
-		return "WaferConfigurationRecord [WAFR_SIZ=" + WAFR_SIZ + ", DIE_HT="
+		return getRecordNo()+": WaferConfigurationRecord [WAFR_SIZ=" + WAFR_SIZ + ", DIE_HT="
 				+ DIE_HT + ", DIE_WID=" + DIE_WID + ", WF_UNITS=" + WF_UNITS
 				+ ", WF_FLAT=" + WF_FLAT + ", CENTER_X=" + CENTER_X
 				+ ", CENTER_Y=" + CENTER_Y + ", POS_X=" + POS_X + ", POS_Y="

@@ -85,7 +85,7 @@ public class HardwareBinRecord extends AbstractSTDFRecord
 	@Override
 	public String toString()
 	{
-		return "HardwareBinRecord [HEAD_NUM=" + HEAD_NUM + ", SITE_NUM="
+		return getRecordNo()+": HardwareBinRecord [HEAD_NUM=" + HEAD_NUM + ", SITE_NUM="
 				+ SITE_NUM + ", HBIN_NUM=" + HBIN_NUM + ", HBIN_CNT="
 				+ HBIN_CNT + ", HBIN_PF=" + HBIN_PF + ", HBIN_NAM=" + HBIN_NAM
 				+ "]";

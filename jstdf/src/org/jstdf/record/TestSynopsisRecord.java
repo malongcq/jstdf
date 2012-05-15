@@ -130,7 +130,7 @@ public class TestSynopsisRecord extends AbstractSTDFRecord
 
 	@Override
 	public String toString() {
-		return "TestSynopsisRecord [HEAD_NUM=" + HEAD_NUM + ", SITE_NUM="
+		return getRecordNo()+": TestSynopsisRecord [HEAD_NUM=" + HEAD_NUM + ", SITE_NUM="
 				+ SITE_NUM + ", TEST_TYP=" + TEST_TYP + ", TEST_NUM="
 				+ TEST_NUM + ", EXEC_CNT=" + EXEC_CNT + ", FAIL_CNT="
 				+ FAIL_CNT + ", ALRM_CNT=" + ALRM_CNT + ", TEST_NAM="
