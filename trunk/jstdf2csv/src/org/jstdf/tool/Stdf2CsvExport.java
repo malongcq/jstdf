@@ -167,6 +167,7 @@ public class Stdf2CsvExport
 		} 
 		catch (Exception e) 
 		{
+			System.out.println("---Unexpected Error---");
 			System.out.println("cmd=" + Arrays.asList(args));
 			e.printStackTrace();
 		}
