@@ -278,17 +278,17 @@ public class PartCsvExporter extends AbstractPartTestResult
 	
 	protected void exportParameter(PartResultsRecord prr, MultipleResultParametricRecord mpr) throws IOException
 	{
-		String header = "Seq,Head,Site,X,Y,H_Bin,S_Bin,Param,Test_Num,N,PMR_IDX,Value\n";
-		for(int i=0; i<mpr.RTN_RSLT.length; i++)
+		String header = "Seq,Head,Site,X,Y,H_Bin,S_Bin,Param,Test_Num,N,IDX,PMR_IDX,Value\n";
+		for(int i=0; i<mpr.RSLT_CNT; i++)
 		{
 			double v = mpr.RTN_RSLT[i];
 			int pmr_idx = mpr.RTN_INDX[i];
 			
-			String line = String.format("%d,%d,%d,%d,%d,%d,%d,\"%s\",%d,%d,%d,%g\n", 
+			String line = String.format("%d,%d,%d,%d,%d,%d,%d,\"%s\",%d,%d,%d,%d,%g\n", 
 					mpr.getRecordNo(), mpr.HEAD_NUM, mpr.SITE_NUM,
 					prr.X_COORD, prr.Y_COORD, prr.HARD_BIN, prr.SOFT_BIN,
 					mpr.TEST_TXT, mpr.TEST_NUM, 
-					mpr.RSLT_CNT, pmr_idx, v);
+					mpr.RSLT_CNT, i, pmr_idx, v);
 			
 			txtw.write(FW_IDX_MPR, line, header, "MPR", "csv");
 		}
