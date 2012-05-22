@@ -254,10 +254,11 @@ public class PartCsvExporter extends AbstractPartTestResult
 	{
 		if(exportDTR)
 		{
-			String line = String.format("%d\n%s\n", dtr.getRecordNo(), dtr.TEXT_DAT);
+			//String line = String.format("%d\n%s\n", dtr.getRecordNo(), dtr.TEXT_DAT);
 			try
 			{
-				txtw.write(FW_IDX_DTR, line, null, "DTR", "txt");
+				txtw.write(FW_IDX_DTR, dtr.getRecordNo()+"\n", null, "DTR", "txt", false);
+				txtw.write(FW_IDX_DTR, dtr.TEXT_DAT, null, "DTR", "txt", false);
 			} 
 			catch (IOException e)
 			{
