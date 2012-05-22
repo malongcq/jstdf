@@ -8,6 +8,7 @@ import java.util.Arrays;
 import org.jstdf.AbstractPartTestResult;
 import org.jstdf.ParametricTestItem;
 import org.jstdf.PartResultSet;
+import org.jstdf.record.DatalogTextRecord;
 import org.jstdf.record.FunctionalTestRecord;
 import org.jstdf.record.HardwareBinRecord;
 import org.jstdf.record.MultipleResultParametricRecord;
@@ -23,7 +24,7 @@ import org.jstdf.record.TestSynopsisRecord;
 
 public class PartCsvExporter extends AbstractPartTestResult
 {
-	private boolean exportPTR, exportFTR, exportMPR;
+	private boolean exportPTR, exportFTR, exportMPR, exportDTR;
 	public boolean isExportPTR()
 	{
 		return exportPTR;
@@ -47,6 +48,14 @@ public class PartCsvExporter extends AbstractPartTestResult
 	public void setExportMPR(boolean exportMPR)
 	{
 		this.exportMPR = exportMPR;
+	}
+	public boolean isExportDTR()
+	{
+		return exportDTR;
+	}
+	public void setExportDTR(boolean exportDTR)
+	{
+		this.exportDTR = exportDTR;
 	}
 
 	protected String filename_bin_spec = "Bin_Spec.csv";
@@ -177,8 +186,8 @@ public class PartCsvExporter extends AbstractPartTestResult
 			{
 				for(ParametricTestItem t : testItems)
 				{
-					w.write(String.format("\"%d\",\"%s\",\"%s\",\"%g\",\"%g\",\"%g\",\"%g\"\n", 
-						t.getTestNum(),t.getTestName(),t.getTestUnit(),
+					w.write(String.format("%s,\"%d\",\"%s\",\"%s\",\"%g\",\"%g\",\"%g\",\"%g\"\n", 
+						t.isMultipleResult()? "MPR":"PTR", t.getTestNum(),t.getTestName(),t.getTestUnit(),
 						t.getLowSpec(),t.getHighSpec(),t.getLowLimit(),t.getHighLimit()));
 				}
 			}
@@ -229,41 +238,34 @@ public class PartCsvExporter extends AbstractPartTestResult
 	public final static int FW_IDX_PTR = 1;
 	public final static int FW_IDX_MPR = 2;
 	public final static int FW_IDX_FTR = 3;
+	public final static int FW_IDX_DTR = 4;
 	
 	public PartCsvExporter(File parent_dir, int page_limit) throws IOException
 	{
 		out_dir = parent_dir;
-//		out_dir.mkdirs();
-//		
-//		fws = new FileWriter[] {null, null, null, null};
-//		fws_cnt = new int[] {0,0,0,0};
-		//fws_typ = new String[] {"PRR"};
 		
-		txtw = new MultiPageTextFileWriter(out_dir, 4);
+		txtw = new MultiPageTextFileWriter(out_dir, 5);
 		txtw.setPageLimit(page_limit);
 	}
 	
-	
-//	protected void writeFile(int idx, String line, String header, String prefix) throws IOException
-//	{
-//		if(fws_cnt[idx]%pageLimit==0)
-//		{
-//			if(fws[idx]!=null)
-//			{
-//				fws[idx].flush();
-//				fws[idx].close();
-//			}
-//			
-//			int lbl = fws_cnt[idx]/pageLimit;
-//			String filename = lbl==0 ? String.format("%s.csv", prefix) : 
-//				String.format("%s_%d.csv",prefix,lbl);
-//			fws[idx] = new FileWriter(new File(out_dir, filename));
-//			fws[idx].write(header);
-//		}
-//		
-//		fws[idx].write(line);
-//		fws_cnt[idx]++;
-//	}
+	@Override
+	public boolean readRecord(DatalogTextRecord dtr) 
+	{
+		if(exportDTR)
+		{
+			String header = "Seq,Text";
+			String line = String.format("%d, \"%s\"", dtr.getRecordNo(), dtr.TEXT_DAT);
+			try
+			{
+				txtw.write(FW_IDX_DTR, line, header, "DTR", "csv");
+			} 
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		return true;
+	}
 	
 	protected void exportParameter(PartResultsRecord prr, ParametricTestRecord ptr) throws IOException
 	{
