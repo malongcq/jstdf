@@ -20,6 +20,13 @@ public class MultiPageTextFileWriter
 	protected FileWriter[] fws;
 	protected int[] fws_cnt;
 	
+	public void reset(int writer_num)
+	{
+		fws = new FileWriter[writer_num];
+		fws_cnt = new int[writer_num];
+		for(int i=0; i<writer_num; i++) fws_cnt[i] = 0;
+	}
+	
 	public MultiPageTextFileWriter(File parent, int writer_num)
 	{
 		out_dir = parent;
@@ -28,9 +35,7 @@ public class MultiPageTextFileWriter
 			out_dir.mkdirs();
 		}
 		
-		fws = new FileWriter[writer_num];
-		fws_cnt = new int[writer_num];
-		for(int i=0; i<writer_num; i++) fws_cnt[i] = 0;
+		reset(writer_num);
 	}
 	
 	public void dispose()
@@ -49,7 +54,13 @@ public class MultiPageTextFileWriter
 	
 	public void write(int idx, String line, String header, String prefix, String suffix) throws IOException
 	{
-		if(fws_cnt[idx]%pageLimit==0)
+		write(idx,line,header,prefix,suffix,true);
+	}
+	
+	public void write(int idx, String line, String header, String prefix, String suffix,
+			boolean multiPage) throws IOException
+	{
+		if(fws_cnt[idx]==0 || (fws_cnt[idx]%pageLimit==0 && multiPage) )
 		{
 			if(fws[idx]!=null)
 			{
@@ -61,10 +72,19 @@ public class MultiPageTextFileWriter
 			String filename = lbl==0 ? String.format("%s.%s", prefix, suffix) : 
 				String.format("%s_%d.%s",prefix, lbl, suffix);
 			fws[idx] = new FileWriter(new File(out_dir, filename));
-			fws[idx].write(header);
+			
+			if(header!=null)
+			{
+				fws[idx].write(header);
+				if(!header.endsWith("\n")) fws[idx].write('\n');
+			}
 		}
 		
-		fws[idx].write(line);
+		if(line!=null)
+		{
+			fws[idx].write(line);
+			if(!line.endsWith("\n")) fws[idx].write('\n');
+		}
 		fws_cnt[idx]++;
 	}
 }
