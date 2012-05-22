@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.BitSet;
 
 import org.jstdf.AbstractPartTestResult;
 import org.jstdf.ParametricTestItem;
@@ -181,7 +182,7 @@ public class PartCsvExporter extends AbstractPartTestResult
 		try
 		{
 			FileWriter w = new FileWriter(new File(out_dir, filename_test_params));
-			w.write("Test_Num,Name,Unit,Low_Spec,High_Spec,Low_Limit,High_Limit\n");
+			w.write("Type,Test_Num,Name,Unit,Low_Spec,High_Spec,Low_Limit,High_Limit\n");
 			if(testItems!=null)
 			{
 				for(ParametricTestItem t : testItems)
@@ -253,11 +254,10 @@ public class PartCsvExporter extends AbstractPartTestResult
 	{
 		if(exportDTR)
 		{
-			String header = "Seq,Text";
-			String line = String.format("%d, \"%s\"", dtr.getRecordNo(), dtr.TEXT_DAT);
+			String line = String.format("%d\n%s\n", dtr.getRecordNo(), dtr.TEXT_DAT);
 			try
 			{
-				txtw.write(FW_IDX_DTR, line, header, "DTR", "csv");
+				txtw.write(FW_IDX_DTR, line, null, "DTR", "txt");
 			} 
 			catch (IOException e)
 			{
@@ -280,17 +280,18 @@ public class PartCsvExporter extends AbstractPartTestResult
 	
 	protected void exportParameter(PartResultsRecord prr, MultipleResultParametricRecord mpr) throws IOException
 	{
-		String header = "Seq,Head,Site,X,Y,H_Bin,S_Bin,Param,Test_Num,N,IDX,PMR_IDX,Value\n";
+		String header = "Seq,Head,Site,X,Y,H_Bin,S_Bin,Param,Test_Num,N,IDX,PMR_IDX,Value,Stat\n";
 		for(int i=0; i<mpr.RSLT_CNT; i++)
 		{
 			double v = mpr.RTN_RSLT[i];
 			Integer pmr_idx = mpr.RTN_ICNT==0 ? null : mpr.RTN_INDX[i];
+			BitSet stat = mpr.RTN_ICNT==0 ? null : mpr.RTN_STAT[i];
 			
-			String line = String.format("%d,%d,%d,%d,%d,%d,%d,\"%s\",%d,%d,%d,%d,%g\n", 
+			String line = String.format("%d,%d,%d,%d,%d,%d,%d,\"%s\",%d,%d,%d,%d,%g,%s\n", 
 					mpr.getRecordNo(), mpr.HEAD_NUM, mpr.SITE_NUM,
 					prr.X_COORD, prr.Y_COORD, prr.HARD_BIN, prr.SOFT_BIN,
 					mpr.TEST_TXT, mpr.TEST_NUM, 
-					mpr.RSLT_CNT, i, pmr_idx, v);
+					mpr.RSLT_CNT, i, pmr_idx, v, stat==null?"":stat);
 			
 			txtw.write(FW_IDX_MPR, line, header, "MPR", "csv");
 		}
