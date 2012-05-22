@@ -282,7 +282,7 @@ public class PartCsvExporter extends AbstractPartTestResult
 		for(int i=0; i<mpr.RSLT_CNT; i++)
 		{
 			double v = mpr.RTN_RSLT[i];
-			int pmr_idx = mpr.RTN_INDX[i];
+			Integer pmr_idx = mpr.RTN_ICNT==0 ? null : mpr.RTN_INDX[i];
 			
 			String line = String.format("%d,%d,%d,%d,%d,%d,%d,\"%s\",%d,%d,%d,%d,%g\n", 
 					mpr.getRecordNo(), mpr.HEAD_NUM, mpr.SITE_NUM,
